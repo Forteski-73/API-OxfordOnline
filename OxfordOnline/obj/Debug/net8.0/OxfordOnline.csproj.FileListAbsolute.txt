@@ -183,3 +183,4 @@ C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Debug\net8.0\tr\System.ServiceMode
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Debug\net8.0\zh-Hans\System.ServiceModel.Primitives.resources.dll
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Debug\net8.0\zh-Hant\System.ServiceModel.Primitives.resources.dll
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Debug\net8.0\OxfordOnline.sourcelink.json

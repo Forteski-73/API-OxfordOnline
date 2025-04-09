@@ -1,22 +1,25 @@
-# Etapa de build - usa SDK do .NET 8.0
+# Etapa 1 - Build com SDK do .NET 8
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-# Copia tudo
-COPY . ./
+# Copia os arquivos do projeto
+COPY . .
 
 # Restaura dependências
-RUN dotnet restore
+RUN dotnet restore "OxfordOnline.AppHost/OxfordOnline.AppHost.csproj"
 
-# Publica para produção
-RUN dotnet publish OxfordOnline.AppHost/OxfordOnline.AppHost.csproj -c Release -o /app/publish
+# Publica a aplicação em modo release
+RUN dotnet publish "OxfordOnline.AppHost/OxfordOnline.AppHost.csproj" -c Release -o /app/publish
 
-# Etapa final - runtime do .NET 8.0
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Etapa 2 - Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
+
+# Copia a publicação
 COPY --from=build /app/publish .
 
-# Usa a porta padrão do Railway
+# Railway usa a variável PORT automaticamente
 ENV ASPNETCORE_URLS=http://+:${PORT}
 
+# Inicia a aplicação
 ENTRYPOINT ["dotnet", "OxfordOnline.AppHost.dll"]
