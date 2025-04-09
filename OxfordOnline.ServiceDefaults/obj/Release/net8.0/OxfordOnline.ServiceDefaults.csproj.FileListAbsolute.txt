@@ -1,0 +1,14 @@
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\bin\Release\net8.0\OxfordOnline.ServiceDefaults.deps.json
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\bin\Release\net8.0\OxfordOnline.ServiceDefaults.runtimeconfig.json
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\bin\Release\net8.0\OxfordOnline.ServiceDefaults.dll
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\bin\Release\net8.0\OxfordOnline.ServiceDefaults.pdb
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.csproj.AssemblyReference.cache
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.AssemblyInfoInputs.cache
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.AssemblyInfo.cs
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.dll
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\refint\OxfordOnline.ServiceDefaults.dll
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.pdb
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\OxfordOnline.ServiceDefaults.genruntimeconfig.cache
+C:\OxfordOnline\OxfordOnline\OxfordOnline.ServiceDefaults\obj\Release\net8.0\ref\OxfordOnline.ServiceDefaults.dll

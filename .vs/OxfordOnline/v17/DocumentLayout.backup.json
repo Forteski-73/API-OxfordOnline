@@ -1,0 +1,232 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\OxfordOnline\\OxfordOnline\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\wsintegratorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\wsintegratorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\models\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\interfaces\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\interfaces\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\models\\produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\models\\produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|c:\\oxfordonline\\oxfordonline\\oxfordonline\\interfaces\\productinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74E457F2-D782-45E9-A439-C0AEC3B05B95}|OxfordOnline\\OxfordOnline.csproj|solutionrelative:oxfordonline\\interfaces\\productinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Image.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Image.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Models\\Image.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Image.cs",
+              "RelativeToolTip": "OxfordOnline\\Models\\Image.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T17:21:39.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImageController.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ImageController.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Controllers\\ImageController.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ImageController.cs",
+              "RelativeToolTip": "OxfordOnline\\Controllers\\ImageController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwCAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T17:11:11.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductInterface.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Interfaces\\ProductInterface.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Interfaces\\ProductInterface.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Interfaces\\ProductInterface.cs",
+              "RelativeToolTip": "OxfordOnline\\Interfaces\\ProductInterface.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T18:37:21.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Interfaces\\Product.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Interfaces\\Product.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Interfaces\\Product.cs",
+              "RelativeToolTip": "OxfordOnline\\Interfaces\\Product.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAArwDYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T18:35:18.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Produtos.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Produtos.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Models\\Produtos.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Produtos.cs",
+              "RelativeToolTip": "OxfordOnline\\Models\\Produtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T18:26:25.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "OxfordOnline\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T18:16:32.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ItemController.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ItemController.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Controllers\\ItemController.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Controllers\\ItemController.cs",
+              "RelativeToolTip": "OxfordOnline\\Controllers\\ItemController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T20:24:22.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WSIntegratorServices.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\WSIntegratorServices.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\WSIntegratorServices.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\WSIntegratorServices.cs",
+              "RelativeToolTip": "OxfordOnline\\WSIntegratorServices.cs",
+              "ViewState": "AgIAAIQvAAAAAAAAAAAswIEvAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T16:04:16.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Program.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Program.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Program.cs",
+              "RelativeToolTip": "OxfordOnline\\Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAswB0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T20:21:51.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\appsettings.json",
+              "RelativeDocumentMoniker": "OxfordOnline\\appsettings.json",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\appsettings.json",
+              "RelativeToolTip": "OxfordOnline\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-02T20:06:19.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "OxfordOnline\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T20:12:50.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Item.cs",
+              "DocumentMoniker": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Item.cs",
+              "RelativeDocumentMoniker": "OxfordOnline\\Models\\Item.cs",
+              "ToolTip": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\Models\\Item.cs",
+              "RelativeToolTip": "OxfordOnline\\Models\\Item.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T20:07:08.104Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
