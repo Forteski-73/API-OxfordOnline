@@ -1,25 +1,30 @@
-# Etapa 1 - Build com SDK do .NET 8
+# Use uma imagem base com o SDK do .NET
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# Defina o diretório de trabalho para o contêiner
 WORKDIR /src
 
-# Copia os arquivos do projeto
+# Copie o arquivo .csproj para dentro do contêiner (ajustado para a pasta correta)
+COPY OxfordOnline.csproj ./
+
+# Restaure as dependências do projeto
+RUN dotnet restore
+
+# Copie o restante do código para dentro do contêiner
 COPY . .
 
-# Restaura dependências
-RUN dotnet restore "OxfordOnline.AppHost/OxfordOnline.AppHost.csproj"
+# Publique a aplicação para a pasta /app
+RUN dotnet publish -c Release -o /app
 
-# Publica a aplicação em modo release
-RUN dotnet publish "OxfordOnline.AppHost/OxfordOnline.AppHost.csproj" -c Release -o /app/publish
+# Use uma imagem base do ASP.NET para execução
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
-# Etapa 2 - Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+# Defina o diretório de trabalho para o contêiner
 WORKDIR /app
 
-# Copia a publicação
-COPY --from=build /app/publish .
+# Copie a aplicação publicada do contêiner de build
+COPY --from=build /app .
 
-# Railway usa a variável PORT automaticamente
-ENV ASPNETCORE_URLS=http://+:${PORT}
-
-# Inicia a aplicação
-ENTRYPOINT ["dotnet", "OxfordOnline.AppHost.dll"]
+# Defina a porta e inicie a aplicação
+EXPOSE 80
+ENTRYPOINT ["dotnet", "OxfordOnline.dll"]

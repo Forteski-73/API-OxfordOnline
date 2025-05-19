@@ -5,7 +5,7 @@ using Oxfordonline.Integration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
+//builder.AddServiceDefaults();
 
 // Configurar Entity Framework
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -34,18 +34,39 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-
-app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var environment = builder.Environment.EnvironmentName;
+if (environment == "Production")  // Ambiente de Produção
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.WebHost.UseUrls("http://0.0.0.0:80");
 }
 
+var app = builder.Build();
+
+//app.MapDefaultEndpoints();
+
+// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment()) // ambiente de desenvolvimento
+//{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+//}
+
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    var tokenConfigurado = builder.Configuration["AuthToken"];
+    var tokenEnviado = context.Request.Headers["Authorization"].FirstOrDefault();
+
+    if (string.IsNullOrEmpty(tokenEnviado) || tokenEnviado != $"Bearer {tokenConfigurado}")
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Token inválido ou ausente.");
+        return;
+    }
+
+    await next();
+});
 
 app.UseAuthorization();
 

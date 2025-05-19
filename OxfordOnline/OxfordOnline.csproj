@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OxfordOnline.ServiceDefaults\OxfordOnline.ServiceDefaults.csproj" />
+    <!--ProjectReference Include="..\OxfordOnline.ServiceDefaults\OxfordOnline.ServiceDefaults.csproj" /-->
   </ItemGroup>
 
 </Project>
