@@ -2,12 +2,12 @@
 
 namespace OxfordOnline.Interfaces
 {
-    interface ProductInterface
+    public interface ProductInterface
     {
-        IEnumerable<Produtos> GetAll();
-        Produtos Get(string id);
-        Produtos Add(Produtos item);
+        IEnumerable<ProdutosAX> GetAll();
+        ProdutosAX Get(string id);
+        ProdutosAX Add(ProdutosAX item);
         void Remove(string id);
-        bool Update(Produtos item);
+        bool Update(ProdutosAX item);
     }
 }

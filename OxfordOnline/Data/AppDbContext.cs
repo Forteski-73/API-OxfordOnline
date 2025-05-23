@@ -14,8 +14,11 @@ namespace OxfordOnline.Data
             _configuration = configuration;
         }
 
-        public DbSet<Item> Item { get; set; }
+        public DbSet<Product> Product { get; set; }
+
         public DbSet<Image> Image { get; set; }
+
+        public DbSet<Tag> Tag { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,16 +30,15 @@ namespace OxfordOnline.Data
                     ServerVersion.AutoDetect(connectionString)); // Detecta a versão do banco automaticamente
             }
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Definir o relacionamento entre oxf_Image e Oxf_Item
+            // Relacionamento entre Image e Product
             modelBuilder.Entity<Image>()
-                .HasOne(i => i.Item)
+                .HasOne(i => i.Product) 
                 .WithMany()
-                .HasForeignKey(i => i.ItemId)
+                .HasForeignKey(i => i.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

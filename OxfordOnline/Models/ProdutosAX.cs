@@ -1,6 +1,6 @@
 ﻿namespace OxfordOnline.Models
 {
-    public class Produtos
+    public class ProdutosAX
     {
         public string Id { get; set; }
         public string NomeDPA { get; set; }

@@ -121,10 +121,20 @@
         }
       }
     },
-    "/api/Item": {
+    "/api/Image/Product/{productId}": {
       "get": {
         "tags": [
-          "Item"
+          "Image"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -134,7 +144,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Item"
+                    "$ref": "#/components/schemas/Image"
                   }
                 }
               },
@@ -142,7 +152,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Item"
+                    "$ref": "#/components/schemas/Image"
                   }
                 }
               },
@@ -150,7 +160,45 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Item"
+                    "$ref": "#/components/schemas/Image"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
                   }
                 }
               }
@@ -160,23 +208,32 @@
       },
       "post": {
         "tags": [
-          "Item"
+          "Product"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Product"
+                }
               }
             }
           }
@@ -188,10 +245,10 @@
         }
       }
     },
-    "/api/Item/{id}": {
+    "/api/Product/{id}": {
       "get": {
         "tags": [
-          "Item"
+          "Product"
         ],
         "parameters": [
           {
@@ -199,8 +256,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -210,20 +266,79 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Item"
+                  "$ref": "#/components/schemas/Product"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Item"
+                  "$ref": "#/components/schemas/Product"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Item"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -231,7 +346,7 @@
     "/api/product/all": {
       "get": {
         "tags": [
-          "Product"
+          "ProductControllerAX"
         ],
         "responses": {
           "200": {
@@ -241,7 +356,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produtos"
+                    "$ref": "#/components/schemas/ProdutosAX"
                   }
                 }
               },
@@ -249,7 +364,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produtos"
+                    "$ref": "#/components/schemas/ProdutosAX"
                   }
                 }
               },
@@ -257,7 +372,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produtos"
+                    "$ref": "#/components/schemas/ProdutosAX"
                   }
                 }
               }
@@ -269,7 +384,7 @@
     "/api/product/{id}": {
       "get": {
         "tags": [
-          "Product"
+          "ProductControllerAX"
         ],
         "parameters": [
           {
@@ -291,7 +406,7 @@
     "/api/product/find/{itemId}": {
       "get": {
         "tags": [
-          "Product"
+          "ProductControllerAX"
         ],
         "parameters": [
           {
@@ -315,65 +430,132 @@
     "schemas": {
       "Image": {
         "required": [
-          "itemId",
-          "path"
+          "path",
+          "productId"
         ],
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32"
-          },
-          "itemId": {
-            "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "path": {
-            "maxLength": 255,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string"
           },
-          "updateDate": {
-            "type": "string",
-            "format": "date-time"
+          "sequence": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
-          "item": {
-            "$ref": "#/components/schemas/Item"
+          "productId": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
           }
         },
         "additionalProperties": false
       },
-      "Item": {
-        "required": [
-          "codeItem",
-          "qrCode"
-        ],
+      "Product": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "codeItem": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "qrCode": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
+          "itemId": {
+            "maxLength": 20,
             "type": "string",
             "nullable": true
           },
-          "createDate": {
+          "itemBarCode": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "prodBrandId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodBrandDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodLinesId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodLinesDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodDecorationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodDecorationDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitVolumeML": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemNetWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prodFamilyId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodFamilyDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "grossWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taraWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossDepth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossWidth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossHeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nrOfItems": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taxFiscalClassification": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Produtos": {
+      "ProdutosAX": {
         "type": "object",
         "properties": {
           "id": {

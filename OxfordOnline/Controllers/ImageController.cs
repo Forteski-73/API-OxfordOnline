@@ -23,25 +23,25 @@ namespace OxfordOnline.Controllers
             if (images == null || !images.Any())
                 return BadRequest("Nenhuma imagem foi enviada.");
 
-            if (images.Any(img => img.ItemId <= 0 || string.IsNullOrWhiteSpace(img.Path)))
-                return BadRequest("Todas as imagens devem ter um ItemId válido e um caminho (Path).");
+            // Validação: ProductId deve estar preenchido e Path não pode ser vazio
+            if (images.Any(img => string.IsNullOrWhiteSpace(img.ProductId) || string.IsNullOrWhiteSpace(img.Path)))
+                return BadRequest("Todas as imagens devem ter um ProductId válido e um caminho (Path).");
 
-            // Verifica se todos os ItemId existem
-            var itemIds = images.Select(i => i.ItemId).Distinct();
-            var existingItemIds = await _context.Item
-                .Where(i => itemIds.Contains(i.Id))
-                .Select(i => i.Id)
+            // Verifica se todos os ProductId existem
+            var productIds = images.Select(i => i.ProductId).Distinct();
+            var existingProductIds = await _context.Product
+                .Where(p => productIds.Contains(p.ItemId))
+                .Select(p => p.ItemId)
                 .ToListAsync();
 
-            var invalidItemIds = itemIds.Except(existingItemIds).ToList();
-            if (invalidItemIds.Any())
-                return NotFound($"Itens não encontrados: {string.Join(", ", invalidItemIds)}");
+            var invalidProductIds = productIds.Except(existingProductIds).ToList();
+            if (invalidProductIds.Any())
+                return NotFound($"Produtos não encontrados: {string.Join(", ", invalidProductIds)}");
 
-            // Atualiza datas e remove referência ao objeto Item
+            // Atualiza datas e remove referência ao objeto Product
             foreach (var img in images)
             {
-                img.UpdateDate = DateTime.UtcNow;
-                img.Item = null;
+                img.Product = null;  // evitar tracking de entidades relacionadas neste ponto
             }
 
             _context.Image.AddRange(images);
@@ -73,6 +73,18 @@ namespace OxfordOnline.Controllers
             return Ok(image);
         }
 
-        // GET: Imagens por item
+        // GET: Imagens por ProductId
+        [HttpGet("Product/{productId}")]
+        public async Task<ActionResult<IEnumerable<Image>>> GetImagesByProductId(string productId)
+        {
+            var images = await _context.Image
+                .Where(i => i.ProductId == productId)
+                .ToListAsync();
+
+            if (images == null || images.Count == 0)
+                return NotFound("Nenhuma imagem encontrada para o produto informado.");
+
+            return Ok(images);
+        }
     }
 }

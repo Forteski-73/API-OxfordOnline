@@ -1,101 +1,156 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
-using OxfordOnline.Interfaces;
+﻿using OxfordOnline.Data;
 using OxfordOnline.Models;
-using System.ServiceModel;
-using Oxfordonline.Integration;
-using OxfordOnline.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-[ApiController]
-[Route("api/product")]
-public class ProductController : ControllerBase
-{
-    static readonly ProductInterface repositorio = new Product();
-    TokenKey tokenKey = new TokenKey();
-
-    [HttpGet("all")]
-    public ActionResult<IEnumerable<Produtos>> GetAllProdutos()
-    {
-        try
-        {
-            return Ok(repositorio.GetAll()); // Retorna 200 OK com a lista de produtos
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Erro ao chamar o serviço", error = ex.Message });
-        }
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetProduto(string id)
-    {
-        try
-        {
-            Produtos item = repositorio.Get(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return Ok(item);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Erro ao chamar o serviço", error = ex.Message});
-        }
-    }
-
-    [HttpGet("find/{itemId}")]
-    public async Task<IActionResult> FindProduct(string itemId)
-    {
-        try
-        {
-            CallContext AxDocumentContext = new CallContext();
-            AxDocumentContext.Company = "100";
-            // Cria o cliente do serviço WCF
-            var wsClient = new ProductServicesClient(new BasicHttpBinding(),
-                new EndpointAddress("http://ax201203:8201/DynamicsAx/Services/WSIntegratorServices"));
-
-            var callContext = new CallContext { Company = "100" };
-
-            // Cria request e chama serviço do Dynamics AX
-            //var request = new ProductServicesFindEstruturaProdutoRequest(callContext, itemId);
-            var response = await wsClient.findAsync(AxDocumentContext, itemId);
-
-            return Ok(new { message = "Sucesso", data = response });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Erro ao chamar o serviço", error = ex.Message });
-        }
-    }
-}
-/*
- namespace OxfordOnline.Controllers
+namespace OxfordOnline.Controllers
 {
     [ApiController]
-[Route("api/product")]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        static readonly ProductInterface repositorio = new Product();
+        private readonly AppDbContext _context;
 
-        TokenKey tokenKey = new TokenKey();
-        public IEnumerable<Produtos> GetAllProdutos()
+        public ProductController(AppDbContext context)
         {
-            return repositorio.GetAll();
+            _context = context;
         }
 
-        public IActionResult GetProduto(string id)
+        // GET: api/product
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            Produtos item = repositorio.Get(id);
-            if (item == null)
+            var products = await _context.Product.ToListAsync();
+            return Ok(products);
+        }
+
+        // GET: api/product/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProductById(string id)
+        {
+            var product = await _context.Product.FindAsync(id);
+            if (product == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Produto não encontrado!" });
             }
-            return Ok(item);
+            return Ok(product);
+        }
+
+        // POST: api/product
+        [HttpPost]
+        public async Task<IActionResult> CreateOrUpdateProducts([FromBody] List<Product> products)
+        {
+            if (products == null || products.Count == 0)
+                return BadRequest(new { message = "Lista de produtos inválida ou vazia." });
+
+            try
+            {
+                foreach (var product in products)
+                {
+                    var existingProduct = await _context.Product.FindAsync(product.ItemId);
+
+                    if (existingProduct != null)
+                    {
+                        // Atualiza os valores do produto existente
+                        _context.Entry(existingProduct).CurrentValues.SetValues(product);
+                    }
+                    else
+                    {
+                        // Adiciona novo produto
+                        _context.Product.Add(product);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"{products.Count} produto(s inserido(s) ou atualizado(s) com sucesso." });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro ao salvar no banco de dados.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro inesperado ao processar a solicitação.",
+                    error = ex.Message
+                });
+            }
+        }
+
+        // PUT: api/product/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(string id, [FromBody] Product product)
+        {
+            if (product == null || id != product.ItemId)
+                return BadRequest(new { message = "Dados do produto inválidos ou ID não corresponde." });
+
+            var existingProduct = await _context.Product.FindAsync(id);
+            if (existingProduct == null)
+                return NotFound(new { message = "Produto não encontrado para atualização." });
+
+            // Atualiza os campos do produto existente
+            _context.Entry(existingProduct).CurrentValues.SetValues(product);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(product);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro ao atualizar no banco de dados.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro inesperado ao processar a solicitação.",
+                    error = ex.Message
+                });
+            }
+        }
+
+        // DELETE: api/product/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(string id)
+        {
+            var product = await _context.Product.FindAsync(id);
+            if (product == null)
+                return NotFound(new { message = "Produto não encontrado para exclusão." });
+
+            _context.Product.Remove(product);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Produto excluído com sucesso." });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro ao excluir no banco de dados.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro inesperado ao processar a solicitação.",
+                    error = ex.Message
+                });
+            }
         }
     }
 }
-*/

@@ -1,22 +1,18 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OxfordOnline.Models
 {
-    [Table("product_image")]
-    public class Image
+    [Table("product_tag")]
+    public class Tag
     {
         [Key]
         [Column("id")]
         public int? Id { get; set; }
 
         [Required]
-        [Column("path")]
-        public string Path { get; set; } = string.Empty;
-
-        [Column("sequence")]
-        public int? Sequence { get; set; }
+        [Column("tag", TypeName = "text")]
+        public string ValueTag { get; set; } = string.Empty;
 
         [Required]
         [Column("product_id")]
