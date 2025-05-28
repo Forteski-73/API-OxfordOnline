@@ -16,6 +16,56 @@ namespace OxfordOnline.Controllers
             _context = context;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateImages([FromBody] List<Image> images)
+        {
+            if (images == null || !images.Any())
+                return BadRequest("Nenhuma imagem foi enviada.");
+
+            // Validação: ProductId deve estar preenchido e Path não pode ser vazio
+            if (images.Any(img => string.IsNullOrWhiteSpace(img.ProductId) || string.IsNullOrWhiteSpace(img.Path)))
+                return BadRequest("Todas as imagens devem ter um ProductId válido e um caminho (Path).");
+
+            // Verifica se todos os ProductId existem
+            var productIds = images.Select(i => i.ProductId).Distinct().ToList();
+            var existingProductIds = await _context.Product
+                .Where(p => productIds.Contains(p.ItemId))
+                .Select(p => p.ItemId)
+                .ToListAsync();
+
+            var invalidProductIds = productIds.Except(existingProductIds).ToList();
+            if (invalidProductIds.Any())
+                return NotFound($"Produtos não encontrados: {string.Join(", ", invalidProductIds)}");
+
+            // Deleta todas as imagens existentes para os ProductIds enviados
+            var imagesToRemove = await _context.Image
+                .Where(img => productIds.Contains(img.ProductId))
+                .ToListAsync();
+
+            if (imagesToRemove.Any())
+            {
+                _context.Image.RemoveRange(imagesToRemove);
+                await _context.SaveChangesAsync(); // Apaga antes de inserir
+            }
+
+            // Remove tracking da entidade Product
+            foreach (var img in images)
+            {
+                img.Product = null;
+            }
+
+            // Insere novas imagens
+            _context.Image.AddRange(images);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = $"{images.Count} imagem(ns) adicionada(s) com sucesso!",
+                imagens = images
+            });
+        }
+
+        /*
         // POST: Criar múltiplas imagens
         [HttpPost]
         public async Task<IActionResult> CreateImages([FromBody] List<Image> images)
@@ -53,6 +103,7 @@ namespace OxfordOnline.Controllers
                 imagens = images
             });
         }
+        */
 
         // GET: Todas as imagens
         [HttpGet]

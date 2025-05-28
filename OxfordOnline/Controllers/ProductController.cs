@@ -152,5 +152,117 @@ namespace OxfordOnline.Controllers
                 });
             }
         }
+
+        // GET: api/product/ProductAll
+        [HttpGet("ProductAll")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsWithImagesAndTags(
+            [FromQuery] string? ItemId = null,
+            [FromQuery] string? ItemBarCode = null,
+            [FromQuery] string? Name = null)
+        {
+            IQueryable<Product> query = _context.Product;
+
+            if (!string.IsNullOrWhiteSpace(ItemId))
+            {
+                query = query.Where(p => p.ItemId == ItemId);
+            }
+            if (!string.IsNullOrWhiteSpace(ItemBarCode))
+            {
+                query = query.Where(p => p.ItemBarCode != null && p.ItemBarCode.StartsWith(ItemBarCode));
+            }
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                query = query.Where(p => p.Name != null && p.Name.Contains(Name));
+            }
+
+            var products = await query
+                .Take(10) // top 10 primeiros encontrados
+                .Select(p => new ProductDto
+                {
+                    ItemId = p.ItemId,
+                    ItemBarCode = p.ItemBarCode,
+                    ProdBrandId = p.ProdBrandId,
+                    ProdBrandDescriptionId = p.ProdBrandDescriptionId,
+                    ProdLinesId = p.ProdLinesId,
+                    ProdLinesDescriptionId = p.ProdLinesDescriptionId,
+                    ProdDecorationId = p.ProdDecorationId,
+                    ProdDecorationDescriptionId = p.ProdDecorationDescriptionId,
+                    Name = p.Name,
+                    UnitVolumeML = p.UnitVolumeML,
+                    ItemNetWeight = p.ItemNetWeight,
+                    ProdFamilyId = p.ProdFamilyId,
+                    ProdFamilyDescriptionId = p.ProdFamilyDescriptionId,
+                    GrossWeight = p.GrossWeight,
+                    TaraWeight = p.TaraWeight,
+                    GrossDepth = p.GrossDepth,
+                    GrossWidth = p.GrossWidth,
+                    GrossHeight = p.GrossHeight,
+                    NrOfItems = p.NrOfItems,
+                    TaxFiscalClassification = p.TaxFiscalClassification,
+
+                    ProductImages = _context.Image
+                        .Where(img => img.ProductId == p.ItemId)
+                        .OrderBy(img => img.Sequence)
+                        .Select(img => new ImageDto
+                        {
+                            Id = img.Id,
+                            Path = img.Path,
+                            Sequence = img.Sequence
+                        }).ToList(),
+
+                    ProductTags = _context.Tag
+                        .Where(tag => tag.ProductId == p.ItemId)
+                        .Select(tag => new TagDto
+                        {
+                            Id = tag.Id,
+                            ValueTag = tag.ValueTag
+                        }).ToList()
+                })
+                .ToListAsync();
+
+            return Ok(products);
+        }
     }
+
+    // DTOs usados para retornar dados estruturados no JSON
+    public class ProductDto //DTO significa Data Transfer Object
+    {
+        public string ItemId { get; set; } = string.Empty;
+        public string? ItemBarCode { get; set; }
+        public string? ProdBrandId { get; set; }
+        public string? ProdBrandDescriptionId { get; set; }
+        public string? ProdLinesId { get; set; }
+        public string? ProdLinesDescriptionId { get; set; }
+        public string? ProdDecorationId { get; set; }
+        public string? ProdDecorationDescriptionId { get; set; }
+        public string? Name { get; set; }
+        public decimal? UnitVolumeML { get; set; }
+        public decimal? ItemNetWeight { get; set; }
+        public string? ProdFamilyId { get; set; }
+        public string? ProdFamilyDescriptionId { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TaraWeight { get; set; }
+        public decimal? GrossDepth { get; set; }
+        public decimal? GrossWidth { get; set; }
+        public decimal? GrossHeight { get; set; }
+        public decimal? NrOfItems { get; set; }
+        public string? TaxFiscalClassification { get; set; }
+
+        public List<ImageDto> ProductImages { get; set; } = new();
+        public List<TagDto> ProductTags { get; set; } = new();
+    }
+
+    public class ImageDto
+    {
+        public int? Id { get; set; }
+        public string Path { get; set; } = string.Empty;
+        public int? Sequence { get; set; }
+    }
+
+    public class TagDto
+    {
+        public int? Id { get; set; }
+        public string ValueTag { get; set; } = string.Empty;
+    }
+
 }
