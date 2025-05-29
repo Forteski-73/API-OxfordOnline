@@ -2,6 +2,7 @@
 using OxfordOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OxfordOnline.Interfaces;
 
 namespace OxfordOnline.Controllers
 {
@@ -207,7 +208,8 @@ namespace OxfordOnline.Controllers
                         {
                             Id = img.Id,
                             Path = img.Path,
-                            Sequence = img.Sequence
+                            Sequence = img.Sequence,
+                            ProductId = img.ProductId
                         }).ToList(),
 
                     ProductTags = _context.Tag
@@ -215,7 +217,8 @@ namespace OxfordOnline.Controllers
                         .Select(tag => new TagDto
                         {
                             Id = tag.Id,
-                            ValueTag = tag.ValueTag
+                            ValueTag = tag.ValueTag,
+                            ProductId = tag.ProductId
                         }).ToList()
                 })
                 .ToListAsync();
@@ -250,6 +253,7 @@ namespace OxfordOnline.Controllers
 
         public List<ImageDto> ProductImages { get; set; } = new();
         public List<TagDto> ProductTags { get; set; } = new();
+
     }
 
     public class ImageDto
@@ -257,12 +261,14 @@ namespace OxfordOnline.Controllers
         public int? Id { get; set; }
         public string Path { get; set; } = string.Empty;
         public int? Sequence { get; set; }
+        public string ProductId { get; set; } = string.Empty;
     }
 
     public class TagDto
     {
         public int? Id { get; set; }
         public string ValueTag { get; set; } = string.Empty;
+        public string ProductId { get; set; } = string.Empty;
     }
 
 }
