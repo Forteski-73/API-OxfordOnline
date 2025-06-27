@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OxfordOnline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ad3dd905e17b06fbc39af468ba73f4f2c778ca3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46b4820673c5a7e615e04a3789dc61130c7a5e84")]
 [assembly: System.Reflection.AssemblyProductAttribute("OxfordOnline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OxfordOnline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

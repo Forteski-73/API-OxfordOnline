@@ -124,22 +124,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ProductControllerAX",
-    "Method": "GetProduto",
-    "RelativePath": "api/product/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "OxfordOnline.Controllers.ProductController",
     "Method": "GetProductById",
     "RelativePath": "api/Product/{id}",
@@ -203,16 +187,32 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ProductControllerAX",
-    "Method": "GetAllProdutos",
-    "RelativePath": "api/product/all",
+    "ContainingType": "OxfordOnline.Controllers.ProductController",
+    "Method": "GetProductsWithImagesAndTags",
+    "RelativePath": "api/Product/ProductAll",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "ItemId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ItemBarCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProdutosAX, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Controllers.ProductDto, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -223,19 +223,91 @@
     ]
   },
   {
-    "ContainingType": "ProductControllerAX",
-    "Method": "FindProduct",
-    "RelativePath": "api/product/find/{itemId}",
+    "ContainingType": "OxfordOnline.Controllers.TagController",
+    "Method": "CreateTags",
+    "RelativePath": "api/Tag",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tags",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.Tag, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.TagController",
+    "Method": "GetAllTags",
+    "RelativePath": "api/Tag",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.Tag, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.TagController",
+    "Method": "GetTagById",
+    "RelativePath": "api/Tag/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "itemId",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "OxfordOnline.Models.Tag",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.TagController",
+    "Method": "GetTagsByProductId",
+    "RelativePath": "api/Tag/Product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
         "Type": "System.String",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.Tag, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

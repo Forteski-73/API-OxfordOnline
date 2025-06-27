@@ -32,12 +32,42 @@ builder.Services.AddSingleton<Oxfordonline.Integration.ProductServicesClient>(pr
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "OxfordOnline API", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new()
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Informe o token no formato: Bearer {seu_token}"
+    });
+
+    c.AddSecurityRequirement(new()
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 var environment = builder.Environment.EnvironmentName;
 if (environment == "Production")  // Ambiente de Produção
 {
-    builder.WebHost.UseUrls("http://0.0.0.0:80");
+    builder.WebHost.UseUrls("http://0.0.0.0:5000");
 }
 
 var app = builder.Build();
@@ -53,15 +83,38 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+// Redirecionamento da raiz para o Swagger
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return;
+    }
+
+    await next();
+});
+
 app.Use(async (context, next) =>
 {
     var tokenConfigurado = builder.Configuration["AuthToken"];
     var tokenEnviado = context.Request.Headers["Authorization"].FirstOrDefault();
 
-    if (string.IsNullOrEmpty(tokenEnviado) || tokenEnviado != $"Bearer {tokenConfigurado}")
+    if (string.IsNullOrEmpty(tokenEnviado))
     {
         context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Token inválido ou ausente.");
+        await context.Response.WriteAsync("Token ausente.");
+        return;
+    }
+
+    var token = tokenEnviado.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)
+        ? tokenEnviado.Substring("Bearer ".Length).Trim()
+        : tokenEnviado.Trim();
+
+    if (token != tokenConfigurado)
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Token inválido.");
         return;
     }
 

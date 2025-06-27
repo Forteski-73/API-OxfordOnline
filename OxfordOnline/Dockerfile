@@ -26,5 +26,5 @@ WORKDIR /app
 COPY --from=build /app .
 
 # Defina a porta e inicie a aplicação
-EXPOSE 80
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "OxfordOnline.dll"]

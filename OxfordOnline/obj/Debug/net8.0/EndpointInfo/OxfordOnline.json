@@ -343,10 +343,33 @@
         }
       }
     },
-    "/api/product/all": {
+    "/api/Product/ProductAll": {
       "get": {
         "tags": [
-          "ProductControllerAX"
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "ItemId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ItemBarCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -356,7 +379,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProdutosAX"
+                    "$ref": "#/components/schemas/ProductDto"
                   }
                 }
               },
@@ -364,7 +387,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProdutosAX"
+                    "$ref": "#/components/schemas/ProductDto"
                   }
                 }
               },
@@ -372,7 +395,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProdutosAX"
+                    "$ref": "#/components/schemas/ProductDto"
                   }
                 }
               }
@@ -381,10 +404,86 @@
         }
       }
     },
-    "/api/product/{id}": {
+    "/api/Tag": {
+      "post": {
+        "tags": [
+          "Tag"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "ProductControllerAX"
+          "Tag"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Tag/{id}": {
+      "get": {
+        "tags": [
+          "Tag"
         ],
         "parameters": [
           {
@@ -392,25 +491,43 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/product/find/{itemId}": {
+    "/api/Tag/Product/{productId}": {
       "get": {
         "tags": [
-          "ProductControllerAX"
+          "Tag"
         ],
         "parameters": [
           {
-            "name": "itemId",
+            "name": "productId",
             "in": "path",
             "required": true,
             "schema": {
@@ -420,7 +537,33 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -456,6 +599,30 @@
           },
           "product": {
             "$ref": "#/components/schemas/Product"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImageDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequence": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "productId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -555,22 +722,154 @@
         },
         "additionalProperties": false
       },
-      "ProdutosAX": {
+      "ProductDto": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemBarCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodBrandId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodBrandDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodLinesId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodLinesDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodDecorationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodDecorationDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitVolumeML": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemNetWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prodFamilyId": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodFamilyDescriptionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "grossWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taraWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossDepth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossWidth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grossHeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nrOfItems": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taxFiscalClassification": {
+            "type": "string",
+            "nullable": true
+          },
+          "productImages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageDto"
+            },
+            "nullable": true
+          },
+          "productTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Tag": {
+        "required": [
+          "productId",
+          "valueTag"
+        ],
         "type": "object",
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "valueTag": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "productId": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "valueTag": {
             "type": "string",
             "nullable": true
           },
-          "nomeDPA": {
-            "type": "string",
-            "nullable": true
-          },
-          "decoracao": {
-            "type": "string",
-            "nullable": true
-          },
-          "marca": {
+          "productId": {
             "type": "string",
             "nullable": true
           }
