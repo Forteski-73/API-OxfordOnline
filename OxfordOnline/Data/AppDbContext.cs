@@ -33,6 +33,12 @@ namespace OxfordOnline.Data
 
         public DbSet<Tag> Tag { get; set; }
 
+        public DbSet<ProductBrand> ProductBrand { get; set; }
+
+        public DbSet<ProductLine> ProductLine { get; set; }
+
+        public DbSet<ProductFamily> ProductFamily { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

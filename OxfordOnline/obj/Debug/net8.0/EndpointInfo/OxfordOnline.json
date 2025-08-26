@@ -5,6 +5,158 @@
     "version": "1.0"
   },
   "paths": {
+    "/v1/Brand": {
+      "post": {
+        "tags": [
+          "Brand"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductBrand"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductBrand"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductBrand"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductBrand"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductBrand"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductBrand"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Family": {
+      "post": {
+        "tags": [
+          "Family"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductFamily"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductFamily"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Family"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductFamily"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductFamily"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductFamily"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/Image": {
       "post": {
         "tags": [
@@ -691,6 +843,82 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/Lines": {
+      "post": {
+        "tags": [
+          "Lines"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductLine"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductLine"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductLine"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Lines"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductLine"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductLine"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductLine"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2155,6 +2383,10 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "yesNoImage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2577,6 +2809,28 @@
         },
         "additionalProperties": false
       },
+      "ProductBrand": {
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "maxLength": 4,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "brandDescription": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "ProductComplete": {
         "type": "object",
         "properties": {
@@ -2658,6 +2912,28 @@
         },
         "additionalProperties": false
       },
+      "ProductFamily": {
+        "type": "object",
+        "properties": {
+          "familyId": {
+            "maxLength": 4,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "familyDescription": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "ProductImageBase64": {
         "type": "object",
         "properties": {
@@ -2720,6 +2996,28 @@
           "unitId": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductLine": {
+        "type": "object",
+        "properties": {
+          "linesId": {
+            "maxLength": 4,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "linesDescription": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

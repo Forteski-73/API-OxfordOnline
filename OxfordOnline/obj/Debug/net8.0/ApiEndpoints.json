@@ -1,5 +1,77 @@
 [
   {
+    "ContainingType": "OxfordOnline.Controllers.BrandController",
+    "Method": "UpsertBrands",
+    "RelativePath": "v1/Brand",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "brands",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductBrand, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.BrandController",
+    "Method": "GetAllBrands",
+    "RelativePath": "v1/Brand",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductBrand, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.FamilyController",
+    "Method": "UpsertFamilies",
+    "RelativePath": "v1/Family",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "families",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductFamily, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.FamilyController",
+    "Method": "GetAllFamilies",
+    "RelativePath": "v1/Family",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductFamily, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.ImageController",
     "Method": "CreateImages",
     "RelativePath": "v1/Image",
@@ -376,6 +448,42 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.InventDim, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.LinesController",
+    "Method": "UpsertLines",
+    "RelativePath": "v1/Lines",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lines",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductLine, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.LinesController",
+    "Method": "GetAllLines",
+    "RelativePath": "v1/Lines",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductLine, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
