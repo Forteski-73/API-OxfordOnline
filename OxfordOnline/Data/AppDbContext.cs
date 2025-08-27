@@ -39,6 +39,8 @@ namespace OxfordOnline.Data
 
         public DbSet<ProductFamily> ProductFamily { get; set; }
 
+        public DbSet<ProductDecoration> ProductDecoration { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
