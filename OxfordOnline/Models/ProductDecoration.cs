@@ -8,7 +8,7 @@ namespace OxfordOnline.Models
     {
         [Key]
         [Column("decoration_id")]
-        [StringLength(4)]
+        [StringLength(6)]
         public string DecorationId { get; set; }
 
         [Column("decoration_description")]
