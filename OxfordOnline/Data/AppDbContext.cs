@@ -41,6 +41,8 @@ namespace OxfordOnline.Data
 
         public DbSet<ProductDecoration> ProductDecoration { get; set; }
 
+        public DbSet<ProductAttributeMap> ProductAttributeMap { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

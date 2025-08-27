@@ -33,12 +33,12 @@ namespace OxfordOnline.Controllers
             {
                 foreach (var line in lines)
                 {
-                    if (string.IsNullOrWhiteSpace(line.LinesId))
+                    if (string.IsNullOrWhiteSpace(line.LineId))
                     {
                         return BadRequest("Dados da linha inválidos. Todos os itens precisam de um LinesId.");
                     }
 
-                    var existingLine = await _context.ProductLine.FindAsync(line.LinesId);
+                    var existingLine = await _context.ProductLine.FindAsync(line.LineId);
 
                     if (existingLine == null)
                     {

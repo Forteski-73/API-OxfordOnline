@@ -7,13 +7,13 @@ namespace OxfordOnline.Models
     public class ProductLine
     {
         [Key]
-        [Column("lines_id")]
+        [Column("line_id")]
         [StringLength(4)]
-        public string LinesId { get; set; }
+        public string LineId { get; set; }
 
-        [Column("lines_description")]
+        [Column("line_description")]
         [StringLength(50)]
-        public string LinesDescription { get; set; }
+        public string LineDescription { get; set; }
 
         [Column("status")]
         public int Status { get; set; }

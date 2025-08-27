@@ -36,6 +36,42 @@
     ]
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.DecorationController",
+    "Method": "UpsertDecorations",
+    "RelativePath": "v1/Decoration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "decorations",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductDecoration, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.DecorationController",
+    "Method": "GetAllDecorations",
+    "RelativePath": "v1/Decoration",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductDecoration, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.FamilyController",
     "Method": "UpsertFamilies",
     "RelativePath": "v1/Family",
@@ -1003,6 +1039,58 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductData, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ProductAttributeMapController",
+    "Method": "UpsertProductAttributeMaps",
+    "RelativePath": "v1/ProductAttributeMap",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maps",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.ProductAttributeMap, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ProductAttributeMapController",
+    "Method": "GetProductAttributeMaps",
+    "RelativePath": "v1/ProductAttributeMap",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "brandId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "lineId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "decorationId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductAttributeMap, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
