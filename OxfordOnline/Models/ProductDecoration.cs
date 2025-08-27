@@ -12,7 +12,7 @@ namespace OxfordOnline.Models
         public string DecorationId { get; set; }
 
         [Column("decoration_description")]
-        [StringLength(50)]
+        [StringLength(100)]
         public string DecorationDescription { get; set; }
 
         [Column("status")]
