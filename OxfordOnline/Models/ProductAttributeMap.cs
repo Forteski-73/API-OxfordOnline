@@ -27,12 +27,12 @@ namespace OxfordOnline.Models
 
         // Propriedades de navegação para EF Core
         [ForeignKey("BrandId")]
-        public ProductBrand Brand { get; set; }
+        public ProductBrand? Brand { get; set; }
 
         [ForeignKey("LineId")]
-        public ProductLine Line { get; set; }
+        public ProductLine? Line { get; set; }
 
         [ForeignKey("DecorationId")]
-        public ProductDecoration Decoration { get; set; }
+        public ProductDecoration? Decoration { get; set; }
     }
 }
