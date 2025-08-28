@@ -74,5 +74,40 @@ namespace OxfordOnline.Controllers
             var lines = await _context.ProductLine.ToListAsync();
             return Ok(lines);
         }
+
+        // GET: Obter linhas por ID da marca
+        [Authorize]
+        [HttpGet("ByBrand/{brandId}")]
+        public async Task<ActionResult<IEnumerable<ProductLine>>> GetLinesByBrandId([FromRoute] string brandId)
+        {
+            // Valida o parâmetro
+            if (string.IsNullOrWhiteSpace(brandId))
+            {
+                return BadRequest("O ID da marca é obrigatório.");
+            }
+
+            // Realiza o join para buscar as linhas únicas
+            var lines = await _context.ProductAttributeMap
+                // Filtra pelo BrandId
+                .Where(map => map.BrandId == brandId)
+                // Inclui a propriedade de navegação 'Line' para carregar os dados completos
+                .Include(map => map.Line)
+                // Seleciona a propriedade de navegação 'Line'
+                .Select(map => map.Line)
+                // Remove duplicatas para retornar apenas linhas únicas
+                .Distinct()
+                // Garante que o resultado não seja nulo (embora a consulta já evite isso)
+                .Where(line => line != null)
+                // Converte para uma lista
+                .ToListAsync();
+
+            if (!lines.Any())
+            {
+                return NotFound("Nenhuma linha encontrada para esta marca.");
+            }
+
+            return Ok(lines);
+        }
     }
+
 }

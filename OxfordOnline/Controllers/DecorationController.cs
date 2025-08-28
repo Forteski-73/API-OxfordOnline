@@ -74,5 +74,42 @@ namespace OxfordOnline.Controllers
             var decorations = await _context.ProductDecoration.ToListAsync();
             return Ok(decorations);
         }
+
+        // GET: Obter decorações por ID da marca e linha
+        [Authorize]
+        [Authorize]
+        [HttpGet("ByBrandLine/{brandId}/{lineId}")]
+        public async Task<ActionResult<IEnumerable<ProductDecoration>>> GetDecorationsByBrandAndLine(
+            [FromRoute] string brandId,
+            [FromRoute] string lineId)
+        {
+            // Valida os parâmetros
+            if (string.IsNullOrWhiteSpace(brandId) || string.IsNullOrWhiteSpace(lineId))
+            {
+                return BadRequest("Os IDs de marca e linha são obrigatórios.");
+            }
+
+            // Realiza o join implícito para buscar as decorações únicas
+            var decorations = await _context.ProductAttributeMap
+                // Filtra pelo BrandId E pelo LineId para garantir a hierarquia
+                .Where(map => map.BrandId == brandId && map.LineId == lineId)
+                // Inclui a propriedade de navegação 'Decoration'
+                .Include(map => map.Decoration)
+                // Seleciona a propriedade de navegação 'Decoration'
+                .Select(map => map.Decoration)
+                // Remove duplicatas para retornar apenas decorações únicas
+                .Distinct()
+                // Garante que o resultado não seja nulo
+                .Where(decoration => decoration != null)
+                // Converte para uma lista
+                .ToListAsync();
+
+            if (!decorations.Any())
+            {
+                return NotFound("Nenhuma decoração encontrada para esta marca e linha.");
+            }
+
+            return Ok(decorations);
+        }
     }
 }
