@@ -24,7 +24,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OxfordOnline.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19e32d0844fa9cae958e81ad3e9ad7ccbc89af35")]
 [assembly: System.Reflection.AssemblyProductAttribute("OxfordOnline.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OxfordOnline.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

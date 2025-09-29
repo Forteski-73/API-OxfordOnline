@@ -77,7 +77,6 @@ namespace OxfordOnline.Controllers
 
         // GET: Obter decorações por ID da marca e linha
         [Authorize]
-        [Authorize]
         [HttpGet("ByBrandLine/{brandId}/{lineId}")]
         public async Task<ActionResult<IEnumerable<ProductDecoration>>> GetDecorationsByBrandAndLine(
             [FromRoute] string brandId,

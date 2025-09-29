@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1d0e0ecd55a47124ceaf3da9c1646291c73fb38")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19e32d0844fa9cae958e81ad3e9ad7ccbc89af35")]
 [assembly: System.Reflection.AssemblyProductAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

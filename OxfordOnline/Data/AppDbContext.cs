@@ -43,6 +43,10 @@ namespace OxfordOnline.Data
 
         public DbSet<ProductAttributeMap> ProductAttributeMap { get; set; }
 
+        public DbSet<Pallet> Pallet { get; set; }
+
+        public DbSet<PalletItem> PalletItem { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -53,16 +57,13 @@ namespace OxfordOnline.Data
                     ServerVersion.AutoDetect(connectionString)); // Detecta a versão do banco automaticamente
             }
         }
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relacionamento entre Image e Product
-            modelBuilder.Entity<Image>()
-                .HasOne(i => i.Product) 
-                .WithMany()
-                .HasForeignKey(i => i.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
-        }*/
+            // Configura PK composta para PalletItem
+            modelBuilder.Entity<PalletItem>()
+                .HasKey(pi => new { pi.PalletId, pi.ProductId });
+        }
     }
 }

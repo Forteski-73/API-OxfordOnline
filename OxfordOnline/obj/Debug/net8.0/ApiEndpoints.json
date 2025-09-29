@@ -72,6 +72,37 @@
     ]
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.DecorationController",
+    "Method": "GetDecorationsByBrandAndLine",
+    "RelativePath": "v1/Decoration/ByBrandLine/{brandId}/{lineId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "brandId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "lineId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductDecoration, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.FamilyController",
     "Method": "UpsertFamilies",
     "RelativePath": "v1/Family",
@@ -530,6 +561,32 @@
     ]
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.LinesController",
+    "Method": "GetLinesByBrandId",
+    "RelativePath": "v1/Lines/ByBrand/{brandId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "brandId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductLine, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.OxfordController",
     "Method": "GetOxfords",
     "RelativePath": "v1/Oxford",
@@ -653,6 +710,121 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "UpsertPallets",
+    "RelativePath": "v1/Pallet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pallets",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.Pallet, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "GetAllPallets",
+    "RelativePath": "v1/Pallet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.Pallet, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "DeletePallet",
+    "RelativePath": "v1/Pallet/{palletId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "palletId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "UpsertPalletItems",
+    "RelativePath": "v1/Pallet/Item",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "palletItems",
+        "Type": "System.Collections.Generic.List\u00601[[OxfordOnline.Models.PalletItem, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "GetPalletItems",
+    "RelativePath": "v1/Pallet/Item/{palletId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "palletId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.PalletItem, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.PalletController",
+    "Method": "DeletePalletItem",
+    "RelativePath": "v1/Pallet/Item/{palletId}/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "palletId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "OxfordOnline.Controllers.ProductController",
