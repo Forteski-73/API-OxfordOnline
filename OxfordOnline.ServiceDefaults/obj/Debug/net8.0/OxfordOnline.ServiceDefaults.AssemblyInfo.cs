@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19e32d0844fa9cae958e81ad3e9ad7ccbc89af35")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31686c7d8d6ba2c6ebad009846edd2bcf56b90cc")]
 [assembly: System.Reflection.AssemblyProductAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OxfordOnline.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
