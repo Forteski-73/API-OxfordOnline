@@ -1,7 +1,8 @@
 {
   "openapi": "3.0.4",
   "info": {
-    "title": "OxfordOnline",
+    "title": "OxfordOnline API",
+    "description": "API OxfordOnline - versão 1.0",
     "version": "1.0"
   },
   "paths": {
@@ -1657,6 +1658,50 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/v1/Inventory/Product": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/Inventory/Product/Count": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

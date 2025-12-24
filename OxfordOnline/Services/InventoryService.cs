@@ -75,6 +75,13 @@ namespace OxfordOnline.Services
             return true;
         }
 
+        public async Task<int> GetProductCountAsync() =>
+            await _inventoryRepository.GetProductCountAsync();
+
+
+        public async Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000) =>
+            await _inventoryRepository.GetProductsPagedAsync(pageNumber, pageSize);
+
 
         // -----------------------------------------------------------------------------
         // --- InventoryRecord - Métodos do Serviço (Delegados ao Repositório) ---

@@ -60,7 +60,22 @@ builder.Services.AddVersionedApiExplorer(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // Segurança JWT
+    // IMPORTANTE: cria o provider manualmente
+    var provider = builder.Services.BuildServiceProvider()
+        .GetRequiredService<IApiVersionDescriptionProvider>();
+
+    // Cria um SwaggerDoc para cada versão da API
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        options.SwaggerDoc(description.GroupName, new OpenApiInfo
+        {
+            Title = "OxfordOnline API",
+            Version = description.ApiVersion.ToString(),
+            Description = $"API OxfordOnline - versão {description.ApiVersion}"
+        });
+    }
+
+    // === Segurança JWT ===
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -85,6 +100,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 
 // === Injeção de dependência ===
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

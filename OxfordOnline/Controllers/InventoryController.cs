@@ -297,5 +297,54 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, $"Erro inesperado ao excluir registro de inventário: {ex.Message}");
             }
         }
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA SICRONIZAR PRODUCT (tabela 'product') ---
+        // -----------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// GET: v1/Inventory/Product?page=1
+        /// Retorna uma lista paginada de produtos (10.000 por vez).
+        /// </summary>
+        [HttpGet("Product")]
+        public async Task<IActionResult> GetProductsPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10000)
+        {
+            try
+            {
+                // Validações básicas para evitar valores negativos ou zero
+                if (page < 1) page = 1;
+                if (pageSize < 1) pageSize = 10; // Define um mínimo
+                if (pageSize > 30000) pageSize = 30000; // Opcional: Define um limite máximo por segurança
+
+                var products = await _inventoryService.GetProductsPagedAsync(page, pageSize);
+
+                if (products == null || !products.Any())
+                    return NotFound(new { message = "Fim da lista de produtos ou página sem registros." });
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao recuperar lote de produtos: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// GET: v1/Inventory/Product/Count
+        /// Retorna o total de registros na tabela de produtos para controle do cliente.
+        /// </summary>
+        [HttpGet("Product/Count")]
+        public async Task<IActionResult> GetProductCount()
+        {
+            try
+            {
+                var total = await _inventoryService.GetProductCountAsync();
+                return Ok(new { total });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao obter contagem de produtos: {ex.Message}");
+            }
+        }
     }
 }

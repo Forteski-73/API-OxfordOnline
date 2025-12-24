@@ -47,6 +47,16 @@ namespace OxfordOnline.Repositories.Interfaces
 
         Task<bool> DeleteInventoryAsync(string _inventCode); // Usando a lógica de Service (que pode incluir exclusão de Records)
 
+        /// <summary>
+        /// Retorna o total de registros na tabela de produtos.
+        /// </summary>
+        Task<int> GetProductCountAsync();
+
+        /// <summary>
+        /// Retorna uma lista paginada de produtos.
+        /// Retornamos 'object' ou um DTO específico se você não quiser expor a model inteira.
+        /// </summary>
+        Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000);
 
         // -----------------------------------------------------------------------------
         // --- InventoryRecord ---

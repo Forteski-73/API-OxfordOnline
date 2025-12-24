@@ -372,18 +372,32 @@ namespace OxfordOnline.Repositories
             return true;
         }
 
-        // --- Método Auxiliar de Lógica de Negócio (Interno) ---
-        /*private async Task UpdateParentInventoryTotalAsync(string inventCode)
+        // ---------------------------- Método para sincronização ----------------------------
+        public async Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000)
         {
-            var newTotal = await CalculateInventoryTotalAsync(inventCode);
-            var inventoryToUpdate = await GetInventoryByCodeAsync(inventCode);
+            // O Skip calcula quantos registros devem ser ignorados com base na página
+            // Ex: Página 1 -> pula 0. Página 2 -> pula 10.000.
+            return await _context.Product
+                .OrderBy(p => p.ProductId) // Ordenação é obrigatória para usar Skip/Take
+                .Select(p => new
+                {
+                    p.ProductId,
+                    p.Barcode,
+                    p.ProductName,
+                    p.Status
+                })
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
 
-            if (inventoryToUpdate != null)
-            {
-                inventoryToUpdate.InventTotal = newTotal;
-                UpdateInventory(inventoryToUpdate);
-            }
-        }*/
+        public async Task<int> GetProductCountAsync()
+        {
+            // Retorna a contagem total de registros na tabela Product
+            return await _context.Product.CountAsync();
+        }
+
+        // ---------------------------- Método para sincronização ----------------------------
 
         private async Task UpdateParentInventoryTotalAsync(string inventCode)
         {
