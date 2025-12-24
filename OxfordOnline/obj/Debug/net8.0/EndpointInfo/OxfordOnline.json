@@ -1706,6 +1706,44 @@
         }
       }
     },
+    "/v1/Inventory/Masks": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryMask"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryMask"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryMask"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/Lines": {
       "post": {
         "tags": [
@@ -4886,6 +4924,32 @@
         },
         "additionalProperties": false
       },
+      "InventoryMask": {
+        "required": [
+          "fieldMask",
+          "fieldName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fieldName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fieldMask": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/Mask"
+          }
+        },
+        "additionalProperties": false
+      },
       "InventoryRecord": {
         "required": [
           "inventCode",
@@ -4976,6 +5040,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "Mask": {
+        "enum": [
+          "Unitizador",
+          "Posicao",
+          "Codigo"
+        ],
+        "type": "string"
       },
       "Oxford": {
         "required": [

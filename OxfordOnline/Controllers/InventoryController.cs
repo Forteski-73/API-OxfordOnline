@@ -346,5 +346,33 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, $"Erro ao obter contagem de produtos: {ex.Message}");
             }
         }
+
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA INVENTORY MASK (tabela 'inventory_mask') ---
+        // -----------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// GET: v1/Inventory/Masks
+        /// Retorna todas as máscaras de campo cadastradas no banco de dados.
+        /// </summary>
+        [HttpGet("Masks")]
+        public async Task<ActionResult<IEnumerable<InventoryMask>>> GetAllInventoryMasks()
+        {
+            try
+            {
+                var masks = await _inventoryService.GetAllInventoryMasksAsync();
+
+                if (masks == null || !masks.Any())
+                    return NotFound("Nenhuma máscara de inventário encontrada.");
+
+                return Ok(masks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao recuperar máscaras: {ex.Message}");
+            }
+        }
+
     }
 }

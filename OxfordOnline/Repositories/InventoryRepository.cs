@@ -138,6 +138,15 @@ namespace OxfordOnline.Repositories
             _context.InventoryRecord.Remove(record);
         }
 
+
+        public async Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync()
+        {
+            return await _context.InventoryMask
+                                 .AsNoTracking()
+                                 .OrderBy(m => m.Id)
+                                 .ToListAsync();
+        }
+
         // --- Lógica de Agregação de Dados ---
         public async Task<decimal> CalculateInventoryTotalAsync(string inventCode)
         {

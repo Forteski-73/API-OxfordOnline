@@ -57,9 +57,11 @@ namespace OxfordOnline.Data
 
         public DbSet<Models.InventoryGuid> InventoryGuid { get; set; }
 
-        public DbSet<Models.Inventory> Inventory { get; set; }
+        public DbSet<Models.Inventory> Inventory { get; set; } 
 
         public DbSet<Models.InventoryRecord> InventoryRecord { get; set; }
+
+        public DbSet<Models.InventoryMask> InventoryMask { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
