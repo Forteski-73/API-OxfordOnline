@@ -24,6 +24,12 @@ namespace OxfordOnline.Models
         [MaxLength(50)]
         public string InventCode { get; set; } = string.Empty;
 
+        // Corresponde a `invent_name` VARCHAR(50) NULL, nome do inventário
+        [Required]
+        [Column("invent_name")]
+        [MaxLength(50)]
+        public string? InventName { get; set; }
+
         // Corresponde a `invent_guid` VARCHAR(36) NOT NULL, Chave Estrangeira
         [Required]
         [Column("invent_guid")]

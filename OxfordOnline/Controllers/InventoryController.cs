@@ -6,6 +6,7 @@ using OxfordOnline.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 
 namespace OxfordOnline.Controllers
@@ -195,6 +196,7 @@ namespace OxfordOnline.Controllers
         [HttpPost("Record")]
         public async Task<IActionResult> CreateOrUpdateInventoryRecord([FromBody] List<InventoryRecordRequest> records)
         {
+            String Msg = string.Empty;
             if (records == null || !records.Any())
                 return BadRequest("Nenhum registro de inventário foi enviado.");
 
@@ -210,12 +212,21 @@ namespace OxfordOnline.Controllers
                         records.First().InventCode
                     );
 
+
+                if (created > 0)
+                {
+                    Msg = "CONTAGEM INSERIDA COM SUCESSO!";
+                }
+                if (updated > 0)
+                {
+                    Msg = "CONTAGEM ATUALIZADA COM SUCESSO!";
+                }
                 var response = new InventoryRecordResponse
                 {
                     InventGuid = updatedInventory.InventGuid,
                     InventCode = updatedInventory.InventCode,
                     InventTotal = updatedInventory.InventTotal,
-                    Message = $"Operação concluída. {created} registro(s) inserido(s) e {updated} registro(s) atualizado(s)."
+                    Message = Msg
                 };
 
                 return Ok(response);
@@ -297,5 +308,82 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, $"Erro inesperado ao excluir registro de inventário: {ex.Message}");
             }
         }
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA SICRONIZAR PRODUCT (tabela 'product') ---
+        // -----------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// GET: v1/Inventory/Product?page=1
+        /// Retorna uma lista paginada de produtos (10.000 por vez).
+        /// </summary>
+        [HttpGet("Product")]
+        public async Task<IActionResult> GetProductsPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 10000)
+        {
+            try
+            {
+                // Validações básicas para evitar valores negativos ou zero
+                if (page < 1) page = 1;
+                if (pageSize < 1) pageSize = 10; // Define um mínimo
+                if (pageSize > 30000) pageSize = 30000; // Opcional: Define um limite máximo por segurança
+
+                var products = await _inventoryService.GetProductsPagedAsync(page, pageSize);
+
+                if (products == null || !products.Any())
+                    return NotFound(new { message = "Fim da lista de produtos ou página sem registros." });
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao recuperar lote de produtos: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// GET: v1/Inventory/Product/Count
+        /// Retorna o total de registros na tabela de produtos para controle do cliente.
+        /// </summary>
+        [HttpGet("Product/Count")]
+        public async Task<IActionResult> GetProductCount()
+        {
+            try
+            {
+                var total = await _inventoryService.GetProductCountAsync();
+                return Ok(new { total });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao obter contagem de produtos: {ex.Message}");
+            }
+        }
+
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA INVENTORY MASK (tabela 'inventory_mask') ---
+        // -----------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// GET: v1/Inventory/Masks
+        /// Retorna todas as máscaras de campo cadastradas no banco de dados.
+        /// </summary>
+        [HttpGet("Masks")]
+        public async Task<ActionResult<IEnumerable<InventoryMask>>> GetAllInventoryMasks()
+        {
+            try
+            {
+                var masks = await _inventoryService.GetAllInventoryMasksAsync();
+
+                if (masks == null || !masks.Any())
+                    return NotFound("Nenhuma máscara de inventário encontrada.");
+
+                return Ok(masks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao recuperar máscaras: {ex.Message}");
+            }
+        }
+
     }
 }

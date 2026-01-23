@@ -803,6 +803,57 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.InventoryController",
+    "Method": "GetAllInventoryMasks",
+    "RelativePath": "v1/Inventory/Masks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.InventoryMask, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.InventoryController",
+    "Method": "GetProductsPaged",
+    "RelativePath": "v1/Inventory/Product",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.InventoryController",
+    "Method": "GetProductCount",
+    "RelativePath": "v1/Inventory/Product/Count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.InventoryController",
     "Method": "GetRecentInventoriesByGuid",
     "RelativePath": "v1/Inventory/RecentByGuid/{inventGuid}",
     "HttpMethod": "GET",

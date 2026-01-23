@@ -61,6 +61,8 @@ namespace OxfordOnline.Data
 
         public DbSet<Models.InventoryRecord> InventoryRecord { get; set; }
 
+        public DbSet<Models.InventoryMask> InventoryMask { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

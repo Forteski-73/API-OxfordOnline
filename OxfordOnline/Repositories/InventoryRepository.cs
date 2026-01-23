@@ -98,10 +98,37 @@ namespace OxfordOnline.Repositories
 
         // --- InventoryRecord - CRUD Básico/Lote ---
 
-        public Task<List<InventoryRecord>> GetRecordsByInventCodeAsync(string inventCode)
+        /*public Task<List<InventoryRecord>> GetRecordsByInventCodeAsync(string inventCode)
         {
             return _context.InventoryRecord
                 .Where(r => r.InventCode == inventCode)
+                .ToListAsync();
+        }*/
+
+        public async Task<List<InventoryRecord>> GetRecordsByInventCodeAsync(string inventCode)
+        {
+            return await _context.InventoryRecord
+                .Include(r => r.ProductNavigation) // Carrega a tabela de produto
+                .Where(r => r.InventCode == inventCode)
+                .Select(r => new InventoryRecord
+                {
+                    // Copia todas as propriedades necessárias
+                    Id = r.Id,
+                    InventCode = r.InventCode,
+                    InventCreated = r.InventCreated,
+                    InventUser = r.InventUser,
+                    InventUnitizer = r.InventUnitizer,
+                    InventLocation = r.InventLocation,
+                    InventProduct = r.InventProduct,
+                    InventBarcode = r.InventBarcode,
+                    InventStandardStack = r.InventStandardStack,
+                    InventQtdStack = r.InventQtdStack,
+                    InventQtdIndividual = r.InventQtdIndividual,
+                    InventTotal = r.InventTotal,
+
+                    // Atribui a descrição do produto ao campo NotMapped
+                    ProductDescription = r.ProductNavigation != null ? r.ProductNavigation.ProductName : "Sem Descrição"
+                })
                 .ToListAsync();
         }
 
@@ -136,6 +163,15 @@ namespace OxfordOnline.Repositories
         public void DeleteRecord(InventoryRecord record)
         {
             _context.InventoryRecord.Remove(record);
+        }
+
+
+        public async Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync()
+        {
+            return await _context.InventoryMask
+                                 .AsNoTracking()
+                                 .OrderBy(m => m.Id)
+                                 .ToListAsync();
         }
 
         // --- Lógica de Agregação de Dados ---
@@ -205,7 +241,7 @@ namespace OxfordOnline.Repositories
                 existingInventory.InventTotal = inventory.InventTotal;
 
                 UpdateInventory(existingInventory);
-            }            
+            }
 
             await SaveAsync();
             return true;
@@ -372,18 +408,32 @@ namespace OxfordOnline.Repositories
             return true;
         }
 
-        // --- Método Auxiliar de Lógica de Negócio (Interno) ---
-        /*private async Task UpdateParentInventoryTotalAsync(string inventCode)
+        // ---------------------------- Método para sincronização ----------------------------
+        public async Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000)
         {
-            var newTotal = await CalculateInventoryTotalAsync(inventCode);
-            var inventoryToUpdate = await GetInventoryByCodeAsync(inventCode);
+            // O Skip calcula quantos registros devem ser ignorados com base na página
+            // Ex: Página 1 -> pula 0. Página 2 -> pula 10.000.
+            return await _context.Product
+                .OrderBy(p => p.ProductId) // Ordenação é obrigatória para usar Skip/Take
+                .Select(p => new
+                {
+                    p.ProductId,
+                    p.Barcode,
+                    p.ProductName,
+                    p.Status
+                })
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
 
-            if (inventoryToUpdate != null)
-            {
-                inventoryToUpdate.InventTotal = newTotal;
-                UpdateInventory(inventoryToUpdate);
-            }
-        }*/
+        public async Task<int> GetProductCountAsync()
+        {
+            // Retorna a contagem total de registros na tabela Product
+            return await _context.Product.CountAsync();
+        }
+
+        // ---------------------------- Método para sincronização ----------------------------
 
         private async Task UpdateParentInventoryTotalAsync(string inventCode)
         {

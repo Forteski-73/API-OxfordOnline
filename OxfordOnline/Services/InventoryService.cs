@@ -1,5 +1,6 @@
 ﻿// Localização: OxfordOnline.Services/InventoryService.cs
 
+using Microsoft.EntityFrameworkCore;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
 using OxfordOnline.Repositories.Interfaces;
@@ -75,6 +76,13 @@ namespace OxfordOnline.Services
             return true;
         }
 
+        public async Task<int> GetProductCountAsync() =>
+            await _inventoryRepository.GetProductCountAsync();
+
+
+        public async Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000) =>
+            await _inventoryRepository.GetProductsPagedAsync(pageNumber, pageSize);
+
 
         // -----------------------------------------------------------------------------
         // --- InventoryRecord - Métodos do Serviço (Delegados ao Repositório) ---
@@ -91,6 +99,12 @@ namespace OxfordOnline.Services
 
         public async Task<bool> DeleteInventoryRecordAsync(string inventCode) =>
             await _inventoryRepository.DeleteInventoryRecordAsync(inventCode);
+
+        // -----------------------------------------------------------------------------
+        // --- InventoryMask - Métodos do Serviço (Delegados ao Repositório) ---
+        // -----------------------------------------------------------------------------
+        public async Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync() =>
+            await _inventoryRepository.GetAllInventoryMasksAsync();
 
         // -----------------------------------------------------------------------------
         // --- Métodos de Utilidade/Consulta ---

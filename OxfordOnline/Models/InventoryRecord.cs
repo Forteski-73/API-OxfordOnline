@@ -49,6 +49,9 @@ namespace OxfordOnline.Models
         [MaxLength(20)]
         public string? InventBarcode { get; set; }
 
+        [NotMapped]
+        public string? ProductDescription { get; set; }
+
         // Corresponde a `invent_standard_stack` INT(11) NULL DEFAULT NULL
         [Column("invent_standard_stack")]
         public int? InventStandardStack { get; set; }
