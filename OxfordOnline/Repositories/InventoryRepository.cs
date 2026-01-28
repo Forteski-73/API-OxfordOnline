@@ -132,9 +132,9 @@ namespace OxfordOnline.Repositories
                 .ToListAsync();
         }
 
-        public Task<InventoryRecord?> GetRecordByIdAsync(string _inventCode)
+        public Task<InventoryRecord?> GetRecordByIdAsync(int _inventId)
         {
-            return _context.InventoryRecord.FindAsync(_inventCode).AsTask();
+            return _context.InventoryRecord.FindAsync(_inventId).AsTask();
         }
 
         public Task<InventoryRecord?> GetRecordByUniqueKeysAsync(string inventCode, string inventLocation, string inventBarcode)
@@ -389,9 +389,9 @@ namespace OxfordOnline.Repositories
             return (recordsToCreate.Count, recordsToUpdate.Count);
         }
 
-        public async Task<bool> DeleteInventoryRecordAsync(string _inventCode)
+        public async Task<bool> DeleteInventoryRecordAsync(int _inventId)
         {
-            var record = await GetRecordByIdAsync(_inventCode);
+            var record = await GetRecordByIdAsync(_inventId);
 
             if (record == null)
                 return false;

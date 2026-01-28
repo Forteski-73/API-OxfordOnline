@@ -91,14 +91,14 @@ namespace OxfordOnline.Services
         public async Task<List<InventoryRecord>> GetRecordsByInventCodeAsync(string inventCode) =>
             await _inventoryRepository.GetRecordsByInventCodeAsync(inventCode);
 
-        public async Task<InventoryRecord?> GetRecordByIdAsync(string inventCode) =>
-            await _inventoryRepository.GetRecordByIdAsync(inventCode);
+        public async Task<InventoryRecord?> GetRecordByIdAsync(int inventId) =>
+            await _inventoryRepository.GetRecordByIdAsync(inventId);
 
         public async Task<(int created, int updated)> CreateOrUpdateInventoryRecordsAsync(List<InventoryRecordRequest> records) =>
             await _inventoryRepository.CreateOrUpdateInventoryRecordsAsync(records);
 
-        public async Task<bool> DeleteInventoryRecordAsync(string inventCode) =>
-            await _inventoryRepository.DeleteInventoryRecordAsync(inventCode);
+        public async Task<bool> DeleteInventoryRecordAsync(int inventId) =>
+            await _inventoryRepository.DeleteInventoryRecordAsync(inventId);
 
         // -----------------------------------------------------------------------------
         // --- InventoryMask - Métodos do Serviço (Delegados ao Repositório) ---

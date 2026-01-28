@@ -168,7 +168,7 @@ namespace OxfordOnline.Controllers
 
         // DELETE: Excluir Inventário por ID
         [Authorize]
-        [HttpDelete("Inventory/{id}")]
+        [HttpDelete("Inventory/{inventCode}")]
         public async Task<IActionResult> DeleteInventory(string inventCode)
         {
             try
@@ -259,9 +259,9 @@ namespace OxfordOnline.Controllers
 
         // GET: InventoryRecord por ID
         [HttpGet("Record/{id}")]
-        public async Task<ActionResult<InventoryRecord>> GetInventoryRecordById(string _inventCode)
+        public async Task<ActionResult<InventoryRecord>> GetInventoryRecordById(int _inventId)
         {
-            var record = await _inventoryService.GetRecordByIdAsync(_inventCode);
+            var record = await _inventoryService.GetRecordByIdAsync(_inventId);
 
             if (record == null)
                 return NotFound("Registro de inventário não encontrado pelo ID.");
@@ -291,17 +291,17 @@ namespace OxfordOnline.Controllers
         // DELETE: Excluir InventoryRecord por ID
         [Authorize]
         [HttpDelete("Record/{id}")]
-        public async Task<IActionResult> DeleteInventoryRecord(string _inventCode)
+        public async Task<IActionResult> DeleteInventoryRecord(int id)
         {
             try
             {
                 // A lógica de exclusão e recalculo do total do pai está no serviço.
-                var deleted = await _inventoryService.DeleteInventoryRecordAsync(_inventCode);
+                var deleted = await _inventoryService.DeleteInventoryRecordAsync(id);
 
                 if (!deleted)
                     return NotFound("Registro de inventário não encontrado para exclusão.");
 
-                return Ok(new { message = $"Registro de inventário com ID {_inventCode} excluído com sucesso e o total do inventário pai foi atualizado." });
+                return Ok(new { message = $"Registro de inventário com ID {id} excluído com sucesso e o total do inventário pai foi atualizado." });
             }
             catch (Exception ex)
             {

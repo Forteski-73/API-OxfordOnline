@@ -67,7 +67,7 @@ namespace OxfordOnline.Repositories.Interfaces
 
         // Métodos de Acesso a Dados (CRUD Básico/Lote)
         Task<List<InventoryRecord>> GetRecordsByInventCodeAsync(string inventCode);
-        Task<InventoryRecord?> GetRecordByIdAsync(string inventCode);
+        Task<InventoryRecord?> GetRecordByIdAsync(int inventId);
         Task<InventoryRecord?> GetRecordByUniqueKeysAsync(string inventCode, string inventLocation, string inventBarcode);
 
         void AddRangeRecords(List<InventoryRecord> records);
@@ -80,6 +80,6 @@ namespace OxfordOnline.Repositories.Interfaces
         // Métodos de Lógica de Negócio (Service)
         // Lógica de BATCH Update/Insert e recalculo do total do Inventory pai
         Task<(int created, int updated)> CreateOrUpdateInventoryRecordsAsync(List<InventoryRecordRequest> records);
-        Task<bool> DeleteInventoryRecordAsync(string inventCode); // Usando a lógica de Service (que inclui recalculo do total)
+        Task<bool> DeleteInventoryRecordAsync(int inventId); // Usando a lógica de Service (que inclui recalculo do total)
     }
 }
