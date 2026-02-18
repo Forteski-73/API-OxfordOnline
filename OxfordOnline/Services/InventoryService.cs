@@ -56,6 +56,9 @@ namespace OxfordOnline.Services
         public async Task<List<Inventory>> GetRecentInventoriesByGuid(string inventGuid) =>
             await _inventoryRepository.GetRecentInventoriesByGuid(inventGuid);
 
+        public async Task<List<Inventory>> GetInventoryAllAsync() =>
+            await _inventoryRepository.GetInventoryAllAsync();
+
         public async Task<bool> DeleteInventoryAsync(string _inventCode) =>
             await _inventoryRepository.DeleteInventoryAsync(_inventCode);
 
@@ -83,6 +86,9 @@ namespace OxfordOnline.Services
         public async Task<IEnumerable<object>> GetProductsPagedAsync(int pageNumber, int pageSize = 10000) =>
             await _inventoryRepository.GetProductsPagedAsync(pageNumber, pageSize);
 
+
+        //public async Task<InventoryGuid?> GetInventAllAsync(string inventGuid) =>
+         //   await _inventoryRepository.GetInventAllAsync(inventGuid);
 
         // -----------------------------------------------------------------------------
         // --- InventoryRecord - Métodos do Serviço (Delegados ao Repositório) ---

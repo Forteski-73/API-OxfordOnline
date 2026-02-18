@@ -6,6 +6,6 @@ namespace OxfordOnline.Models.Dto
     {
         public string ProductId { get; set; }
         public Finalidade Finalidade { get; set; }
-        public List<string> Base64Images { get; set; }
+        public List<string>? Base64Images { get; set; }
     }
 }

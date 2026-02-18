@@ -266,6 +266,20 @@ namespace OxfordOnline.Repositories
             return inventories;
         }
 
+        public async Task<List<Inventory>> GetInventoryAllAsync()
+        {
+            var oneYearAgo = DateTime.Now.AddDays(-365);
+
+            var inventories = await _context.Inventory
+                .Where(i => i.InventCreated.HasValue && i.InventCreated.Value >= oneYearAgo)
+                .OrderByDescending(i => i.InventStatus == InventoryStatus.Iniciado.ToString())
+                .ThenByDescending(i => i.InventCreated)
+
+                .ToListAsync();
+
+            return inventories;
+        }
+
 
         public async Task<bool> DeleteInventoryAsync(string InventCode)
         {

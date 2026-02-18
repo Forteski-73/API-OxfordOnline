@@ -1299,6 +1299,35 @@
         }
       }
     },
+    "/v1/Inventory/All": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inventory"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inventory"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inventory"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/Inventory/Inventory": {
       "post": {
         "tags": [
@@ -1423,7 +1452,7 @@
         }
       }
     },
-    "/v1/Inventory/Inventory/{id}": {
+    "/v1/Inventory/Inventory/{inventCode}": {
       "delete": {
         "tags": [
           "Inventory"
@@ -1431,13 +1460,6 @@
         "parameters": [
           {
             "name": "inventCode",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1547,10 +1569,11 @@
         ],
         "parameters": [
           {
-            "name": "_inventCode",
+            "name": "_inventId",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -1591,18 +1614,12 @@
         ],
         "parameters": [
           {
-            "name": "_inventCode",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],

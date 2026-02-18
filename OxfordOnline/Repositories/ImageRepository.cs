@@ -188,6 +188,39 @@ namespace OxfordOnline.Repositories
             }
         }
 
+        public async Task DeleteAllImagesByProductIdAsync(string productId)
+        {
+            try
+            {
+                // Busca todas as imagens do produto
+                var images = await _context.Image
+                    .Where(i => i.ProductId == productId)
+                    .ToListAsync();
+
+                if (!images.Any())
+                {
+                    return;
+                }
+
+                foreach (var image in images)
+                {
+                    if (!string.IsNullOrEmpty(image.ImagePath))
+                    {
+                        await _ftpService.DeleteAsync(image.ImagePath);
+                    }
+
+                    _context.Image.Remove(image);
+                }
+
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task UpdateImagesByProductIdAsync(string productId, Finalidade finalidade, List<IFormFile> files)
         {
             _logger.LogError("**** INICIO UpdateImagesByProductIdAsync ****");

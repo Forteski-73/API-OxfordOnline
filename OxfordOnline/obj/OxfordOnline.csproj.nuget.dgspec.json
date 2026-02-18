@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\OxfordOnline\\oxfordonline\\OxfordOnline\\OxfordOnline.csproj": {}
+    "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj": {}
   },
   "projects": {
-    "C:\\OxfordOnline\\oxfordonline\\OxfordOnline\\OxfordOnline.csproj": {
+    "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\OxfordOnline\\oxfordonline\\OxfordOnline\\OxfordOnline.csproj",
+        "projectUniqueName": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
         "projectName": "OxfordOnline",
-        "projectPath": "C:\\OxfordOnline\\oxfordonline\\OxfordOnline\\OxfordOnline.csproj",
+        "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
         "packagesPath": "C:\\Users\\diones.forteski\\.nuget\\packages\\",
-        "outputPath": "C:\\OxfordOnline\\oxfordonline\\OxfordOnline\\obj\\",
+        "outputPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

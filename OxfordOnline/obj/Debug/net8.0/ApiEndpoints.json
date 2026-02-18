@@ -678,6 +678,26 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.InventoryController",
+    "Method": "GetInventoryAll",
+    "RelativePath": "v1/Inventory/All",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "OxfordOnline.Models.Inventory",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.InventoryController",
     "Method": "GetInventoryGuidByGuid",
     "RelativePath": "v1/Inventory/ByGuid/{inventGuid}",
     "HttpMethod": "GET",
@@ -783,7 +803,7 @@
   {
     "ContainingType": "OxfordOnline.Controllers.InventoryController",
     "Method": "DeleteInventory",
-    "RelativePath": "v1/Inventory/Inventory/{id}",
+    "RelativePath": "v1/Inventory/Inventory/{inventCode}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -791,11 +811,6 @@
       {
         "Name": "inventCode",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -903,8 +918,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "_inventCode",
-        "Type": "System.String",
+        "Name": "_inventId",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
@@ -934,13 +949,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "_inventCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "id",
-        "Type": "",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

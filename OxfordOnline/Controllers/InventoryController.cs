@@ -94,6 +94,18 @@ namespace OxfordOnline.Controllers
             return Ok(inventoryGuid);
         }
 
+        // GET: GUID de inventário por invent_guid (a string GUID)
+        [HttpGet("All")]
+        public async Task<ActionResult<Inventory>> GetInventoryAll()
+        {
+            var inventoryGuid = await _inventoryService.GetInventoryAllAsync();
+
+            if (inventoryGuid == null)
+                return NotFound("GUID de inventário não encontrado.");
+
+            return Ok(inventoryGuid);
+        }
+
         // -----------------------------------------------------------------------------------------------------------------
         // --- MÉTODOS PARA INVENTORY (tabela 'inventory') ---
         // -----------------------------------------------------------------------------------------------------------------

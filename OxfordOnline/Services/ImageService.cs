@@ -79,6 +79,11 @@ namespace OxfordOnline.Services
             await _imageRepository.UpdateImagesByteAsync(productId, finalidade, imageBytesList);
         }
 
+        public async Task DeleteAllImagesByProductIdAsync(string productId)
+        {
+            await _imageRepository.DeleteAllImagesByProductIdAsync(productId);
+        }
+
         // NOVO: Baixa imagem direto do FTP como stream
         public async Task<Stream> DownloadImageStreamAsync(string ftpFilePath)
         {

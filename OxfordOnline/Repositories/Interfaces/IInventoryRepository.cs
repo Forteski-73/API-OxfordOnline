@@ -45,6 +45,8 @@ namespace OxfordOnline.Repositories.Interfaces
 
         Task<List<Inventory>> GetRecentInventoriesByGuid(string _inventCode);
 
+        Task<List<Inventory>> GetInventoryAllAsync();
+
         Task<bool> DeleteInventoryAsync(string _inventCode); // Usando a lógica de Service (que pode incluir exclusão de Records)
 
         /// Retorna todas as máscaras configuradas para os campos (Unitizador, Posição, Código)

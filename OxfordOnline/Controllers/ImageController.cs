@@ -198,7 +198,9 @@ namespace OxfordOnline.Controllers
 
             if (request.Base64Images == null || !request.Base64Images.Any())
             {
-                return BadRequest("Nenhuma imagem em base64 enviada.");
+                await _imageService.DeleteAllImagesByProductIdAsync(request.ProductId);
+                return Ok("Imagens do produto excluídas com sucesso via Base64.");
+                //return BadRequest("Nenhuma imagem em base64 enviada.");
             }
 
             try
