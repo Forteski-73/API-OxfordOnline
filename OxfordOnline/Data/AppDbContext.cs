@@ -63,6 +63,10 @@ namespace OxfordOnline.Data
 
         public DbSet<Models.InventoryMask> InventoryMask { get; set; }
 
+        public DbSet<ProductPack> ProductPack { get; set; }
+        public DbSet<ProductPackImage> ProductPackImage { get; set; }
+        public DbSet<ProductPackItem> ProductPackItem { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -77,11 +81,11 @@ namespace OxfordOnline.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // 1. Define a Chave Primária Composta (PalletId + ProductId)
+            // Define a Chave Primária Composta (PalletId + ProductId)
             modelBuilder.Entity<PalletItem>()
                 .HasKey(pi => new { pi.PalletId, pi.ProductId });
 
-            // 2. Define Explicitamente a Relação de Chave Estrangeira com Product
+            // Define Explicitamente a Relação de Chave Estrangeira com Product
             // Isso garante que o EF Core saiba como buscar o Product.
             modelBuilder.Entity<PalletItem>()
                 .HasOne(pi => pi.Product) // A propriedade de navegação PalletItem.Product
@@ -96,6 +100,14 @@ namespace OxfordOnline.Data
                 .HasOne(pll => pll.Pallet)
                 .WithMany()
                 .HasForeignKey(pll => pll.PalletId);
+
+
+            // Chave Estrangeira de ProductPack com Product
+            modelBuilder.Entity<ProductPackImage>()
+                .HasKey(p => new { p.PackId, p.PackSequence });
+
+            modelBuilder.Entity<ProductPackItem>()
+                .HasKey(p => new { p.PackId, p.PackItem });
         }
     }
 }

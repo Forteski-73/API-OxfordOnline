@@ -119,6 +119,9 @@ builder.Services.Configure<FtpSettings>(builder.Configuration.GetSection("Ftp"))
 builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<InventoryService>();
 
+builder.Services.AddScoped<IProductPackRepository, ProductPackRepository>();
+builder.Services.AddScoped<ProductPackingService>();
+
 // === Produção ===
 if (builder.Environment.IsProduction())
 {

@@ -94,12 +94,12 @@ namespace OxfordOnline.Repositories
 
                             productComplete.Images.Add(new ImageBase64
                             {
-                                ProductId = productId,
-                                ImagePath = img.ImagePath,
-                                Sequence = img.Sequence,
-                                ImageMain = img.ImageMain,
-                                Finalidade = img.Finalidade ?? "PRODUTO",
-                                ImagesBase64 = imageZipBase64
+                                ProductId       = productId,
+                                ImagePath       = img.ImagePath,
+                                Sequence        = img.Sequence,
+                                ImageMain       = img.ImageMain,
+                                Finalidade      = img.Finalidade ?? "PRODUTO",
+                                ImagesBase64    = imageZipBase64
                             });
                         }
                         catch (Exception ex)
