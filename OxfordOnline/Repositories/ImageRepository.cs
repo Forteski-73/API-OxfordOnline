@@ -310,6 +310,8 @@ namespace OxfordOnline.Repositories
                 throw;
             }
         }
+
+        /*
         public async Task DeleteAllImagesByPackIdAsync(string productId)
         {
             try
@@ -338,6 +340,35 @@ namespace OxfordOnline.Repositories
 
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }*/
+
+        public async Task DeleteAllImagesByPackIdAsync(string packId)
+        {
+            try
+            {
+                if (!int.TryParse(packId, out int packIdInt)) return;
+
+                var images = await _context.ProductPackImage
+                    .Where(i => i.PackId == packIdInt)
+                    .ToListAsync();
+
+                if (images.Any())
+                {
+                    // Deleta arquivos no FTP (isso precisa ser um por um)
+                    foreach (var image in images.Where(i => !string.IsNullOrEmpty(i.PackImagePath)))
+                    {
+                        await _ftpService.DeleteAsync(image.PackImagePath);
+                    }
+
+                    // Deleta do Banco em uma única operação
+                    _context.ProductPackImage.RemoveRange(images);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
             {
                 throw;
             }
