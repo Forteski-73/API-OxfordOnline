@@ -10,5 +10,7 @@
         public List<string>? DecorationId { get; set; }
         public List<string>? Tag { get; set; }
         public string? YesNoImage { get; set; }
+        public int Offset { get; set; } = 0;
+        public int Limit { get; set; } = 20;
     }
 }

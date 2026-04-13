@@ -162,6 +162,188 @@ namespace OxfordOnline.Repositories
 
         public async Task<ProductSearchResponse> GetAppSearchAsync(AppProductFilterRequest filterRequest)
         {
+            var baseQuery =
+                from p in _context.Product
+                join o in _context.Oxford on p.ProductId equals o.ProductId into oxJoin
+                from ox in oxJoin.DefaultIfEmpty()
+                where p.Status
+                select new { p, ox };
+
+            if (filterRequest.ProductId?.Any() == true)
+            {
+                var ids = filterRequest.ProductId;
+                var barcodes = ids.Where(x => x.Length >= 13).ToList();
+
+                baseQuery = baseQuery.Where(q =>
+                    ids.Contains(q.p.ProductId) ||
+                    (q.p.Barcode != null && barcodes.Contains(q.p.Barcode))
+                );
+            }
+
+            if (filterRequest.FamilyId?.Any() == true)
+            {
+                var filter = filterRequest.FamilyId;
+                baseQuery = baseQuery.Where(q =>
+                    q.ox != null &&
+                    (filter.Contains(q.ox.FamilyId) ||
+                     filter.Contains(q.ox.FamilyDescription ?? ""))
+                );
+            }
+
+            if (filterRequest.BrandId?.Any() == true)
+            {
+                var filter = filterRequest.BrandId;
+                baseQuery = baseQuery.Where(q =>
+                    q.ox != null &&
+                    (filter.Contains(q.ox.BrandId) ||
+                     filter.Contains(q.ox.BrandDescription ?? ""))
+                );
+            }
+
+            if (filterRequest.LineId?.Any() == true)
+            {
+                var filter = filterRequest.LineId;
+                baseQuery = baseQuery.Where(q =>
+                    q.ox != null &&
+                    (filter.Contains(q.ox.LineId) ||
+                     filter.Contains(q.ox.LineDescription ?? ""))
+                );
+            }
+
+            if (filterRequest.DecorationId?.Any() == true)
+            {
+                var filter = filterRequest.DecorationId.First();
+
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    var f = filter.ToLower();
+                    baseQuery = baseQuery.Where(q =>
+                        q.ox != null &&
+                        (
+                            (q.ox.DecorationDescription != null && q.ox.DecorationDescription.ToLower().Contains(f)) ||
+                            (q.ox.DecorationId != null && q.ox.DecorationId.ToLower().Contains(f))
+                        )
+                    );
+                }
+            }
+
+            if (filterRequest.Tag?.Any() == true)
+            {
+                var tags = filterRequest.Tag;
+
+                baseQuery = baseQuery.Where(q =>
+                    _context.Tag.Any(t =>
+                        t.ProductId == q.p.ProductId &&
+                        tags.Contains(t.ValueTag ?? "")
+                    )
+                );
+            }
+
+            if (!string.IsNullOrWhiteSpace(filterRequest.Name))
+            {
+                var name = filterRequest.Name.ToLower();
+                baseQuery = baseQuery.Where(q =>
+                    q.p.ProductName != null &&
+                    q.p.ProductName.ToLower().Contains(name)
+                );
+            }
+
+            var imageQuery = _context.Image
+                .Where(i => i.ImageMain && i.Finalidade == Finalidade.PRODUTO.ToString())
+                .Select(i => i.ProductId)
+                .Distinct();
+
+            if (!string.IsNullOrWhiteSpace(filterRequest.YesNoImage))
+            {
+                if (filterRequest.YesNoImage.Equals("yes", StringComparison.OrdinalIgnoreCase))
+                    baseQuery = baseQuery.Where(q => imageQuery.Contains(q.p.ProductId));
+                else if (filterRequest.YesNoImage.Equals("no", StringComparison.OrdinalIgnoreCase))
+                    baseQuery = baseQuery.Where(q => !imageQuery.Contains(q.p.ProductId));
+            }
+
+            var query = baseQuery.Select(q => new
+            {
+                Product = q.p,
+                HasImage = imageQuery.Contains(q.p.ProductId)
+            });
+
+            var totalCount = await query.CountAsync();
+
+            var products = await query
+                .OrderByDescending(x => x.HasImage)
+                .ThenBy(x => x.Product.ProductId)
+                .Skip(filterRequest.Offset)
+                .Take(filterRequest.Limit)
+                .Select(x => x.Product)
+                .ToListAsync();
+
+            var productAppList = new List<ProductApp>(products.Count);
+
+            foreach (var p in products)
+            {
+                var productApp = new ProductApp
+                {
+                    ProductId = p.ProductId,
+                    Barcode = p.Barcode,
+                    Name = p.ProductName
+                };
+
+                try
+                {
+                    var images = await _imageRepository.GetByProductIdAsync(p.ProductId, Finalidade.PRODUTO, true);
+
+                    if (images != null && images.Any())
+                    {
+                        using var zipStream = new MemoryStream();
+
+                        using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
+                        {
+                            foreach (var img in images)
+                            {
+                                var imagePath = img?.ImagePath;
+
+                                if (string.IsNullOrWhiteSpace(imagePath))
+                                    continue;
+
+                                var path = imagePath.TrimStart('/').Replace('\\', '/');
+                                var fileName = Path.GetFileName(path);
+
+                                try
+                                {
+                                    using var stream = await _imageRepository.DownloadFileStreamFromFtpAsync(path);
+                                    var entry = archive.CreateEntry(fileName, CompressionLevel.Fastest);
+
+                                    using var entryStream = entry.Open();
+                                    await stream.CopyToAsync(entryStream);
+                                }
+                                catch (Exception ex)
+                                {
+                                    _logger.LogWarning(ex, $"Erro ao zipar imagem {fileName} - {p.ProductId}");
+                                }
+                            }
+                        }
+
+                        productApp.ImageZipBase64 = Convert.ToBase64String(zipStream.ToArray());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Erro ao processar imagens - {p.ProductId}");
+                }
+
+                productAppList.Add(productApp);
+            }
+
+            return new ProductSearchResponse
+            {
+                TotalProducts = totalCount,
+                Products = productAppList
+            };
+        }
+
+        /*
+        public async Task<ProductSearchResponse> GetAppSearchAsync(AppProductFilterRequest filterRequest)
+        {
             var query = from p in _context.Product
                         join o in _context.Oxford on p.ProductId equals o.ProductId into oxJoin
                         from ox in oxJoin.DefaultIfEmpty()
@@ -281,13 +463,6 @@ namespace OxfordOnline.Repositories
             var totalCount = await query.CountAsync();
 
             // 2 - Executa a consulta para buscar os primeiros 20 produtos
-            /*var productsFromDb = await query
-                .OrderBy(q => q.p.ProductId)
-                .Take(20)
-                .Select(q => q.p)
-                .ToListAsync();
-            */
-
             var productsFromDb = await query
                 .OrderByDescending(q => _context.Image.Any(i =>
                     i.ProductId == q.p.ProductId &&
@@ -295,7 +470,8 @@ namespace OxfordOnline.Repositories
                     i.Finalidade == Finalidade.PRODUTO.ToString()
                 ))
                 .ThenBy(q => q.p.ProductId) // Ordenação secundária para garantir uma ordem consistente
-                .Take(20)
+                .Skip(filterRequest.Offset) // Pula os já carregados
+                .Take(filterRequest.Limit)  // Pega apenas a página atual (ex: 20)
                 .Select(q => q.p)
                 .ToListAsync();
 
@@ -373,6 +549,7 @@ namespace OxfordOnline.Repositories
                 Products = productAppList
             };
         }
+        */
 
         public async Task<Product?> GetByProductIdAsync(string productId) =>
             await _context.Product.FirstOrDefaultAsync(p => p.ProductId == productId);

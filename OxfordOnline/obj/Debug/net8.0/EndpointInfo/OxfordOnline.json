@@ -815,6 +815,37 @@
         }
       }
     },
+    "/v1/Image/UpdateImages/Base64": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageGenBase64"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageGenBase64"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageGenBase64"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/Invent": {
       "get": {
         "tags": [
@@ -4977,6 +5008,14 @@
           "yesNoImage": {
             "type": "string",
             "nullable": true
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5125,6 +5164,27 @@
             "nullable": true
           },
           "imagesBase64": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImageGenBase64": {
+        "type": "object",
+        "properties": {
+          "codeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "base64Images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "createdUser": {
             "type": "string",
             "nullable": true
           }

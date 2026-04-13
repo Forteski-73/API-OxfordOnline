@@ -29,5 +29,8 @@ namespace OxfordOnline.Repositories.Interfaces
 
         // Remove uma imagem da tabela product_pack_image
         Task DeleteImageAsync(ProductPackImage image);
+
+        // remove a imagem do banco
+        Task DeleteByPackIdAsync(int packId);
     }
 }

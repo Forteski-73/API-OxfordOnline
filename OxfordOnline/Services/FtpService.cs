@@ -208,19 +208,15 @@ namespace OxfordOnline.Services
 
         public async Task EnsureFtpDirectoryExistsAsync(string remotePath)
         {
-            if (string.IsNullOrWhiteSpace(remotePath))
-            {
-                _logger.LogWarning("[FtpService] Caminho remoto vazio ao tentar garantir diretório.");
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(remotePath)) return;
 
             try
             {
-                var directoryPath = Path.GetDirectoryName(remotePath)?.Replace("\\", "/");
-                if (string.IsNullOrEmpty(directoryPath))
-                    return;
+                // Normaliza as barras para o padrão FTP (/)
+                // REMOVIDO o Path.GetDirectoryName para não "comer" a última pasta
+                var normalizedPath = remotePath.Replace("\\", "/");
 
-                var parts = directoryPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                var parts = normalizedPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
                 string currentPath = "";
 
                 foreach (var part in parts)
@@ -241,22 +237,25 @@ namespace OxfordOnline.Services
                     }
                     catch (WebException ex)
                     {
-                        if (ex.Response is FtpWebResponse ftpResponse &&
-                            ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                        if (ex.Response is FtpWebResponse ftpResponse)
                         {
-                            // Diretório já existe → ignora
-                            _logger.LogDebug($"[FtpService] Diretório já existe: {currentPath}");
-                        }
-                        else
-                        {
-                            throw;
+                            // Alguns servidores retornam ActionNotTakenFileUnavailable (550) 
+                            // se a pasta já existir.
+                            if (ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                            {
+                                _logger.LogDebug($"[FtpService] Diretório já existe ou sem permissão: {currentPath}");
+                            }
+                            else
+                            {
+                                throw;
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"[FtpService] Falha ao garantir existência de diretório: {remotePath}");
+                _logger.LogError(ex, $"[FtpService] Falha ao garantir diretório: {remotePath}");
                 throw;
             }
         }

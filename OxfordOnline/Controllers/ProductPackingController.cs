@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OxfordOnline.Models;
+using OxfordOnline.Models.Dto;
 using OxfordOnline.Resources;
 using OxfordOnline.Services;
+using System.IO.Compression;
 
 namespace OxfordOnline.Controllers
 {
@@ -159,6 +161,5 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, new { message = "Erro ao deletar imagem.", error = ex.Message });
             }
         }
-
     }
 }

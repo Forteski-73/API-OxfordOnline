@@ -19,8 +19,10 @@ namespace OxfordOnline.Repositories.Interfaces
 
         Task UpdateImagesByteAsync(string productId, Finalidade finalidade, List<byte[]> imageBytesList);
 
+        Task UpdateImagesPackAsync(string codeId, string createdUser, List<byte[]> imageBytesList);
+
         Task DeleteAllImagesByProductIdAsync(string productId);
-        //Task SaveImageAsync(string productId, string fileName, Stream content);
+        Task DeleteAllImagesByPackIdAsync(string productId);
         Task<Stream> DownloadFileStreamFromFtpAsync(string ftpFilePath);
     }
 }

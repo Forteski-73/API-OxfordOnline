@@ -54,19 +54,6 @@ namespace OxfordOnline.Services
             return images;
         }
 
-        /*
-        public async Task DeleteImagesByProductIdAsync(string productId)
-        {
-            await _imageRepository.DeleteImagesByProductIdAsync(productId);
-        }
-
-        // NOVO: Salva uma nova imagem, envia para o FTP e grava no banco
-        public async Task SaveImageAsync(string productId, string fileName, Stream content)
-        {
-            await _imageRepository.SaveImageAsync(productId, fileName, content);
-        }
-        */
-
         public async Task UpdateImagesByProductIdAsync(string productId, Finalidade finalidade, List<IFormFile> files)
         {
             await _imageRepository.UpdateImagesByProductIdAsync(productId, finalidade, files);
@@ -82,6 +69,17 @@ namespace OxfordOnline.Services
         public async Task DeleteAllImagesByProductIdAsync(string productId)
         {
             await _imageRepository.DeleteAllImagesByProductIdAsync(productId);
+        }
+
+        public async Task DeleteAllImagesByPackIdAsync(string productId)
+        {
+            await _imageRepository.DeleteAllImagesByPackIdAsync(productId);
+        }
+
+        public async Task UpdateImagesPackAsync(string codeId, string createdUser, List<byte[]> imageBytesList)
+        {
+            // ... sua lógica de upload aqui, usando os bytes diretamente
+            await _imageRepository.UpdateImagesPackAsync(codeId, createdUser, imageBytesList);
         }
 
         // NOVO: Baixa imagem direto do FTP como stream

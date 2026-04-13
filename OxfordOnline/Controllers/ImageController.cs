@@ -251,5 +251,87 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, "Erro ao salvar novas imagens...");
             }
         }
+
+
+        /* ************************************************************       GENERICO             **********************************************************/
+
+        [HttpPost("UpdateImages/Base64")]
+        public async Task<IActionResult> UpdateImagesBase64([FromBody] ImageGenBase64 request)
+        {
+            // 1. Validação Básica
+            if (request == null || string.IsNullOrWhiteSpace(request.CodeId))
+            {
+                return BadRequest("Identificador é obrigatório.");
+            }
+
+            // 2. Cenário de Deleção: Se a lista estiver vazia, remove todas as imagens vinculadas ao ID
+            if (request.Base64Images == null || !request.Base64Images.Any())
+            {
+                // Aqui você chama o método de deleção genérico do seu service
+                await _imageService.DeleteAllImagesByPackIdAsync(request.CodeId);
+                return Ok($"Todas as imagens associadas ao ID {request.CodeId} foram removidas.");
+            }
+
+            try
+            {
+                var imageBytesList = new List<byte[]>();
+
+                // 3. Processamento das strings Base64 (ZIPs)
+                foreach (var base64Zip in request.Base64Images)
+                {
+                    if (string.IsNullOrWhiteSpace(base64Zip)) continue;
+
+                    // Converte Base64 para Bytes (ZIP)
+                    byte[] zippedBytes = Convert.FromBase64String(base64Zip);
+
+                    using (var zippedStream = new MemoryStream(zippedBytes))
+                    using (var archive = new ZipArchive(zippedStream, ZipArchiveMode.Read))
+                    {
+                        // Processa cada arquivo dentro do ZIP (caso o ZIP tenha mais de uma imagem)
+                        foreach (var entry in archive.Entries)
+                        {
+                            if (string.IsNullOrEmpty(entry.Name)) continue;
+
+                            using (var entryStream = entry.Open())
+                            using (var unzippedStream = new MemoryStream())
+                            {
+                                await entryStream.CopyToAsync(unzippedStream);
+                                imageBytesList.Add(unzippedStream.ToArray());
+                            }
+                        }
+                    }
+                }
+
+                if (!imageBytesList.Any())
+                {
+                    return BadRequest("Nenhum arquivo de imagem válido foi encontrado nos pacotes enviados.");
+                }
+
+                // 4. Persistência
+                // Nota: Certifique-se de que o seu serviço aceite o CodeId genérico.
+                // Se houver uma finalidade fixa ou padrão para este endpoint, passe-a aqui.
+                await _imageService.UpdateImagesPackAsync(request.CodeId, request.CreatedUser, imageBytesList);
+
+                return Ok(new
+                {
+                    Message = "Imagens atualizadas com sucesso.",
+                    Count = imageBytesList.Count
+                });
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato Base64 inválido detectado.");
+            }
+            catch (InvalidDataException)
+            {
+                return BadRequest("Um ou mais pacotes enviados não são arquivos ZIP válidos.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"*** Erro ao processar UpdateImages para o ID: {request.CodeId} ***");
+                return StatusCode(500, "Ocorreu um erro interno ao processar as imagens.");
+            }
+        }
+
     }
 }

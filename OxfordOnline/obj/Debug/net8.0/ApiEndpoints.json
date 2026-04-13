@@ -397,6 +397,22 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.ImageController",
+    "Method": "UpdateImagesBase64",
+    "RelativePath": "v1/Image/UpdateImages/Base64",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "OxfordOnline.Models.Dto.ImageGenBase64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ImageController",
     "Method": "UpdateImages",
     "RelativePath": "v1/Image/UpdateProductImages/{productId}/{finalidade}",
     "HttpMethod": "POST",

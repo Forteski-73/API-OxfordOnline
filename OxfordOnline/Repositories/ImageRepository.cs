@@ -310,109 +310,38 @@ namespace OxfordOnline.Repositories
                 throw;
             }
         }
-
-        /*public async Task UpdateImagesByProductIdAsync(string productId, Finalidade finalidade, List<IFormFile> files)
+        public async Task DeleteAllImagesByPackIdAsync(string productId)
         {
-            _logger.LogError("**** INICIO  UpdateImagesByProductIdAsync ****");
             try
             {
-                var images = await _context.Image.Where(i => i.ProductId == productId && i.Finalidade == finalidade.ToString()).ToListAsync();
+                // Busca todas as imagens do produto
+                var images = await _context.Image
+                    .Where(i => i.ProductId == productId)
+                    .ToListAsync();
 
-                var firstImage = images.FirstOrDefault();
-
-                if (firstImage == null)
+                if (!images.Any())
                 {
-                    var oxford = await _context.Oxford.FirstOrDefaultAsync(o => o.ProductId == productId);
-                    //family_description, brand_description, line_description, decoration_description
-                    if (oxford == null)
-                    {
-                        _logger.LogError($"**** Produto não encontrado: {productId} ****");
-                        throw new KeyNotFoundException($"Produto não encontrado: {productId}");
-                    }
-
-                    var pathBuilder = new FtpImagePathBuilder(
-                        oxford.FamilyDescription.      Replace(" ", "_"),
-                        oxford.BrandDescription.       Replace(" ", "_"),
-                        oxford.LineDescription.        Replace(" ", "_"),
-                        oxford.DecorationDescription.  Replace(" ", "_"),
-                        oxford.ProductId,
-                        finalidade.ToString()
-                    );
-
-                    var imagePath = $"{ pathBuilder.ToString() }/";
-
-                    _logger.LogError($"**************** Verificando diretório no FTP: {imagePath} ****************");
-
-                    await _ftpService.EnsureDirectoryExistsAsync(pathBuilder);
-
-                    firstImage = new Image 
-                    {
-                        ProductId = productId,
-                        ImagePath = imagePath,
-                        Finalidade = finalidade.ToString(),
-                    };
+                    return;
                 }
 
-                if (firstImage != null)
+                foreach (var image in images)
                 {
-                    _logger.LogError("************************** INICIO  FTP **************************");
-                    foreach (var image in images)
+                    if (!string.IsNullOrEmpty(image.ImagePath))
                     {
-                        if (!string.IsNullOrEmpty(image.ImagePath))
-                        {
-                            await _ftpService.DeleteAsync(image.ImagePath); // remove a imagem do FTP
-                        }
-                        _context.Image.Remove(image);  // remove a imagem do contexto
+                        await _ftpService.DeleteAsync(image.ImagePath);
                     }
 
-                    int seqImg = 1;
-                    bool mainImg = true;
-                    foreach (var file in files)
-                    {
-                        if (file.Length == 0) continue;
-
-                        using var stream = file.OpenReadStream();
-
-                        var baseDir = Path.GetDirectoryName(firstImage.ImagePath)?.Replace("\\", "/");
-                        var ftpPath = $"{baseDir}/{file.FileName}";
-
-                        await _ftpService.UploadAsync(ftpPath, stream);
-
-                        _logger.LogError($"***************************************** Diretório no FTP: {ftpPath} *****************************************");
-
-                        var imageNew = new Image
-                        {
-                            ProductId = productId,
-                            ImagePath = ftpPath,
-                            Finalidade = finalidade.ToString(),
-                            Sequence = seqImg,
-                            ImageMain = mainImg
-                        };
-                        _context.Image.Add(imageNew); // adiciona a nova imagem ao contexto
-
-                        mainImg = false;
-                        seqImg++;
-                    }
-                    _logger.LogError("**** ATUALIZOU DB ****");
-                    await _context.SaveChangesAsync(); // atualiza o banco de dados
-
+                    _context.Image.Remove(image);
                 }
-                else
-                {
-                    _logger.LogError("**** Nenhuma imagem existente para basear o caminho. ****");
-                    throw new InvalidOperationException("Nenhuma imagem existente para basear o caminho.");
-                }
+
+                await _context.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {
-                // Registra o erro com mais contexto
-                _logger.LogError(ex, $"**** Erro ao atualizar imagens para o produto: {productId} ****");
-
-                // Repropaga a exceção para ser tratada no controller (ou middleware)
                 throw;
             }
         }
-        */
 
         public async Task<Stream> DownloadFileStreamFromFtpAsync(string ftpFilePath)
         {
@@ -433,5 +362,87 @@ namespace OxfordOnline.Repositories
                 .OrderBy(i => i.Sequence)
                 .ToListAsync();
         }
+
+        public async Task UpdateImagesPackAsync(string codeId, string createdUser, List<byte[]> imageBytesList)
+        {
+            _logger.LogError("**** INICIO UpdateImagesByteAsync ****");
+            try
+            {
+ 
+                var images = await _context.ProductPackImage.Where(i => i.PackId == int.Parse(codeId)).ToListAsync();
+
+                string directoryPath;
+
+                if (images.Any())
+                {
+                    // Pega o diretório da primeira imagem existente para usar como base
+                    directoryPath = Path.GetDirectoryName(images.First().PackImagePath)?.Replace("\\", "/") ?? string.Empty;
+
+                    // Deleta as imagens antigas do FTP e do contexto
+                    foreach (var image in images)
+                    {
+                        if (!string.IsNullOrEmpty(image.PackImagePath))
+                        {
+                            await _ftpService.DeleteAsync(image.PackImagePath);
+                        }
+                        _context.ProductPackImage.Remove(image);
+                    }
+                }
+                else
+                {
+                    // Se não houver imagens, cria um novo diretório no FTP
+                    directoryPath = $"ESQUEMA_MONTAGEM/{codeId}";
+
+                    // Garante que a pasta existe no FTP
+                    await _ftpService.EnsureFtpDirectoryExistsAsync(directoryPath);
+
+                }
+
+                if (string.IsNullOrEmpty(directoryPath))
+                {
+                    throw new InvalidOperationException("Não foi possível determinar o diretório de destino.");
+                }
+
+                int seqImg = 1;
+                // Convertemos o codeId para inteiro uma única vez para usar no loop
+                int packIdInt = int.Parse(codeId);
+
+                foreach (var imageBytes in imageBytesList)
+                {
+                    var formattedSequence = seqImg.ToString("D6");
+                    var fileName = $"{formattedSequence}.jpeg";
+
+                    using var stream = new MemoryStream(imageBytes);
+
+                    var ftpPath = $"{directoryPath}/{fileName}";
+
+                    _logger.LogInformation($"**** SUBINDO IMAGEM PACK: {ftpPath} ****");
+                    await _ftpService.UploadAsync(ftpPath, stream);
+
+                    // AJUSTE: Usando a classe ProductPackImage e seus respectivos campos
+                    var packImageNew = new ProductPackImage
+                    {
+                        PackId = packIdInt,                 // pack_id
+                        PackSequence = seqImg,              // pack_sequence
+                        PackImagePath = ftpPath,            // pack_image_path
+                        PackUser = createdUser,             // pack_user (Ajuste conforme seu usuário)
+                        PackLastUpdate = DateTime.Now       // pack_last_update
+                    };
+
+                    _context.ProductPackImage.Add(packImageNew);
+
+                    seqImg++;
+                }
+
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("**** IMAGENS DE PACK ATUALIZADAS E SALVAS NO BANCO DE DADOS ****");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"**** Erro ao atualizar imagens para o esquema : {codeId} ****");
+                throw;
+            }
+        }
+
     }
 }

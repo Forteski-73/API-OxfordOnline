@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.Enums;
+using OxfordOnline.Repositories;
 using OxfordOnline.Repositories.Interfaces;
+using System.IO.Compression;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OxfordOnline.Services
 {
@@ -92,6 +96,11 @@ namespace OxfordOnline.Services
             await _repo.DeleteImageAsync(image);
             await _repo.SaveAsync();
             return true;
+        }
+
+        public async Task DeleteAllImagesByPackIdAsync(int packId)
+        {
+            await _repo.DeleteByPackIdAsync(packId);
         }
 
     }

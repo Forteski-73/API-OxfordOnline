@@ -14,13 +14,15 @@ namespace OxfordOnline.Repositories
     {
         private readonly AppDbContext _context;
         private readonly IImageRepository _imageRepository;
+        private readonly IFtpService _ftpService;
         private readonly ILogger<ProductRepository> _logger;
 
-        public ProductPackRepository(AppDbContext context, IImageRepository imageRepository, ILogger<ProductRepository> logger)
+        public ProductPackRepository(AppDbContext context, IImageRepository imageRepository, IFtpService ftpService, ILogger<ProductRepository> logger)
         {
             _context = context;
             _logger = logger;
             _imageRepository = imageRepository;
+            _ftpService = ftpService;
         }
 
         public async Task<IEnumerable<ProductPack>> GetAllAsync()
@@ -161,6 +163,18 @@ namespace OxfordOnline.Repositories
                 }
 
                 return resultList;
+            }
+        }
+
+        public async Task DeleteByPackIdAsync(int packId)
+        {
+            var images = await _context.ProductPackImage
+                .Where(x => x.PackId == packId)
+                .ToListAsync();
+
+            if (images.Any())
+            {
+                _context.ProductPackImage.RemoveRange(images);
             }
         }
 
