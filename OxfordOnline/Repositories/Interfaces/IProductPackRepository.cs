@@ -32,5 +32,25 @@ namespace OxfordOnline.Repositories.Interfaces
 
         // remove a imagem do banco
         Task DeleteByPackIdAsync(int packId);
+
+        /// <summary>
+        /// Busca todos os itens associados a um packId específico
+        /// </summary>
+        Task<IEnumerable<ProductPackItem>> GetItemsByPackIdAsync(int packId);
+
+        /// <summary>
+        /// Busca um item específico através da chave composta (ID do Pacote + SKU/PackItem)
+        /// </summary>
+        Task<ProductPackItem?> GetItemAsync(int packId, string sku);
+
+        /// <summary>
+        /// Adiciona um novo item à tabela product_pack_item
+        /// </summary>
+        Task AddItemAsync(ProductPackItem item);
+
+        /// <summary>
+        /// Remove um registro da tabela product_pack_item
+        /// </summary>
+        Task DeleteItemAsync(ProductPackItem item);
     }
 }

@@ -161,5 +161,57 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, new { message = "Erro ao deletar imagem.", error = ex.Message });
             }
         }
+
+        // --- Endpoints de Itens (Tabela Filha) ---
+
+        // GET: /v1/ProductPacking/Items/{packId}
+        [HttpGet("Items/{packId}")]
+        public async Task<ActionResult<IEnumerable<ProductPackItem>>> GetItemsByPack(int packId)
+        {
+            var items = await _packingService.GetItemsByPackAsync(packId);
+            if (items == null || !items.Any())
+                return NotFound(new { message = "Nenhum item encontrado para esta montagem." });
+
+            return Ok(items);
+        }
+
+        // POST: /v1/ProductPacking/Items
+        [HttpPost("Items")]
+        public async Task<ActionResult<ProductPackItem>> AddItemToPack([FromBody] ProductPackItem item)
+        {
+            if (item == null || string.IsNullOrEmpty(item.PackProductId))
+                return BadRequest(new { message = EndPointsMessages.InvalidProductData });
+
+            try
+            {
+                var createdItem = await _packingService.AddItemAsync(item);
+                return Ok(createdItem);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao adicionar item {PackItem} ao pacote {PackId}", item.PackProductId, item.PackId);
+                return StatusCode(500, new { message = "Erro ao salvar item da montagem.", error = ex.Message });
+            }
+        }
+
+        // DELETE: /v1/ProductPacking/Items/{packId}/{sku}
+        [HttpDelete("Items/{packId}/{sku}")]
+        public async Task<IActionResult> DeleteItem(int packId, string sku)
+        {
+            try
+            {
+                // Note que 'sku' aqui refere-se à propriedade 'PackItem' da sua Model
+                var success = await _packingService.DeleteItemAsync(packId, sku);
+                if (!success)
+                    return NotFound(new { message = "Item não encontrado para exclusão." });
+
+                return Ok(new { message = "Item removido com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao deletar item {Sku} do pacote {PackId}", sku, packId);
+                return StatusCode(500, new { message = "Erro ao deletar item.", error = ex.Message });
+            }
+        }
     }
 }

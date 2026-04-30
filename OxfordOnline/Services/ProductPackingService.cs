@@ -103,5 +103,45 @@ namespace OxfordOnline.Services
             await _repo.DeleteByPackIdAsync(packId);
         }
 
+        // --- Métodos de Itens (Tabela Filha product_pack_item) ---
+
+        /// <summary>
+        /// Busca todos os itens (SKUs) associados a um pacote específico.
+        /// </summary>
+        public async Task<IEnumerable<ProductPackItem>> GetItemsByPackAsync(int packId)
+        {
+            // O repositório deve buscar na tabela product_pack_item filtrando pelo packId
+            return await _repo.GetItemsByPackIdAsync(packId);
+        }
+
+        /// <summary>
+        /// Adiciona um novo item (produto) ao esquema de montagem.
+        /// </summary>
+        public async Task<ProductPackItem> AddItemAsync(ProductPackItem item)
+        {
+            // Opcional: Você pode adicionar validações de regra de negócio aqui
+            // antes de enviar para o repositório.
+
+            await _repo.AddItemAsync(item);
+            await _repo.SaveAsync();
+            return item;
+        }
+
+        /// <summary>
+        /// Remove um item específico de um pacote baseado no PackId e no SKU (PackItem).
+        /// </summary>
+        public async Task<bool> DeleteItemAsync(int packId, string sku)
+        {
+            // Busca o item específico no repositório
+            var item = await _repo.GetItemAsync(packId, sku);
+
+            if (item == null) return false;
+
+            await _repo.DeleteItemAsync(item);
+            await _repo.SaveAsync();
+
+            return true;
+        }
+
     }
 }

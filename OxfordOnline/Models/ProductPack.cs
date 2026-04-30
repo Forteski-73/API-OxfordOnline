@@ -26,14 +26,10 @@ namespace OxfordOnline.Models
 
         // Navigation Properties 
         // Inicia com uma lista vazia para evitar erros de validação 'Required'
-        [JsonIgnore]
-        [NotMapped]
-        [Column("images")]
+
         public ICollection<ProductPackImage> Images { get; set; } = new List<ProductPackImage>();
 
-        [JsonIgnore]
-        [NotMapped]
-        [Column("items")]
+
         public ICollection<ProductPackItem> Items { get; set; } = new List<ProductPackItem>();
     }
 }

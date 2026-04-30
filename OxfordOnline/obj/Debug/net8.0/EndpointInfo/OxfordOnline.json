@@ -4531,6 +4531,134 @@
         }
       }
     },
+    "/v1/ProductPacking/Items/{packId}": {
+      "get": {
+        "tags": [
+          "ProductPacking"
+        ],
+        "parameters": [
+          {
+            "name": "packId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductPackItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductPackItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductPackItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ProductPacking/Items": {
+      "post": {
+        "tags": [
+          "ProductPacking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductPackItem"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductPackItem"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductPackItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPackItem"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPackItem"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPackItem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ProductPacking/Items/{packId}/{sku}": {
+      "delete": {
+        "tags": [
+          "ProductPacking"
+        ],
+        "parameters": [
+          {
+            "name": "packId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/Tag": {
       "post": {
         "tags": [
@@ -6501,6 +6629,20 @@
           "packCreated": {
             "type": "string",
             "format": "date-time"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductPackImage"
+            },
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductPackItem"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6533,6 +6675,35 @@
           "packLastUpdate": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductPackItem": {
+        "required": [
+          "packProductId",
+          "packUser"
+        ],
+        "type": "object",
+        "properties": {
+          "packId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "packProductId": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "packUser": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false

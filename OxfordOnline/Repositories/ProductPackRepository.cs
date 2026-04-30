@@ -25,9 +25,19 @@ namespace OxfordOnline.Repositories
             _ftpService = ftpService;
         }
 
+        /*public async Task<IEnumerable<ProductPack>> GetAllAsync()
+        {
+            return await _context.ProductPack
+                .AsNoTracking()
+                .ToListAsync();
+        }*/
+
         public async Task<IEnumerable<ProductPack>> GetAllAsync()
         {
             return await _context.ProductPack
+                .Include(p => p.Images)
+                .Include(p => p.Items)
+                    .ThenInclude(i => i.Product) // igual seu GetItemsByPackIdAsync
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -46,7 +56,7 @@ namespace OxfordOnline.Repositories
             return await _context.ProductPack
                 .Include(p => p.Images)
                 .Include(p => p.Items)
-                .Where(p => p.Items.Any(i => i.PackItem == productId))
+                .Where(p => p.Items.Any(i => i.PackProductId == productId))
                 .ToListAsync();
         }
 
@@ -178,5 +188,39 @@ namespace OxfordOnline.Repositories
             }
         }
 
+        // --- Métodos para Itens (product_pack_item) ---
+        public async Task<IEnumerable<ProductPackItem>> GetItemsByPackIdAsync(int packId)
+        {
+            return await _context.ProductPackItem
+                    .Include(i => i.Product) // <--- CRUCIAL: Carrega o product na navegação
+                    .AsNoTracking()
+                    .Where(i => i.PackId == packId)
+                    .ToListAsync();
+        }
+
+        public async Task<ProductPackItem?> GetItemAsync(int packId, string sku)
+        {
+            // Busca pela chave composta: ID do Pacote + Código do Item (SKU)
+            return await _context.ProductPackItem
+                .FirstOrDefaultAsync(i => i.PackId == packId && i.PackProductId == sku);
+        }
+
+        public async Task AddItemAsync(ProductPackItem item)
+        {
+            var exists = await _context.ProductPackItem
+                .AnyAsync(p => p.PackId == item.PackId
+                            && p.PackProductId == item.PackProductId);
+
+            if (exists)
+                return; // já existe, não faz nada
+
+            await _context.ProductPackItem.AddAsync(item);
+        }
+
+        public async Task DeleteItemAsync(ProductPackItem item)
+        {
+            _context.ProductPackItem.Remove(item);
+            await Task.CompletedTask;
+        }
     }
 }

@@ -107,7 +107,7 @@ namespace OxfordOnline.Data
                 .HasKey(p => new { p.PackId, p.PackSequence });
 
             modelBuilder.Entity<ProductPackItem>()
-                .HasKey(p => new { p.PackId, p.PackItem });
+                .HasKey(p => new { p.PackId, p.PackProductId });
         }
     }
 }

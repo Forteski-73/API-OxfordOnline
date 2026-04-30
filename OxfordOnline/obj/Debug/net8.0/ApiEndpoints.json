@@ -2525,6 +2525,79 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.ProductPackingController",
+    "Method": "AddItemToPack",
+    "RelativePath": "v1/ProductPacking/Items",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "item",
+        "Type": "OxfordOnline.Models.ProductPackItem",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "OxfordOnline.Models.ProductPackItem",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ProductPackingController",
+    "Method": "GetItemsByPack",
+    "RelativePath": "v1/ProductPacking/Items/{packId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "packId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[OxfordOnline.Models.ProductPackItem, OxfordOnline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ProductPackingController",
+    "Method": "DeleteItem",
+    "RelativePath": "v1/ProductPacking/Items/{packId}/{sku}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "packId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sku",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.TagController",
     "Method": "CreateTags",
     "RelativePath": "v1/Tag",
