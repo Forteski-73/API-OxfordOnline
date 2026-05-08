@@ -49,26 +49,26 @@ namespace OxfordOnline.Controllers
                 return BadRequest(new { message = EndPointsMessages.EmailRequired });
             }
 
-            bool emailExists = await _context.UserAccount.AnyAsync(ua => ua.Email == user.Account);
-            if (!emailExists)
-            {
-                return BadRequest(new { message = EndPointsMessages.EmailRequired });
-            }
-
-            bool exists = await _context.ApiUser.AnyAsync(u => u.User == user.User);
-            if (exists)
-                return Conflict(new { message = EndPointsMessages.UserAlreadyRegistered });
+            var existingUser = await _context.ApiUser.FirstOrDefaultAsync(u => u.Account == user.Account);
 
             try
             {
                 string hash = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
-                _context.ApiUser.Add(new ApiUser
+                if (existingUser != null)
                 {
-                    User = user.User,
-                    Password = hash,
-                    Account = user.Account
-                });
+                    existingUser.User = user.User;
+                    existingUser.Password = hash;
+                }
+                else
+                {
+                    _context.ApiUser.Add(new ApiUser
+                    {
+                        User = user.User,
+                        Password = hash,
+                        Account = user.Account
+                    });
+                }
 
                 await _context.SaveChangesAsync();
                 return Ok(new { message = EndPointsMessages.UserRegisteredSuccess });
@@ -127,30 +127,3 @@ namespace OxfordOnline.Controllers
         }
     }
 }
-
-/*
-[HttpPost("register")]
-public async Task<IActionResult> Register([FromHeader] string token, [FromBody] ApiUser user)
-{
-    if (token != _config["AuthToken"])
-        return Unauthorized(new { message = "Token inválido." });
-
-    if (string.IsNullOrWhiteSpace(user.User) || string.IsNullOrWhiteSpace(user.Password))
-        return BadRequest(new { message = "Usuário e senha obrigatórios." });
-
-    bool exists = await _context.ApiUser.AnyAsync(u => u.User == user.User);
-    if (exists)
-        return Conflict(new { message = "Usuário já cadastrado." });
-
-    string hash = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
-    _context.ApiUser.Add(new ApiUser
-    {
-        User = user.User,
-        Password = hash
-    });
-
-    await _context.SaveChangesAsync();
-    return Ok(new { message = "Usuário cadastrado com sucesso." });
-}
-*/
