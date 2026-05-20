@@ -169,8 +169,8 @@ namespace OxfordOnline.Controllers
         public async Task<ActionResult<IEnumerable<ProductPackItem>>> GetItemsByPack(int packId)
         {
             var items = await _packingService.GetItemsByPackAsync(packId);
-            if (items == null || !items.Any())
-                return NotFound(new { message = "Nenhum item encontrado para esta montagem." });
+            //if (items == null || !items.Any())
+            //    return NotFound(new { message = "Nenhum item encontrado para esta montagem." });
 
             return Ok(items);
         }
