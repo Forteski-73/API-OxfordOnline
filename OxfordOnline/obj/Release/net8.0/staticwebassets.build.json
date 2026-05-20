@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"Vmrd1vrnqY5ZunFtheHpdSIZfSDTbgFd0luXjTesyuk=","Source":"OxfordOnline","BasePath":"_content/OxfordOnline","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "xPmRcPBu+nMaPwiPJBHVWKKtVdyod0aj+yH3r00pDYA=",
+  "Source": "OxfordOnline",
+  "BasePath": "_content/OxfordOnline",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

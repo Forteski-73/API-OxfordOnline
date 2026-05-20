@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TgpdclsP2Xc=",
+  "dgSpecHash": "HFpaLVy4Udk=",
   "success": true,
   "projectFilePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
   "expectedPackageFiles": [
@@ -127,10 +127,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'Microsoft.CSharp 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'Microsoft.CSharp 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "Microsoft.CSharp",
       "targetGraphs": [
         "net8.0"
@@ -139,10 +137,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'Microsoft.VisualBasic 10.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'Microsoft.VisualBasic 10.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "Microsoft.VisualBasic",
       "targetGraphs": [
         "net8.0"
@@ -151,10 +147,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.AppContext 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.AppContext 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.AppContext",
       "targetGraphs": [
         "net8.0"
@@ -163,10 +157,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Collections 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Collections 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Collections",
       "targetGraphs": [
         "net8.0"
@@ -175,10 +167,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Collections.Concurrent 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Collections.Concurrent 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Collections.Concurrent",
       "targetGraphs": [
         "net8.0"
@@ -187,10 +177,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.ComponentModel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.ComponentModel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.ComponentModel",
       "targetGraphs": [
         "net8.0"
@@ -199,10 +187,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.ComponentModel.Annotations 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.ComponentModel.Annotations 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.ComponentModel.Annotations",
       "targetGraphs": [
         "net8.0"
@@ -211,10 +197,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Diagnostics.Debug 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Diagnostics.Debug 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Diagnostics.Debug",
       "targetGraphs": [
         "net8.0"
@@ -223,10 +207,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Diagnostics.Tools 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Diagnostics.Tools 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Diagnostics.Tools",
       "targetGraphs": [
         "net8.0"
@@ -235,10 +217,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Diagnostics.Tracing 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Diagnostics.Tracing 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Diagnostics.Tracing",
       "targetGraphs": [
         "net8.0"
@@ -247,10 +227,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Dynamic.Runtime 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Dynamic.Runtime 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Dynamic.Runtime",
       "targetGraphs": [
         "net8.0"
@@ -259,10 +237,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Globalization 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Globalization 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Globalization",
       "targetGraphs": [
         "net8.0"
@@ -271,10 +247,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Globalization.Calendars 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Globalization.Calendars 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Globalization.Calendars",
       "targetGraphs": [
         "net8.0"
@@ -283,10 +257,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Globalization.Extensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Globalization.Extensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Globalization.Extensions",
       "targetGraphs": [
         "net8.0"
@@ -295,10 +267,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO",
       "targetGraphs": [
         "net8.0"
@@ -307,10 +277,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO.Compression 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO.Compression 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO.Compression",
       "targetGraphs": [
         "net8.0"
@@ -319,10 +287,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO.Compression.ZipFile 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO.Compression.ZipFile 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO.Compression.ZipFile",
       "targetGraphs": [
         "net8.0"
@@ -331,10 +297,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO.FileSystem 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO.FileSystem 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO.FileSystem",
       "targetGraphs": [
         "net8.0"
@@ -343,10 +307,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO.FileSystem.Primitives 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO.FileSystem.Primitives 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO.FileSystem.Primitives",
       "targetGraphs": [
         "net8.0"
@@ -355,10 +317,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.IO.UnmanagedMemoryStream 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.IO.UnmanagedMemoryStream 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.IO.UnmanagedMemoryStream",
       "targetGraphs": [
         "net8.0"
@@ -367,10 +327,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Linq 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Linq 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Linq",
       "targetGraphs": [
         "net8.0"
@@ -379,10 +337,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Linq.Expressions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Linq.Expressions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Linq.Expressions",
       "targetGraphs": [
         "net8.0"
@@ -391,10 +347,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Linq.Parallel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Linq.Parallel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Linq.Parallel",
       "targetGraphs": [
         "net8.0"
@@ -403,10 +357,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Linq.Queryable 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Linq.Queryable 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Linq.Queryable",
       "targetGraphs": [
         "net8.0"
@@ -415,10 +367,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Net.Http 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Net.Http 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Net.Http",
       "targetGraphs": [
         "net8.0"
@@ -427,10 +377,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Net.NetworkInformation 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Net.NetworkInformation 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Net.NetworkInformation",
       "targetGraphs": [
         "net8.0"
@@ -439,10 +387,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Net.Primitives 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Net.Primitives 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Net.Primitives",
       "targetGraphs": [
         "net8.0"
@@ -451,10 +397,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Numerics.Vectors 4.1.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Numerics.Vectors 4.1.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Numerics.Vectors",
       "targetGraphs": [
         "net8.0"
@@ -463,10 +407,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.ObjectModel 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.ObjectModel 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.ObjectModel",
       "targetGraphs": [
         "net8.0"
@@ -475,10 +417,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Reflection 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Reflection 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Reflection",
       "targetGraphs": [
         "net8.0"
@@ -487,10 +427,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Reflection.DispatchProxy 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Reflection.DispatchProxy 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Reflection.DispatchProxy",
       "targetGraphs": [
         "net8.0"
@@ -499,10 +437,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Reflection.Extensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Reflection.Extensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Reflection.Extensions",
       "targetGraphs": [
         "net8.0"
@@ -511,10 +447,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Reflection.Primitives 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Reflection.Primitives 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Reflection.Primitives",
       "targetGraphs": [
         "net8.0"
@@ -523,10 +457,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Reflection.TypeExtensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Reflection.TypeExtensions 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Reflection.TypeExtensions",
       "targetGraphs": [
         "net8.0"
@@ -535,10 +467,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Resources.ResourceManager 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Resources.ResourceManager 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Resources.ResourceManager",
       "targetGraphs": [
         "net8.0"
@@ -547,10 +477,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Runtime 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Runtime 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Runtime",
       "targetGraphs": [
         "net8.0"
@@ -559,10 +487,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Runtime.Extensions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Runtime.Extensions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Runtime.Extensions",
       "targetGraphs": [
         "net8.0"
@@ -571,10 +497,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Runtime.Handles 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Runtime.Handles 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Runtime.Handles",
       "targetGraphs": [
         "net8.0"
@@ -583,10 +507,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Runtime.InteropServices 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Runtime.InteropServices 4.0.20' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Runtime.InteropServices",
       "targetGraphs": [
         "net8.0"
@@ -595,10 +517,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Runtime.Numerics 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Runtime.Numerics 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Runtime.Numerics",
       "targetGraphs": [
         "net8.0"
@@ -607,10 +527,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Security.Claims 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Security.Claims 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Security.Claims",
       "targetGraphs": [
         "net8.0"
@@ -619,10 +537,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Security.Principal 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Security.Principal 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Security.Principal",
       "targetGraphs": [
         "net8.0"
@@ -631,10 +547,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Text.Encoding 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Text.Encoding 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Text.Encoding",
       "targetGraphs": [
         "net8.0"
@@ -643,10 +557,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Text.Encoding.Extensions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Text.Encoding.Extensions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Text.Encoding.Extensions",
       "targetGraphs": [
         "net8.0"
@@ -655,10 +567,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Text.RegularExpressions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Text.RegularExpressions 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Text.RegularExpressions",
       "targetGraphs": [
         "net8.0"
@@ -667,10 +577,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Threading 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Threading 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Threading",
       "targetGraphs": [
         "net8.0"
@@ -679,10 +587,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Threading.Tasks 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Threading.Tasks 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Threading.Tasks",
       "targetGraphs": [
         "net8.0"
@@ -691,10 +597,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Threading.Tasks.Dataflow 4.5.25' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Threading.Tasks.Dataflow 4.5.25' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Threading.Tasks.Dataflow",
       "targetGraphs": [
         "net8.0"
@@ -703,10 +607,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Threading.Tasks.Parallel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Threading.Tasks.Parallel 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Threading.Tasks.Parallel",
       "targetGraphs": [
         "net8.0"
@@ -715,10 +617,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Threading.Timer 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Threading.Timer 4.0.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Threading.Timer",
       "targetGraphs": [
         "net8.0"
@@ -727,10 +627,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Xml.ReaderWriter 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Xml.ReaderWriter 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Xml.ReaderWriter",
       "targetGraphs": [
         "net8.0"
@@ -739,10 +637,8 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "message": "O pacote 'System.Xml.XDocument 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "projectPath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\OxfordOnline\\OxfordOnline\\OxfordOnline\\OxfordOnline.csproj",
+      "message": "O pacote 'System.Xml.XDocument 4.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "System.Xml.XDocument",
       "targetGraphs": [
         "net8.0"
