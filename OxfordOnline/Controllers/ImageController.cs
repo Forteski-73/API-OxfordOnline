@@ -7,11 +7,13 @@ using OxfordOnline.Models.Dto;
 using OxfordOnline.Models.Enums;
 using OxfordOnline.Resources;
 using OxfordOnline.Services;
+using SkiaSharp;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text.Json;
-using System.IO.Compression;
+using static System.Net.Mime.MediaTypeNames;
+using ImageEntity = OxfordOnline.Models.Image;
 
 namespace OxfordOnline.Controllers
 {
@@ -32,7 +34,7 @@ namespace OxfordOnline.Controllers
         // POST: /Image
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateImages([FromBody] List<Image> images)
+        public async Task<IActionResult> CreateImages([FromBody] List<ImageEntity> images)
         {
             if (images == null || !images.Any())
                 return BadRequest(new { message = EndPointsMessages.NoImagesProvided });
@@ -67,7 +69,7 @@ namespace OxfordOnline.Controllers
         // GET: /Image/{id}
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Image>> GetImageById(int id)
+        public async Task<ActionResult<ImageEntity>> GetImageById(int id)
         {
             var image = await _imageService.GetImageByIdAsync(id);
             if (image == null)
@@ -79,7 +81,7 @@ namespace OxfordOnline.Controllers
         // GET: /Image/Product/{productId}
         [Authorize]
         [HttpGet("Product/{productId}/{finalidade}")]
-        public async Task<ActionResult<IEnumerable<Image>>> GetImagesByProductId(string productId, Finalidade finalidade)
+        public async Task<ActionResult<IEnumerable<ImageEntity>>> GetImagesByProductId(string productId, Finalidade finalidade)
         {
             var images = await _imageService.GetImagesByProductIdAsync(productId, finalidade, false);
             if (!images.Any())
@@ -253,7 +255,7 @@ namespace OxfordOnline.Controllers
         }
 
 
-        /* ************************************************************       GENERICO             **********************************************************/
+        /* ************************************************************  GENERICO  **********************************************************/
 
         [HttpPost("UpdateImages/Base64")]
         public async Task<IActionResult> UpdateImagesBase64([FromBody] ImageGenBase64 request)
@@ -330,6 +332,219 @@ namespace OxfordOnline.Controllers
             {
                 _logger.LogError(ex, $"*** Erro ao processar UpdateImages para o ID: {request.CodeId} ***");
                 return StatusCode(500, "Ocorreu um erro interno ao processar as imagens.");
+            }
+        }
+
+        // =========================================================
+        // IMPORTAÇÃO VIA URL
+        // =========================================================
+        [HttpPost("ImportImagesByUrl")]
+        public async Task<IActionResult> ImportImagesByUrl(
+            [FromBody] ImportProductImagesRequest request)
+        {
+            if (request == null || request.Images == null || !request.Images.Any())
+            {
+                return BadRequest("Nenhuma imagem enviada.");
+            }
+
+            try
+            {
+                using var httpClient = new HttpClient();
+
+                int success = 0;
+                int errors = 0;
+
+                var groupedImages = request.Images
+                    .Where(x => !string.IsNullOrWhiteSpace(x.Product)
+                             && !string.IsNullOrWhiteSpace(x.UrlImage))
+                    .GroupBy(x => x.Product);
+
+                foreach (var group in groupedImages)
+                {
+                    var base64Images = new List<string>();
+
+                    foreach (var item in group)
+                    {
+                        try
+                        {
+                            // =====================================================
+                            // BAIXA IMAGEM
+                            // =====================================================
+                            byte[] originalBytes =
+                                await httpClient.GetByteArrayAsync(item.UrlImage);
+
+                            byte[] imageBytes;
+
+                            // =====================================================
+                            // LOAD IMAGEM
+                            // =====================================================
+                            using var originalBitmap =
+                                SKBitmap.Decode(originalBytes);
+
+                            if (originalBitmap == null)
+                            {
+                                throw new Exception("Imagem inválida.");
+                            }
+
+                            // =====================================================
+                            // CRIA CANVAS 600x600
+                            // =====================================================
+                            using var resizedBitmap =
+                                new SKBitmap(600, 600);
+
+                            using var canvas =
+                                new SKCanvas(resizedBitmap);
+
+                            // FUNDO BRANCO
+                            canvas.Clear(SKColors.White);
+
+                            // =====================================================
+                            // CROP PROPORCIONAL
+                            // =====================================================
+                            float ratioX =
+                                (float)600 / originalBitmap.Width;
+
+                            float ratioY =
+                                (float)600 / originalBitmap.Height;
+
+                            float ratio =
+                                Math.Max(ratioX, ratioY);
+
+                            int newWidth =
+                                (int)(originalBitmap.Width * ratio);
+
+                            int newHeight =
+                                (int)(originalBitmap.Height * ratio);
+
+                            int posX =
+                                (600 - newWidth) / 2;
+
+                            int posY =
+                                (600 - newHeight) / 2;
+
+                            // =====================================================
+                            // QUALIDADE ALTA
+                            // =====================================================
+                            using var paint = new SKPaint
+                            {
+                                IsAntialias = true,
+                                FilterQuality = SKFilterQuality.High
+                            };
+
+                            var destRect = new SKRect(
+                                posX,
+                                posY,
+                                posX + newWidth,
+                                posY + newHeight);
+
+                            canvas.DrawBitmap(
+                                originalBitmap,
+                                destRect,
+                                paint);
+
+                            canvas.Flush();
+
+                            // =====================================================
+                            // CONVERTE JPG
+                            // =====================================================
+                            using var image =
+                                SKImage.FromBitmap(resizedBitmap);
+
+                            using var data =
+                                image.Encode(SKEncodedImageFormat.Jpeg, 90);
+
+                            imageBytes = data.ToArray();
+
+                            // =====================================================
+                            // COMPACTA ZIP
+                            // =====================================================
+                            byte[] zippedBytes;
+
+                            using (var zipMemory = new MemoryStream())
+                            {
+                                using (var archive = new ZipArchive(
+                                    zipMemory,
+                                    ZipArchiveMode.Create,
+                                    true))
+                                {
+                                    var entry = archive.CreateEntry(
+                                        "image.jpg",
+                                        CompressionLevel.Fastest);
+
+                                    using var entryStream =
+                                        entry.Open();
+
+                                    await entryStream.WriteAsync(
+                                        imageBytes,
+                                        0,
+                                        imageBytes.Length);
+                                }
+
+                                zippedBytes = zipMemory.ToArray();
+                            }
+
+                            // =====================================================
+                            // ZIP -> BASE64
+                            // =====================================================
+                            var base64 =
+                                Convert.ToBase64String(zippedBytes);
+
+                            base64Images.Add(base64);
+
+                            success++;
+                        }
+                        catch (Exception ex)
+                        {
+                            errors++;
+
+                            _logger.LogError(
+                                ex,
+                                $"Erro ao baixar/processar imagem: {item.UrlImage}");
+                        }
+                    }
+
+                    // =====================================================
+                    // SALVA PRODUTO
+                    // =====================================================
+                    if (base64Images.Any())
+                    {
+                        var productRequest =
+                            new ProductImageBase64
+                            {
+                                ProductId = group.Key,
+                                Finalidade = request.Finalidade,
+                                Base64Images = base64Images
+                            };
+
+                        var result =
+                            await ReplaceImagesBase64(productRequest);
+
+                        if (result is not OkObjectResult)
+                        {
+                            var erroMsg =
+                                (result as ObjectResult)?.Value?.ToString()
+                                ?? "Erro desconhecido ao processar imagens.";
+
+                            throw new Exception(
+                                $"Falha ao atualizar imagens: {erroMsg}");
+                        }
+                    }
+                }
+
+                return Ok(new
+                {
+                    Message = "Importação finalizada.",
+                    Success = success,
+                    Errors = errors
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao importar imagens via URL");
+
+                return StatusCode(
+                    500,
+                    "Erro interno ao importar imagens.");
             }
         }
 

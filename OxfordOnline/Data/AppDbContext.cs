@@ -17,6 +17,12 @@ namespace OxfordOnline.Data
 
         public DbSet<ApiUser> ApiUser { get; set; }
 
+        public DbSet<Profile> Profile { get; set; }
+
+        public DbSet<Menu> Menu { get; set; }
+
+        public DbSet<ProfileMenu> ProfileMenu { get; set; }
+
         public DbSet<UserAccount> UserAccount { get; set; }
 
         public DbSet<Product> Product { get; set; }
@@ -81,6 +87,10 @@ namespace OxfordOnline.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Chave primária composta para a tabela profile_menus
+            modelBuilder.Entity<ProfileMenu>()
+                .HasKey(pm => new { pm.ProfileId, pm.MenuId });
+
             // Define a Chave Primária Composta (PalletId + ProductId)
             modelBuilder.Entity<PalletItem>()
                 .HasKey(pi => new { pi.PalletId, pi.ProductId });
@@ -100,7 +110,6 @@ namespace OxfordOnline.Data
                 .HasOne(pll => pll.Pallet)
                 .WithMany()
                 .HasForeignKey(pll => pll.PalletId);
-
 
             // Chave Estrangeira de ProductPack com Product
             modelBuilder.Entity<ProductPackImage>()

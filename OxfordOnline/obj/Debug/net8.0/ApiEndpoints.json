@@ -298,6 +298,22 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.ImageController",
+    "Method": "ImportImagesByUrl",
+    "RelativePath": "v1/Image/ImportImagesByUrl",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "OxfordOnline.Models.Dto.ImportProductImagesRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.ImageController",
     "Method": "GetImagesByProductId",
     "RelativePath": "v1/Image/Product/{productId}/{finalidade}",
     "HttpMethod": "GET",
@@ -2802,6 +2818,38 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "LoginUser",
+    "RelativePath": "v1/User/LoginUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "OxfordOnline.Models.ApiUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "GetProfiles",
+    "RelativePath": "v1/User/Profiles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
     "Method": "Register",
     "RelativePath": "v1/User/register",
     "HttpMethod": "POST",
@@ -2817,6 +2865,22 @@
         "Name": "user",
         "Type": "OxfordOnline.Models.ApiUser",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "GetUsers",
+    "RelativePath": "v1/User/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

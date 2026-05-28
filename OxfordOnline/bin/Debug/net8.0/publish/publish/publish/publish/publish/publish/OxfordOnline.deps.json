@@ -18,6 +18,7 @@
           "Microsoft.NETCore": "5.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "8.0.2",
           "Swashbuckle.AspNetCore": "9.0.1",
+          "System.Drawing.Common": "10.0.8",
           "System.IdentityModel.Tokens.Jwt": "8.12.1",
           "System.ServiceModel.Http": "8.1.2",
           "System.ServiceModel.Primitives": "8.1.2"
@@ -348,6 +349,22 @@
         }
       },
       "Microsoft.VisualBasic/10.0.0": {},
+      "Microsoft.Win32.SystemEvents/10.0.8": {
+        "runtime": {
+          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -460,6 +477,25 @@
       "System.Diagnostics.Debug/4.0.10": {},
       "System.Diagnostics.Tools/4.0.0": {},
       "System.Diagnostics.Tracing/4.0.20": {},
+      "System.Drawing.Common/10.0.8": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "10.0.8"
+        },
+        "runtime": {
+          "lib/net8.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          },
+          "lib/net8.0/System.Private.Windows.Core.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          },
+          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        }
+      },
       "System.Dynamic.Runtime/4.0.10": {},
       "System.Globalization/4.0.10": {},
       "System.Globalization.Calendars/4.0.0": {
@@ -1067,6 +1103,13 @@
       "path": "microsoft.visualbasic/10.0.0",
       "hashPath": "microsoft.visualbasic.10.0.0.nupkg.sha512"
     },
+    "Microsoft.Win32.SystemEvents/10.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J9+VT0lkrA7wW38CGxO2sZd+iH9C0qzioMi/2ztpT32WOVr+04uNqFIrxisTRf+mvtXLtdqcio1AoS0vfAVLLQ==",
+      "path": "microsoft.win32.systemevents/10.0.8",
+      "hashPath": "microsoft.win32.systemevents.10.0.8.nupkg.sha512"
+    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
@@ -1227,6 +1270,13 @@
       "sha512": "sha512-gn/wexGHc35Fv++5L1gYHMY5g25COfiZ0PGrL+3PfwzoJd4X2LbTAm/U8d385SI6BKQBI/z4dQfvneS9J27+Tw==",
       "path": "system.diagnostics.tracing/4.0.20",
       "hashPath": "system.diagnostics.tracing.4.0.20.nupkg.sha512"
+    },
+    "System.Drawing.Common/10.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LCISd6JAF80vsy9L6wuetZeOMR3FH+SwKovw5Zl0Nov9pB9ZOiCSqvOfMzooypPItQLv0mGfEePjJ1nCCQztNw==",
+      "path": "system.drawing.common/10.0.8",
+      "hashPath": "system.drawing.common.10.0.8.nupkg.sha512"
     },
     "System.Dynamic.Runtime/4.0.10": {
       "type": "package",

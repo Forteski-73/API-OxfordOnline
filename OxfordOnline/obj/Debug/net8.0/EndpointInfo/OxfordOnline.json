@@ -846,6 +846,37 @@
         }
       }
     },
+    "/v1/Image/ImportImagesByUrl": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportProductImagesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportProductImagesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportProductImagesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/Invent": {
       "get": {
         "tags": [
@@ -5058,6 +5089,61 @@
           }
         }
       }
+    },
+    "/v1/User/LoginUser": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiUser"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiUser"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/User/Users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/User/Profiles": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5079,6 +5165,11 @@
           },
           "account": {
             "type": "string",
+            "nullable": true
+          },
+          "profileId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -5314,6 +5405,22 @@
           },
           "createdUser": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportProductImagesRequest": {
+        "type": "object",
+        "properties": {
+          "finalidade": {
+            "$ref": "#/components/schemas/Finalidade"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductImageUrl"
+            },
             "nullable": true
           }
         },
@@ -6353,6 +6460,20 @@
             "items": {
               "type": "string"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductImageUrl": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImage": {
+            "type": "string",
             "nullable": true
           }
         },

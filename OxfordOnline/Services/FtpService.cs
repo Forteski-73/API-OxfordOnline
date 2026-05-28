@@ -264,13 +264,13 @@ namespace OxfordOnline.Services
         {
             try
             {
-                var uri = new Uri($"ftp://{_ftpHost}{path}");
-                var request = (FtpWebRequest)WebRequest.Create(uri);
-                request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                var uri             = new Uri($"ftp://{_ftpHost}{path}");
+                var request         = (FtpWebRequest)WebRequest.Create(uri);
+                request.Method      = WebRequestMethods.Ftp.MakeDirectory;
                 request.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
-                request.UsePassive = true;
-                request.UseBinary = true;
-                request.KeepAlive = false;
+                request.UsePassive  = true;
+                request.UseBinary   = true;
+                request.KeepAlive   = false;
 
                 using var response = (FtpWebResponse)await request.GetResponseAsync();
             }
