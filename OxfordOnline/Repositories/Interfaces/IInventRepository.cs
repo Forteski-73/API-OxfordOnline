@@ -1,4 +1,5 @@
 ﻿using OxfordOnline.Models;
+using OxfordOnline.Models.Dto;
 
 namespace OxfordOnline.Repositories.Interfaces
 {
@@ -10,5 +11,6 @@ namespace OxfordOnline.Repositories.Interfaces
         Task UpdateAsync(Invent invent);
         Task DeleteAsync(Invent invent);
         Task SaveAsync();
+        Task SaveProductCompleteAsync(ProductComplete dtoInvent);
     }
 }

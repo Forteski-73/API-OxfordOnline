@@ -46,7 +46,7 @@ namespace OxfordOnline.Repositories.Interfaces
         /// <summary>
         /// Adiciona um novo item à tabela product_pack_item
         /// </summary>
-        Task AddItemAsync(ProductPackItem item);
+        Task<ProductPackItem> AddItemAsync(ProductPackItem item);
 
         /// <summary>
         /// Remove um registro da tabela product_pack_item

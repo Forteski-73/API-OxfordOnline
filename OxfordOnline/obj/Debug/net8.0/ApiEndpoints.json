@@ -553,6 +553,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.InventController",
+    "Method": "SaveProductComplete",
+    "RelativePath": "v1/Invent/New",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dtoInvent",
+        "Type": "OxfordOnline.Models.Dto.ProductComplete",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.InventDimController",
     "Method": "CreateOrUpdateInventDims",
     "RelativePath": "v1/InventDim",
@@ -2850,9 +2866,67 @@
   },
   {
     "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "GetProfilesForMenu",
+    "RelativePath": "v1/User/ProfilesMenu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
     "Method": "Register",
     "RelativePath": "v1/User/register",
     "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "user",
+        "Type": "OxfordOnline.Models.ApiUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "UpdateProfileMenus",
+    "RelativePath": "v1/User/UpdateProfileMenus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "request",
+        "Type": "OxfordOnline.Models.ProfileMenuUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "UpdateUserProfile",
+    "RelativePath": "v1/User/UpdateUserProfile",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [

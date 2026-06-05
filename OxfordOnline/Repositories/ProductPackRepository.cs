@@ -205,16 +205,24 @@ namespace OxfordOnline.Repositories
                 .FirstOrDefaultAsync(i => i.PackId == packId && i.PackProductId == sku);
         }
 
-        public async Task AddItemAsync(ProductPackItem item)
+        public async Task<ProductPackItem> AddItemAsync(ProductPackItem item)
         {
-            var exists = await _context.ProductPackItem
-                .AnyAsync(p => p.PackId == item.PackId
-                            && p.PackProductId == item.PackProductId);
+            var existingItem = await _context.ProductPackItem
+                .Include(p => p.Product)
+                .FirstOrDefaultAsync(p => p.PackId == item.PackId
+                                     && p.PackProductId == item.PackProductId);
 
-            if (exists)
-                return; // já existe, não faz nada
+            if (existingItem != null)
+            {
+                return existingItem;
+            }
 
             await _context.ProductPackItem.AddAsync(item);
+
+            // Força o EF Core a carregar a propriedade de navegação 'Product' 
+            await _context.Entry(item).Reference(p => p.Product).LoadAsync();
+
+            return item;
         }
 
         public async Task DeleteItemAsync(ProductPackItem item)

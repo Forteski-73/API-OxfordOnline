@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OxfordOnline.Models;
-using OxfordOnline.Services;
+using OxfordOnline.Models.Dto;
 using OxfordOnline.Resources;
+using OxfordOnline.Services;
 
 namespace OxfordOnline.Controllers
 {
@@ -112,6 +113,35 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, new
                 {
                     message = EndPointsMessages.ErrorDeletingProduct,
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
+
+        // POST: /Invent/New
+        [Authorize]
+        [HttpPost("New")]
+        public async Task<IActionResult> SaveProductComplete([FromBody] ProductComplete dtoInvent)
+        {
+            if (dtoInvent == null)
+                return BadRequest(new { message = EndPointsMessages.InvalidProductData });
+
+            try
+            {
+                var success = await _inventService.SaveProductCompleteAsync(dtoInvent);
+                if (!success)
+                    return BadRequest(new { message = "Não foi possível processar os dados enviados." });
+
+                // Retorna sucesso. Você pode mapear uma mensagem nova no EndPointsMessages se preferir
+                return Ok(new { message = "Produto completo e suas dependências gravados com sucesso!" });
+            }
+            catch (Exception ex)
+            {
+                // Reutilizando logs e mensagens de erro contextuais
+                _logger.LogError(ex, EndPointsMessages.LogErrorSavingProduct);
+                return StatusCode(500, new
+                {
+                    message = EndPointsMessages.ErrorSavingProducts,
                     error = ex.InnerException?.Message ?? ex.Message
                 });
             }

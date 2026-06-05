@@ -398,5 +398,307 @@ namespace OxfordOnline.Controllers
             }
         }
 
+        [HttpGet("ProfilesMenu")]
+        public async Task<IActionResult> GetProfilesForMenu(
+            [FromHeader(Name = "Authorization")] string authHeader)
+        {
+            try
+            {
+                // ============================================
+                // VALIDAÇÃO DO TOKEN (Mantendo seu padrão)
+                // ============================================
+                if (string.IsNullOrWhiteSpace(authHeader) || !authHeader.StartsWith("Bearer "))
+                {
+                    return Unauthorized(new { message = "Token ausente ou inválido." });
+                }
+
+                string token = authHeader.Substring("Bearer ".Length).Trim();
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+                tokenHandler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = _config["Jwt:Issuer"],
+                        ValidAudience = _config["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ClockSkew = TimeSpan.Zero
+                    },
+                    out SecurityToken validatedToken
+                );
+
+                // ============================================
+                // BUSCA A LISTA SIMPLES DE MENUS DEFAULT
+                // ============================================
+                var defaultMenus = await _context.Menu
+                    //.Where(m => m.IsActive) // Filtra apenas os ativos
+                    .Select(m => new
+                    {
+                        id = m.Id,
+                        title = m.Title
+                    })
+                    .OrderBy(m => m.title)
+                    .ToListAsync();
+
+                // ============================================
+                // BUSCA OS PERFIS COM SEUS MENUS VINCULADOS
+                // ============================================
+                var profilesWithMenus = await _context.Profile
+                    .Select(p => new
+                    {
+                        id = p.Id,
+                        name = p.Name,
+                        menus = _context.ProfileMenu
+                            .Where(pm => pm.ProfileId == p.Id)
+                            .Join(_context.Menu,
+                                pm => pm.MenuId,
+                                m => m.Id,
+                                (pm, m) => new
+                                {
+                                    id = m.Id,
+                                    title = m.Title
+                                })
+                            .ToList()
+                    })
+                    .OrderBy(p => p.name)
+                    .ToListAsync();
+
+                // ============================================
+                // RETORNO ENVELOPADO COM OS DOIS BLOCOS
+                // ============================================
+                return Ok(new
+                {
+                    menus_default = defaultMenus,
+                    profiles = profilesWithMenus
+                });
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                return Unauthorized(new { message = "Token expirado." });
+            }
+            catch (SecurityTokenException)
+            {
+                return Unauthorized(new { message = "Token inválido." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar perfis e menus configurados.");
+
+                return StatusCode(500, new
+                {
+                    message = "Erro ao buscar perfis e menus configurados.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
+
+        [HttpPut("UpdateUserProfile")]
+        public async Task<IActionResult> UpdateUserProfile(
+                    [FromHeader(Name = "Authorization")] string authHeader,
+                    [FromBody] ApiUser user)
+        {
+            try
+            {
+                // ============================================
+                // VALIDAÇÃO DO TOKEN JWT
+                // ============================================
+                if (string.IsNullOrWhiteSpace(authHeader) || !authHeader.StartsWith("Bearer "))
+                {
+                    return Unauthorized(new { message = "Token ausente ou inválido." });
+                }
+
+                string token = authHeader.Substring("Bearer ".Length).Trim();
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+                tokenHandler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = _config["Jwt:Issuer"],
+                        ValidAudience = _config["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ClockSkew = TimeSpan.Zero
+                    },
+                    out SecurityToken validatedToken
+                );
+
+                // ============================================
+                // VALIDAÇÃO DOS DADOS ENVIADOS
+                // ============================================
+                if (string.IsNullOrWhiteSpace(user.User))
+                {
+                    return BadRequest(new { message = "O nome de usuário (User) é obrigatório." });
+                }
+
+                if (!user.ProfileId.HasValue || user.ProfileId.Value <= 0)
+                {
+                    return BadRequest(new { message = "O ProfileId é obrigatório e deve ser um ID válido (maior que zero)." });
+                }
+
+                // ============================================
+                // BUSCA O USUÁRIO NO BANCO DE DADOS
+                // ============================================
+                var dbUser = await _context.ApiUser.FirstOrDefaultAsync(u => u.User == user.User);
+
+                if (dbUser == null)
+                {
+                    return NotFound(new { message = "Usuário não encontrado." });
+                }
+
+                // ============================================
+                // ATUALIZA PROFILE ID SE ENVIADO E VÁLIDO
+                // ============================================
+                bool profileExists = await _context.Profile
+                    .AnyAsync(p => p.Id == user.ProfileId.Value);
+
+                if (!profileExists)
+                {
+                    return BadRequest(new { message = $"O perfil de ID {user.ProfileId.Value} não existe na tabela de perfis." });
+                }
+
+                if (dbUser.ProfileId != user.ProfileId.Value)
+                {
+                    dbUser.ProfileId = user.ProfileId.Value;
+                    await _context.SaveChangesAsync();
+                }
+
+                // ============================================
+                // RETORNO
+                // ============================================
+                return Ok(new
+                {
+                    message = "Perfil do usuário atualizado com sucesso!",
+                    user = dbUser.User,
+                    newProfileId = dbUser.ProfileId
+                });
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                return Unauthorized(new { message = "Token expirado." });
+            }
+            catch (SecurityTokenException)
+            {
+                return Unauthorized(new { message = "Token inválido." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar o perfil do usuário.");
+
+                return StatusCode(500, new
+                {
+                    message = "Erro ao atualizar o perfil do usuário.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
+
+        [HttpPost("UpdateProfileMenus")]
+        public async Task<IActionResult> UpdateProfileMenus(
+                    [FromHeader(Name = "Authorization")] string authHeader,
+                    [FromBody] ProfileMenuUpdateRequest request)
+        {
+            try
+            {
+                // ============================================
+                // VALIDAÇÃO DO TOKEN
+                // ============================================
+                if (string.IsNullOrWhiteSpace(authHeader) || !authHeader.StartsWith("Bearer "))
+                {
+                    return Unauthorized(new { message = "Token ausente ou inválido." });
+                }
+
+                string token = authHeader.Substring("Bearer ".Length).Trim();
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+                tokenHandler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = _config["Jwt:Issuer"],
+                        ValidAudience = _config["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ClockSkew = TimeSpan.Zero
+                    },
+                    out SecurityToken validatedToken
+                );
+
+                // ============================================
+                // VALIDA SE O PROFILE EXISTE
+                // ============================================
+                var profileExists = await _context.Profile.AnyAsync(p => p.Id == request.Id);
+                if (!profileExists)
+                {
+                    return BadRequest(new { message = $"O perfil de ID {request.Id} não existe." });
+                }
+
+                // ============================================
+                // ATUALIZAÇÃO DA TABELA RELATION (profile_menus)
+                // ============================================
+
+                // 1. Busca e remove todos os vínculos atuais desse perfil
+                var existingRelations = await _context.ProfileMenu
+                    .Where(pm => pm.ProfileId == request.Id)
+                    .ToListAsync();
+
+                if (existingRelations.Any())
+                {
+                    _context.ProfileMenu.RemoveRange(existingRelations);
+                }
+
+                // 2. Adiciona os novos vínculos passados no array do JSON
+                if (request.Menus != null && request.Menus.Any())
+                {
+                    var newRelations = request.Menus.Select(m => new ProfileMenu
+                    {
+                        ProfileId = request.Id,
+                        MenuId = m.Id
+                    }).ToList();
+
+                    _context.ProfileMenu.AddRange(newRelations);
+                }
+
+                // 3. Salva as alterações no banco de dados
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "Menus do perfil atualizados com sucesso!",
+                    profileId = request.Id
+                });
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                return Unauthorized(new { message = "Token expirado." });
+            }
+            catch (SecurityTokenException)
+            {
+                return Unauthorized(new { message = "Token inválido." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar menus do perfil.");
+
+                return StatusCode(500, new
+                {
+                    message = "Erro ao atualizar menus do perfil.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
     }
 }

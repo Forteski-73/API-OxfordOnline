@@ -1,4 +1,5 @@
 ﻿using OxfordOnline.Models;
+using OxfordOnline.Models.Dto;
 using OxfordOnline.Repositories.Interfaces;
 
 namespace OxfordOnline.Services
@@ -64,5 +65,15 @@ namespace OxfordOnline.Services
             await _invent.SaveAsync();
             return true;
         }
+
+
+        /// Chama o repositório para salvar o um produto completo com todas as entidades relacionadas.
+        public async Task<bool> SaveProductCompleteAsync(ProductComplete dtoInvent)
+        {
+            await _invent.SaveProductCompleteAsync(dtoInvent);
+
+            return true;
+        }
+
     }
 }

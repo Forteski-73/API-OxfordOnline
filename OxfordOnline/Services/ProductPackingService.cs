@@ -119,12 +119,12 @@ namespace OxfordOnline.Services
         /// </summary>
         public async Task<ProductPackItem> AddItemAsync(ProductPackItem item)
         {
-            // Opcional: Você pode adicionar validações de regra de negócio aqui
-            // antes de enviar para o repositório.
+            // Captura o item retornado pelo repositório (já com o Product carregado)
+            var resultItem = await _repo.AddItemAsync(item);
 
-            await _repo.AddItemAsync(item);
             await _repo.SaveAsync();
-            return item;
+
+            return resultItem;
         }
 
         /// <summary>
