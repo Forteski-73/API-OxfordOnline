@@ -42,13 +42,57 @@ namespace OxfordOnline.Repositories
         {
             if (dtoInvent == null) throw new ArgumentNullException(nameof(dtoInvent), "Json não pode ser nulo.");
 
-            if (dtoInvent.Product != null)        await _context.Set<Product>().AddAsync(dtoInvent.Product);
-            if (dtoInvent.Oxford != null)         await _context.Set<Oxford>().AddAsync(dtoInvent.Oxford);
-            if (dtoInvent.Invent != null)         await _context.Invent.AddAsync(dtoInvent.Invent);
-            if (dtoInvent.Location != null)       await _context.Set<InventDim>().AddAsync(dtoInvent.Location);
-            if (dtoInvent.TaxInformation != null) await _context.Set<TaxInformation>().AddAsync(dtoInvent.TaxInformation);
+            // Tabela Product
+            if (dtoInvent.Product != null && !string.IsNullOrEmpty(dtoInvent.Product.ProductId))
+            {
+                bool exists = await _context.Set<Product>().AnyAsync(p => p.ProductId == dtoInvent.Product.ProductId);
+                if (!exists)
+                {
+                    await _context.Set<Product>().AddAsync(dtoInvent.Product);
+                }
+            }
 
-            // Persiste todas as alterações no banco de dados de uma vez só
+            // Tabela Oxford
+            if (dtoInvent.Oxford != null && !string.IsNullOrEmpty(dtoInvent.Oxford.ProductId))
+            {
+                bool exists = await _context.Set<Oxford>().AnyAsync(o => o.ProductId == dtoInvent.Oxford.ProductId);
+                if (!exists)
+                {
+                    await _context.Set<Oxford>().AddAsync(dtoInvent.Oxford);
+                }
+            }
+
+            // Tabela Invent
+            if (dtoInvent.Invent != null && !string.IsNullOrEmpty(dtoInvent.Invent.ProductId))
+            {
+                bool exists = await _context.Invent.AnyAsync(i => i.ProductId == dtoInvent.Invent.ProductId);
+                if (!exists)
+                {
+                    await _context.Invent.AddAsync(dtoInvent.Invent);
+                }
+            }
+
+            // Tabela InventDim (Location)
+            if (dtoInvent.Location != null && !string.IsNullOrEmpty(dtoInvent.Location.ProductId))
+            {
+                bool exists = await _context.Set<InventDim>().AnyAsync(l => l.ProductId == dtoInvent.Location.ProductId);
+                if (!exists)
+                {
+                    await _context.Set<InventDim>().AddAsync(dtoInvent.Location);
+                }
+            }
+
+            // Tabela TaxInformation
+            if (dtoInvent.TaxInformation != null && !string.IsNullOrEmpty(dtoInvent.TaxInformation.ProductId))
+            {
+                bool exists = await _context.Set<TaxInformation>().AnyAsync(t => t.ProductId == dtoInvent.TaxInformation.ProductId);
+                if (!exists)
+                {
+                    await _context.Set<TaxInformation>().AddAsync(dtoInvent.TaxInformation);
+                }
+            }
+
+            // Se nenhum dos IFs acima disparar o AddAsync, o SaveChangesAsync não fará nada
             await _context.SaveChangesAsync();
         }
     }
