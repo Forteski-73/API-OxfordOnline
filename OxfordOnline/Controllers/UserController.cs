@@ -700,5 +700,11 @@ namespace OxfordOnline.Controllers
                 });
             }
         }
+
+        [HttpGet("api")]
+        public IActionResult CheckStatus()
+        {
+            return Ok(new { status = "Online", timestamp = DateTime.UtcNow });
+        }
     }
 }

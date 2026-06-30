@@ -1771,6 +1771,52 @@
         }
       }
     },
+    "/v1/Inventory/Record/ByCode/{inventCode}/{unitizer}/{location}/{item}": {
+      "delete": {
+        "tags": [
+          "Inventory"
+        ],
+        "parameters": [
+          {
+            "name": "inventCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unitizer",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/Inventory/Product": {
       "get": {
         "tags": [
@@ -5243,6 +5289,18 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/User/api": {
+      "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -105,6 +105,9 @@ namespace OxfordOnline.Services
 
         public async Task<bool> DeleteInventoryRecordAsync(int inventId) =>
             await _inventoryRepository.DeleteInventoryRecordAsync(inventId);
+        
+        public async Task<bool> DeleteInvRecByCodeItemAsync(string inventCode, string unitizer, string location, string item) =>
+            await _inventoryRepository.DeleteInvRecByCodeItemAsync(inventCode, unitizer, location, item);
 
         // -----------------------------------------------------------------------------
         // --- InventoryMask - Métodos do Serviço (Delegados ao Repositório) ---

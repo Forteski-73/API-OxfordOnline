@@ -321,6 +321,27 @@ namespace OxfordOnline.Controllers
             }
         }
 
+        // DELETE: Excluir InventoryRecord por InventCode e Item
+        // DELETE: Excluir InventoryRecord por InventCode e Item
+        [Authorize]
+        [HttpDelete("Record/ByCode/{inventCode}/{unitizer}/{location}/{item}")]
+        public async Task<IActionResult> DeleteInventoryRecordByCodeAndItem(
+            string inventCode, string unitizer, string location, string item)
+        {
+            try
+            {
+                var deleted = await _inventoryService.DeleteInvRecByCodeItemAsync(inventCode, unitizer, location, item);
+                if (!deleted)
+                    return NotFound("Registro de inventário não encontrado para exclusão.");
+
+                return Ok(new { message = $"Registro excluído com sucesso e o total do inventário pai foi atualizado." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro inesperado ao excluir registro de inventário: {ex.Message}");
+            }
+        }
+
         // -----------------------------------------------------------------------------------------------------------------
         // --- MÉTODOS PARA SICRONIZAR PRODUCT (tabela 'product') ---
         // -----------------------------------------------------------------------------------------------------------------

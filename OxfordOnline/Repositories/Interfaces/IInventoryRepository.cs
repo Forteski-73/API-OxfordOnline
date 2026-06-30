@@ -83,5 +83,6 @@ namespace OxfordOnline.Repositories.Interfaces
         // Lógica de BATCH Update/Insert e recalculo do total do Inventory pai
         Task<(int created, int updated)> CreateOrUpdateInventoryRecordsAsync(List<InventoryRecordRequest> records);
         Task<bool> DeleteInventoryRecordAsync(int inventId); // Usando a lógica de Service (que inclui recalculo do total)
+        Task<bool> DeleteInvRecByCodeItemAsync(string inventCode, string unitizer, string location, string item); // Usando a lógica de Service (que inclui recalculo do total)
     }
 }

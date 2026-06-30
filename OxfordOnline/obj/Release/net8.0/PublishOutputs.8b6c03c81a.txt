@@ -19,6 +19,8 @@ C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\pub
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\output.config
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\output.config
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\output.config
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\output.config
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\web.config
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\web.config
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\web.config
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\web.config
@@ -136,6 +138,11 @@ C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\pub
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\global.json
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.deps.json
 C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.runtimeconfig.json
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\global.json
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.deps.json
+C:\OxfordOnline\OxfordOnline\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.runtimeconfig.json
 C:\OxfordOnline\OxfordOnline\publish\OxfordOnline.dll
 C:\OxfordOnline\OxfordOnline\publish\OxfordOnline.runtimeconfig.json
 C:\OxfordOnline\OxfordOnline\publish\OxfordOnline.pdb

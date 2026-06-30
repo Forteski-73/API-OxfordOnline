@@ -415,10 +415,28 @@ namespace OxfordOnline.Repositories
             DeleteRecord(record);
             await SaveAsync();
 
-            // Regra de negócio: Recalcular o total do Inventário pai após exclusão
+            // Recalcula o total do Inventário pai após exclusão
             await UpdateParentInventoryTotalAsync(inventCode);
             await SaveAsync();
 
+            return true;
+        }
+
+        public async Task<bool> DeleteInvRecByCodeItemAsync(string inventCode, string unitizer, string location, string item)
+        {
+            var record = await _context.InventoryRecord.FirstOrDefaultAsync(r =>
+                r.InventCode == inventCode &&
+                r.InventUnitizer == unitizer &&
+                r.InventLocation == location &&
+                r.InventProduct == item);
+
+            if (record == null)
+                return false;
+
+            DeleteRecord(record);
+            await SaveAsync();
+            await UpdateParentInventoryTotalAsync(inventCode);
+            await SaveAsync();
             return true;
         }
 

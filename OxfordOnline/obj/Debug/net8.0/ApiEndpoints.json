@@ -1031,6 +1031,37 @@
     ]
   },
   {
+    "ContainingType": "OxfordOnline.Controllers.InventoryController",
+    "Method": "DeleteInventoryRecordByCodeAndItem",
+    "RelativePath": "v1/Inventory/Record/ByCode/{inventCode}/{unitizer}/{location}/{item}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventCode",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "unitizer",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "location",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "item",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "OxfordOnline.Controllers.LinesController",
     "Method": "UpsertLines",
     "RelativePath": "v1/Lines",
@@ -2814,6 +2845,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OxfordOnline.Controllers.UserController",
+    "Method": "CheckStatus",
+    "RelativePath": "v1/User/api",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

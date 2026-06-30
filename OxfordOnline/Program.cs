@@ -133,7 +133,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactLocalhost", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // endereço do frontend
+        policy.WithOrigins("http://localhost:5173", "https://oxfordonline.com.br", "https://www.oxfordonline.com.br") // endereço do frontend
               .AllowAnyHeader() // permite Authorization, Content-Type, etc.
               .AllowAnyMethod() // GET, POST, PUT, DELETE, OPTIONS
               .AllowCredentials(); // se precisar enviar cookies
@@ -170,11 +170,10 @@ app.Use(async (context, next) =>
     await next();
 });
 
+app.UseHttpsRedirection();
 // === Usar CORS antes da autenticação ===
 app.UseCors("AllowReactLocalhost");
 // === Usar CORS antes da autenticação ===
-
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
