@@ -12,6 +12,9 @@ namespace OxfordOnline.Models
 
         public string? Description { get; set; }
 
+        [Column("is_readonly")]
+        public bool IsReadOnly { get; set; } = false;
+
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
     }

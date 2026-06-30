@@ -126,6 +126,7 @@ namespace OxfordOnline.Controllers
             }
         }
 
+        /*
         [HttpPost("LoginUser")]
         public async Task<IActionResult> LoginUser([FromBody] ApiUser user)
         {
@@ -186,6 +187,118 @@ namespace OxfordOnline.Controllers
                 {
                     new Claim(ClaimTypes.Name, dbUser.User)
                 };
+
+                if (dbUser.ProfileId.HasValue)
+                {
+                    claims.Add(new Claim("profileId", dbUser.ProfileId.Value.ToString()));
+                }
+
+                // ============================================
+                // GERA TOKEN JWT
+                // ============================================
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddHours(24),
+                    signingCredentials: creds
+                );
+
+                // ============================================
+                // RETORNO
+                // ============================================
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    profileId = dbUser.ProfileId,
+                    menus = allowedMenus
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, EndPointsMessages.LogErrorLoginUser);
+                return StatusCode(500, new
+                {
+                    message = EndPointsMessages.LogErrorLoginUser,
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
+        */
+
+        [HttpPost("LoginUser")]
+        public async Task<IActionResult> LoginUser([FromBody] ApiUser user)
+        {
+            try
+            {
+                var dbUser = await _context.ApiUser.FirstOrDefaultAsync(u => u.User == user.User);
+
+                // Valida usuário e senha
+                if (dbUser == null || !BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
+                {
+                    return Unauthorized(new { message = EndPointsMessages.InvalidUserOrPassword });
+                }
+
+                Profile? profile = null;
+
+                // ============================================
+                // ATUALIZA PROFILE ID SE ENVIADO E VÁLIDO
+                // ============================================
+                if (user.ProfileId.HasValue && user.ProfileId.Value > 0)
+                {
+                    profile = await _context.Profile.FirstOrDefaultAsync(p => p.Id == user.ProfileId.Value);
+
+                    if (profile == null)
+                    {
+                        return BadRequest(new { message = $"O perfil de ID {user.ProfileId.Value} não existe na tabela de perfis." });
+                    }
+
+                    if (dbUser.ProfileId != user.ProfileId.Value)
+                    {
+                        dbUser.ProfileId = user.ProfileId.Value;
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
+                // ============================================
+                // BUSCA MENUS LIBERADOS (Baseado no ProfileId atualizado)
+                // ============================================
+                
+                Profile? currentProfile = null;
+                if (dbUser.ProfileId.HasValue)
+                {
+                    currentProfile = await _context.Profile.FirstOrDefaultAsync(p => p.Id == dbUser.ProfileId.Value);
+                }
+                bool isReadOnly = currentProfile?.IsReadOnly ?? false;
+
+                object allowedMenus = Array.Empty<object>();
+
+                if (dbUser.ProfileId.HasValue)
+                {
+                    allowedMenus = await (
+                        from pm in _context.ProfileMenu
+                        join m in _context.Menu on pm.MenuId equals m.Id
+                        where pm.ProfileId == dbUser.ProfileId.Value && m.IsActive
+                        select new
+                        {
+                            title = m.Title,
+                            routeName = m.RouteName,
+                            imagePath = m.ImagePath,
+                            isReadOnly = isReadOnly,
+                        }
+                    ).ToListAsync();
+                }
+
+                // ============================================
+                // CONFIGURA CLAIMS JWT
+                // ============================================
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, dbUser.User)
+        };
 
                 if (dbUser.ProfileId.HasValue)
                 {
