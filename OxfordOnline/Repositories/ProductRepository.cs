@@ -51,16 +51,27 @@ namespace OxfordOnline.Repositories
             var inventDim = await _context.InventDim.FirstOrDefaultAsync(id => id.ProductId == productId);
             var taxInformation = await _context.TaxInformation.FirstOrDefaultAsync(ti => ti.ProductId == productId);
             var tags = await _context.Tag.Where(t => t.ProductId == productId).ToListAsync();
+            var pack = await _context.ProductPack.Where(p => p.Items.Any(i => i.PackProductId == productId)).FirstOrDefaultAsync();
+
+            // Busca os packs que contêm esse produto como item
+            /*
+               var packs = await _context.ProductPack
+                .Include(p => p.Items)
+                .Include(p => p.Images)
+                .Where(p => p.Items.Any(i => i.PackProductId == productId))
+                .ToListAsync();
+            */
 
             var productComplete = new ProductComplete
             {
-                Product = productEntity,
-                Oxford = oxford,
-                Invent = invent,
-                Location = inventDim,
-                TaxInformation = taxInformation,
-                Images = new List<ImageBase64>(),
-                Tags = tags
+                Product         = productEntity,
+                Oxford          = oxford,
+                Invent          = invent,
+                Location        = inventDim,
+                TaxInformation  = taxInformation,
+                Images          = new List<ImageBase64>(),
+                Tags            = tags,
+                Pack            = pack
             };
 
             try

@@ -6530,6 +6530,9 @@
               "$ref": "#/components/schemas/Tag"
             },
             "nullable": true
+          },
+          "pack": {
+            "$ref": "#/components/schemas/ProductPack"
           }
         },
         "additionalProperties": false

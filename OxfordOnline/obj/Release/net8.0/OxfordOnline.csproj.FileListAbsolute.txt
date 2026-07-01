@@ -294,10 +294,8 @@ C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Release\net8.0\publish\publish\pub
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Release\net8.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\global.json
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Release\net8.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.deps.json
 C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Release\net8.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\OxfordOnline.runtimeconfig.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\bin\Release\net8.0\OxfordOnline.staticwebassets.endpoints.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\rpswa.dswa.cache.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\rjimswa.dswa.cache.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\rjsmrazor.dswa.cache.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\rjsmcshtml.dswa.cache.json
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\staticwebassets.build.json.cache
-C:\OxfordOnline\OxfordOnline\OxfordOnline\obj\Release\net8.0\staticwebassets.build.endpoints.json
+C:\OxfordOnline\OxfordOnline\oxfordonline\obj\Release\net8.0\staticwebassets\msbuild.OxfordOnline.Microsoft.AspNetCore.StaticWebAssets.props
+C:\OxfordOnline\OxfordOnline\oxfordonline\obj\Release\net8.0\staticwebassets\msbuild.build.OxfordOnline.props
+C:\OxfordOnline\OxfordOnline\oxfordonline\obj\Release\net8.0\staticwebassets\msbuild.buildMultiTargeting.OxfordOnline.props
+C:\OxfordOnline\OxfordOnline\oxfordonline\obj\Release\net8.0\staticwebassets\msbuild.buildTransitive.OxfordOnline.props
+C:\OxfordOnline\OxfordOnline\oxfordonline\obj\Release\net8.0\staticwebassets.pack.json
