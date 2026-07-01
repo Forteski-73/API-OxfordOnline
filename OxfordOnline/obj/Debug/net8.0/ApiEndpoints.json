@@ -2475,13 +2475,13 @@
   {
     "ContainingType": "OxfordOnline.Controllers.ProductPackingController",
     "Method": "DeletePack",
-    "RelativePath": "v1/ProductPacking/{id}",
+    "RelativePath": "v1/ProductPacking/{PackId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "PackId",
         "Type": "System.Int32",
         "IsRequired": true
       }

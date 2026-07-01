@@ -24,5 +24,7 @@ namespace OxfordOnline.Repositories.Interfaces
         Task DeleteAllImagesByProductIdAsync(string productId);
         Task DeleteAllImagesByPackIdAsync(string productId);
         Task<Stream> DownloadFileStreamFromFtpAsync(string ftpFilePath);
+
+        Task DeleteFtpFilesOnlyAsync(string packId);
     }
 }

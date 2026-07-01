@@ -12,10 +12,12 @@ namespace OxfordOnline.Services
     public class ProductPackingService
     {
         private readonly IProductPackRepository _repo;
+        private readonly ImageService _imageService;
 
-        public ProductPackingService(IProductPackRepository repo)
+        public ProductPackingService(IProductPackRepository repo, ImageService imageService)
         {
-            _repo = repo;
+            _repo           = repo;
+            _imageService   = imageService;
         }
 
         public async Task<IEnumerable<ProductPack>> GetAllPacksAsync()
@@ -57,7 +59,7 @@ namespace OxfordOnline.Services
             return true;
         }
 
-        public async Task<bool> DeletePackAsync(int id)
+        /*public async Task<bool> DeletePackAsync(int id)
         {
             var pack = await _repo.GetByIdAsync(id);
             if (pack == null) return false;
@@ -66,7 +68,7 @@ namespace OxfordOnline.Services
             await _repo.SaveAsync();
 
             return true;
-        }
+        }*/
 
         public async Task<IEnumerable<ProductPack>> GetPacksByProductAsync(string productId)
         {
@@ -138,6 +140,52 @@ namespace OxfordOnline.Services
             if (item == null) return false;
 
             await _repo.DeleteItemAsync(item);
+            await _repo.SaveAsync();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Remove um Pack e todos os seus registros filhos
+        /// </summary>
+        /*
+        public async Task<bool> DeletePackAsync(int id)
+        {
+            var pack = await _repo.GetByIdAsync(id);
+            if (pack == null) return false;
+
+            // 1. Remove os itens filhos (product_pack_item)
+            await _repo.DeleteItemsByPackIdAsync(id);
+
+            // 2. Remove as imagens filhas (product_pack_image)
+            await _repo.DeleteByPackIdAsync(id);
+
+            // 3. Remove o pai (product_pack)
+            await _repo.DeleteAsync(pack);
+
+            // 4. Persiste tudo em uma única transação
+            await _repo.SaveAsync();
+
+            return true;
+        }
+        */
+
+        public async Task<bool> DeletePackAsync(int id)
+        {
+            var pack = await _repo.GetByIdAsync(id);
+            if (pack == null) return false;
+
+            // Deleta arquivos físicos no FTP (antes de perder os paths do banco)
+            await _imageService.DeleteFtpFilesOnlyAsync(id.ToString());
+
+            // Remove registros filhos do banco (sem SaveChanges individuais)
+            await _repo.DeleteItemsByPackIdAsync(id);   // já usa RemoveRange sem Save
+            await _repo.DeleteByPackIdAsync(id);        // já usa RemoveRange sem Save
+
+            // Remove o pai
+            await _repo.DeleteAsync(pack);
+
+            // Persiste tudo de uma vez
             await _repo.SaveAsync();
 
             return true;

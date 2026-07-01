@@ -52,5 +52,10 @@ namespace OxfordOnline.Repositories.Interfaces
         /// Remove um registro da tabela product_pack_item
         /// </summary>
         Task DeleteItemAsync(ProductPackItem item);
+
+        /// <summary>
+        /// Remove um registro da tabela product_pack
+        /// </summary>
+        Task DeleteItemsByPackIdAsync(int packId);
     }
 }

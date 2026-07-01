@@ -25,13 +25,6 @@ namespace OxfordOnline.Repositories
             _ftpService = ftpService;
         }
 
-        /*public async Task<IEnumerable<ProductPack>> GetAllAsync()
-        {
-            return await _context.ProductPack
-                .AsNoTracking()
-                .ToListAsync();
-        }*/
-
         public async Task<IEnumerable<ProductPack>> GetAllAsync()
         {
             return await _context.ProductPack
@@ -55,7 +48,7 @@ namespace OxfordOnline.Repositories
             // Busca pacotes onde a lista de itens contém o ID do produto informado
             return await _context.ProductPack
                 .Include(p => p.Images)
-                .Include(p => p.Items)
+                //.Include(p => p.Items)
                 .Where(p => p.Items.Any(i => i.PackProductId == productId))
                 .ToListAsync();
         }
@@ -230,5 +223,18 @@ namespace OxfordOnline.Repositories
             _context.ProductPackItem.Remove(item);
             await Task.CompletedTask;
         }
+
+        public async Task DeleteItemsByPackIdAsync(int packId)
+        {
+            var items = await _context.ProductPackItem
+                .Where(x => x.PackId == packId)
+                .ToListAsync();
+
+            if (items.Any())
+            {
+                _context.ProductPackItem.RemoveRange(items);
+            }
+        }
+
     }
 }

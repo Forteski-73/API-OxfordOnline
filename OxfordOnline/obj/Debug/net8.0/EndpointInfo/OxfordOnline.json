@@ -4439,14 +4439,16 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/v1/ProductPacking/{PackId}": {
       "delete": {
         "tags": [
           "ProductPacking"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "PackId",
             "in": "path",
             "required": true,
             "schema": {

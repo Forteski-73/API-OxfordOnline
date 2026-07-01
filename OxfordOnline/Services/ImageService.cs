@@ -87,5 +87,14 @@ namespace OxfordOnline.Services
         {
             return await _imageRepository.DownloadFileStreamFromFtpAsync(ftpFilePath);
         }
+
+        /// <summary>
+        /// Deleta apenas os arquivos físicos no FTP, sem tocar no banco.
+        /// Use quando o controle de SaveChanges é feito externamente.
+        /// </summary>
+        public async Task DeleteFtpFilesOnlyAsync(string packId)
+        {
+            await _imageRepository.DeleteFtpFilesOnlyAsync(packId);
+        }
     }
 }

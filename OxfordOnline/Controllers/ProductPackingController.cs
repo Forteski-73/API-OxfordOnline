@@ -83,13 +83,13 @@ namespace OxfordOnline.Controllers
             }
         }
 
-        // DELETE: /v1/ProductPacking/{id}
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePack(int id)
+        // DELETE: /v1/ProductPacking/{PackId}
+        [HttpDelete("{PackId}")]
+        public async Task<IActionResult> DeletePack(int PackId)
         {
             try
             {
-                var success = await _packingService.DeletePackAsync(id);
+                var success = await _packingService.DeletePackAsync(PackId);
                 if (!success)
                     return NotFound(new { message = EndPointsMessages.ProductNotFoundForDelete });
 
@@ -97,7 +97,7 @@ namespace OxfordOnline.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao deletar pacote {PackId}", id);
+                _logger.LogError(ex, "Erro ao deletar pacote {PackId}", PackId);
                 return StatusCode(500, new { message = EndPointsMessages.ErrorDeletingProduct, error = ex.Message });
             }
         }
