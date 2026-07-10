@@ -134,5 +134,22 @@ namespace OxfordOnline.Controllers
 
             return Ok(tvDevice);
         }
+
+        [Authorize]
+        [HttpGet("TvDevice/{deviceId}")]
+        public async Task<IActionResult> GetTvDevice(int deviceId)
+        {
+            var tvDevice = await _tvDeviceRepository.GetByDeviceIdAsync(deviceId);
+
+            if (tvDevice == null)
+                return NotFound("Nenhum registro de TV encontrado para o device informado.");
+
+            return Ok(new TvDeviceResponse
+            {
+                DeviceId = tvDevice.DeviceId,
+                Setor = tvDevice.Setor,
+                TransCode = tvDevice.TransCode
+            });
+        }
     }
 }
