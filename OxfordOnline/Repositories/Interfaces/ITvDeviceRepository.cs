@@ -13,5 +13,10 @@ namespace OxfordOnline.Repositories.Interfaces
         Task<bool> DeleteAsync(int deviceId);
 
         Task<TvDevice> UpdateAsync(TvDevice tvDevice);
+
+        Task<TvDevice?> GetByGuidAndUserAsync(Guid guid, string user);
+
+        Task<List<Image>> GetByGuidAndUserIMGAsync(Guid guid, string user);
+
     }
 }

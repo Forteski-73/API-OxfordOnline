@@ -151,5 +151,50 @@ namespace OxfordOnline.Controllers
                 TransCode = tvDevice.TransCode
             });
         }
+
+        [Authorize]
+        [HttpGet("TvDevice")]
+        public async Task<IActionResult> GetTvDeviceByGuidAndUser([FromQuery] Guid guid, [FromQuery] string user)
+        {
+            if (guid == Guid.Empty)
+                return BadRequest("Guid é obrigatório.");
+
+            if (string.IsNullOrWhiteSpace(user))
+                return BadRequest("Usuário é obrigatório.");
+
+            var tvDevice = await _tvDeviceRepository.GetByGuidAndUserAsync(guid, user);
+
+
+            if (tvDevice == null)
+                return NotFound("TV Device não encontrado.");
+
+            return Ok(new TvDeviceResponse
+            {   
+                DeviceId    = tvDevice.DeviceId,
+                Setor       = tvDevice.Setor,
+                TransCode   = tvDevice.TransCode
+            });
+        }
+
+        [Authorize]
+        [HttpGet("TvDeviceIMG")]
+        public async Task<IActionResult> GetByGuidAndUserIMGAsync(
+            [FromQuery] Guid guid,
+            [FromQuery] string user)
+        {
+            if (guid == Guid.Empty)
+                return BadRequest("Guid é obrigatório.");
+
+            if (string.IsNullOrWhiteSpace(user))
+                return BadRequest("Usuário é obrigatório.");
+
+            var images = await _tvDeviceRepository.GetByGuidAndUserIMGAsync(guid, user);
+
+            if (images == null || !images.Any())
+                return NotFound("Nenhuma imagem encontrada para o TV Device.");
+
+            return Ok(images);
+        }
+
     }
 }

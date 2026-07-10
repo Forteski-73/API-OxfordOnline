@@ -79,7 +79,7 @@ namespace OxfordOnline.Data
 
         public DbSet<TvDevice> TvDevice { get; set; }
 
-        public DbSet<TvDevice> Device { get; set; }
+        public DbSet<Device> Device { get; set; }
         
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
