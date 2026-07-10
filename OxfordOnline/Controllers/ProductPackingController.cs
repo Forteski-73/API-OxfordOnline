@@ -25,7 +25,7 @@ namespace OxfordOnline.Controllers
 
         // GET: /v1/ProductPacking
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductPack>>> GetAllPacks()
+        public async Task<ActionResult<IEnumerable<PalletGroup>>> GetAllPacks()
         {
             var packs = await _packingService.GetAllPacksAsync();
             return Ok(packs);
@@ -33,7 +33,7 @@ namespace OxfordOnline.Controllers
 
         // GET: /v1/ProductPacking/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductPack>> GetPackById(int id)
+        public async Task<ActionResult<PalletGroup>> GetPackById(int id)
         {
             var pack = await _packingService.GetPackByIdAsync(id);
             if (pack == null)
@@ -44,7 +44,7 @@ namespace OxfordOnline.Controllers
 
         // POST: /v1/ProductPacking
         [HttpPost]
-        public async Task<ActionResult<ProductPack>> CreatePack([FromBody] ProductPack pack)
+        public async Task<ActionResult<PalletGroup>> CreatePack([FromBody] PalletGroup pack)
         {
             if (pack == null)
                 return BadRequest(new { message = EndPointsMessages.InvalidProductData });
@@ -63,7 +63,7 @@ namespace OxfordOnline.Controllers
 
         // PUT: /v1/ProductPacking/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePack(int id, [FromBody] ProductPack pack)
+        public async Task<IActionResult> UpdatePack(int id, [FromBody] PalletGroup pack)
         {
             if (pack == null || id != pack.PackId)
                 return BadRequest(new { message = EndPointsMessages.InvalidProductData });
@@ -104,7 +104,7 @@ namespace OxfordOnline.Controllers
 
         // GET: /v1/ProductPacking/ByProduct/{productId}
         [HttpGet("ByProduct/{productId}")]
-        public async Task<ActionResult<IEnumerable<ProductPack>>> GetPacksByProduct(string productId)
+        public async Task<ActionResult<IEnumerable<PalletGroup>>> GetPacksByProduct(string productId)
         {
             var packs = await _packingService.GetPacksByProductAsync(productId);
             return Ok(packs);
@@ -115,7 +115,7 @@ namespace OxfordOnline.Controllers
 
         // GET: /v1/ProductPacking/Images/{packId}
         [HttpGet("Images/{packId}")]
-        public async Task<ActionResult<IEnumerable<ProductPackImage>>> GetImagesByPack(int packId)
+        public async Task<ActionResult<IEnumerable<PalletGroupImage>>> GetImagesByPack(int packId)
         {
             var images = await _packingService.GetImagesByPackAsync(packId);
             if (images == null || !images.Any())
@@ -126,7 +126,7 @@ namespace OxfordOnline.Controllers
 
         // POST: /v1/ProductPacking/Images
         [HttpPost("Images")]
-        public async Task<ActionResult<ProductPackImage>> AddImageToPack([FromBody] ProductPackImage image)
+        public async Task<ActionResult<PalletGroupImage>> AddImageToPack([FromBody] PalletGroupImage image)
         {
             if (image == null)
                 return BadRequest(new { message = EndPointsMessages.InvalidProductData });
@@ -166,7 +166,7 @@ namespace OxfordOnline.Controllers
 
         // GET: /v1/ProductPacking/Items/{packId}
         [HttpGet("Items/{packId}")]
-        public async Task<ActionResult<IEnumerable<ProductPackItem>>> GetItemsByPack(int packId)
+        public async Task<ActionResult<IEnumerable<PalletGroupItem>>> GetItemsByPack(int packId)
         {
             var items = await _packingService.GetItemsByPackAsync(packId);
             //if (items == null || !items.Any())
@@ -177,7 +177,7 @@ namespace OxfordOnline.Controllers
 
         // POST: /v1/ProductPacking/Items
         [HttpPost("Items")]
-        public async Task<ActionResult<ProductPackItem>> AddItemToPack([FromBody] ProductPackItem item)
+        public async Task<ActionResult<PalletGroupItem>> AddItemToPack([FromBody] PalletGroupItem item)
         {
             if (item == null || string.IsNullOrEmpty(item.PackProductId))
                 return BadRequest(new { message = EndPointsMessages.InvalidProductData });

@@ -69,13 +69,17 @@ namespace OxfordOnline.Data
 
         public DbSet<Models.InventoryMask> InventoryMask { get; set; }
 
-        public DbSet<ProductPack> ProductPack { get; set; }
+        public DbSet<PalletGroup> ProductPack { get; set; }
 
-        public DbSet<ProductPackImage> ProductPackImage { get; set; }
+        public DbSet<PalletGroupImage> ProductPackImage { get; set; }
 
-        public DbSet<ProductPackItem> ProductPackItem { get; set; }
+        public DbSet<PalletGroupItem> ProductPackItem { get; set; }
 
         public DbSet<ProductBom> ProductBom { get; set; }
+
+        public DbSet<TvDevice> TvDevice { get; set; }
+
+        public DbSet<TvDevice> Device { get; set; }
         
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -117,10 +121,10 @@ namespace OxfordOnline.Data
                 .HasForeignKey(pll => pll.PalletId);
 
             // Chave Estrangeira de ProductPack com Product
-            modelBuilder.Entity<ProductPackImage>()
+            modelBuilder.Entity<PalletGroupImage>()
                 .HasKey(p => new { p.PackId, p.PackSequence });
 
-            modelBuilder.Entity<ProductPackItem>()
+            modelBuilder.Entity<PalletGroupItem>()
                 .HasKey(p => new { p.PackId, p.PackProductId });
         }
     }

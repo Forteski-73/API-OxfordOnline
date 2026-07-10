@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace OxfordOnline.Models
 {
-    [Table("product_pack")]
-    public class ProductPack
+    [Table("pallet_group")]
+    public class PalletGroup
     {
         [Key]
         [Column("pack_id")]
@@ -27,9 +27,9 @@ namespace OxfordOnline.Models
         // Navigation Properties 
         // Inicia com uma lista vazia para evitar erros de validação 'Required'
 
-        public ICollection<ProductPackImage> Images { get; set; } = new List<ProductPackImage>();
+        public ICollection<PalletGroupImage> Images { get; set; } = new List<PalletGroupImage>();
 
 
-        public ICollection<ProductPackItem> Items { get; set; } = new List<ProductPackItem>();
+        public ICollection<PalletGroupItem> Items { get; set; } = new List<PalletGroupItem>();
     }
 }

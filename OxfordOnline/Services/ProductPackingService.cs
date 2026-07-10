@@ -20,18 +20,18 @@ namespace OxfordOnline.Services
             _imageService   = imageService;
         }
 
-        public async Task<IEnumerable<ProductPack>> GetAllPacksAsync()
+        public async Task<IEnumerable<PalletGroup>> GetAllPacksAsync()
         {
             // O repositório deve implementar a lógica de Include para Images e Items
             return await _repo.GetAllAsync();
         }
 
-        public async Task<ProductPack?> GetPackByIdAsync(int id)
+        public async Task<PalletGroup?> GetPackByIdAsync(int id)
         {
             return await _repo.GetByIdAsync(id);
         }
 
-        public async Task<ProductPack> CreatePackAsync(ProductPack pack)
+        public async Task<PalletGroup> CreatePackAsync(PalletGroup pack)
         {
             // Garante a data de criação no servidor
             pack.PackCreated = DateTime.Now;
@@ -42,7 +42,7 @@ namespace OxfordOnline.Services
             return pack;
         }
 
-        public async Task<bool> UpdatePackAsync(ProductPack pack)
+        public async Task<bool> UpdatePackAsync(PalletGroup pack)
         {
             var existingPack = await _repo.GetByIdAsync(pack.PackId);
             if (existingPack == null) return false;
@@ -70,7 +70,7 @@ namespace OxfordOnline.Services
             return true;
         }*/
 
-        public async Task<IEnumerable<ProductPack>> GetPacksByProductAsync(string productId)
+        public async Task<IEnumerable<PalletGroup>> GetPacksByProductAsync(string productId)
         {
             // Busca pacotes que contenham o item específico
             return await _repo.GetPacksByProductIdAsync(productId);
@@ -82,7 +82,7 @@ namespace OxfordOnline.Services
             return await _repo.GetPackImagesAsBase64Async(packId);
         }
 
-        public async Task<ProductPackImage> AddImageAsync(ProductPackImage image)
+        public async Task<PalletGroupImage> AddImageAsync(PalletGroupImage image)
         {
             image.PackLastUpdate = DateTime.Now;
             await _repo.AddImageAsync(image);
@@ -110,7 +110,7 @@ namespace OxfordOnline.Services
         /// <summary>
         /// Busca todos os itens (SKUs) associados a um pacote específico.
         /// </summary>
-        public async Task<IEnumerable<ProductPackItem>> GetItemsByPackAsync(int packId)
+        public async Task<IEnumerable<PalletGroupItem>> GetItemsByPackAsync(int packId)
         {
             // O repositório deve buscar na tabela product_pack_item filtrando pelo packId
             return await _repo.GetItemsByPackIdAsync(packId);
@@ -119,7 +119,7 @@ namespace OxfordOnline.Services
         /// <summary>
         /// Adiciona um novo item (produto) ao esquema de montagem.
         /// </summary>
-        public async Task<ProductPackItem> AddItemAsync(ProductPackItem item)
+        public async Task<PalletGroupItem> AddItemAsync(PalletGroupItem item)
         {
             // Captura o item retornado pelo repositório (já com o Product carregado)
             var resultItem = await _repo.AddItemAsync(item);

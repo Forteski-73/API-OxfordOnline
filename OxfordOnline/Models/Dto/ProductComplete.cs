@@ -11,6 +11,6 @@
         public List<ImageBase64>? Images { get; set; }
         public List<Tag>? Tags { get; set; }
 
-        public ProductPack? Pack { get; set; }
+        public PalletGroup? Pack { get; set; }
     }
 }

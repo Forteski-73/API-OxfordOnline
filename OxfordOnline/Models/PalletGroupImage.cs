@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace OxfordOnline.Models
 {
-    [Table("product_pack_image")]
-    public class ProductPackImage
+    [Table("pallet_group_image")]
+    public class PalletGroupImage
     {
         [Column("pack_id")]
         public int PackId { get; set; }
@@ -29,6 +29,6 @@ namespace OxfordOnline.Models
         // Navigation
         [ForeignKey("PackId")]
         [JsonIgnore]
-        public ProductPack? ProductPack { get; set; }
+        public PalletGroup? ProductPack { get; set; }
     }
 }

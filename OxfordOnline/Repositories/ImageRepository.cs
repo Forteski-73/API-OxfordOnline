@@ -451,7 +451,7 @@ namespace OxfordOnline.Repositories
                     await _ftpService.UploadAsync(ftpPath, stream);
 
                     // AJUSTE: Usando a classe ProductPackImage e seus respectivos campos
-                    var packImageNew = new ProductPackImage
+                    var packImageNew = new PalletGroupImage
                     {
                         PackId = packIdInt,                 // pack_id
                         PackSequence = seqImg,              // pack_sequence

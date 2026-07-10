@@ -25,7 +25,7 @@ namespace OxfordOnline.Repositories
             _ftpService = ftpService;
         }
 
-        public async Task<IEnumerable<ProductPack>> GetAllAsync()
+        public async Task<IEnumerable<PalletGroup>> GetAllAsync()
         {
             return await _context.ProductPack
                 .Include(p => p.Images)
@@ -35,7 +35,7 @@ namespace OxfordOnline.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ProductPack?> GetByIdAsync(int id)
+        public async Task<PalletGroup?> GetByIdAsync(int id)
         {
             return await _context.ProductPack
                 .Include(p => p.Images)
@@ -43,7 +43,7 @@ namespace OxfordOnline.Repositories
                 .FirstOrDefaultAsync(p => p.PackId == id);
         }
 
-        public async Task<IEnumerable<ProductPack>> GetPacksByProductIdAsync(string productId)
+        public async Task<IEnumerable<PalletGroup>> GetPacksByProductIdAsync(string productId)
         {
             // Busca pacotes onde a lista de itens contém o ID do produto informado
             return await _context.ProductPack
@@ -53,18 +53,18 @@ namespace OxfordOnline.Repositories
                 .ToListAsync();
         }
 
-        public async Task AddAsync(ProductPack pack)
+        public async Task AddAsync(PalletGroup pack)
         {
             await _context.ProductPack.AddAsync(pack);
         }
 
-        public async Task UpdateAsync(ProductPack pack)
+        public async Task UpdateAsync(PalletGroup pack)
         {
             _context.ProductPack.Update(pack);
             await Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(ProductPack pack)
+        public async Task DeleteAsync(PalletGroup pack)
         {
             _context.ProductPack.Remove(pack);
             await Task.CompletedTask;
@@ -76,25 +76,25 @@ namespace OxfordOnline.Repositories
         }
 
 
-        public async Task<IEnumerable<ProductPackImage>> GetImagesByPackIdAsync(int packId)
+        public async Task<IEnumerable<PalletGroupImage>> GetImagesByPackIdAsync(int packId)
         {
             return await _context.ProductPackImage
                 .Where(i => i.PackId == packId)
                 .ToListAsync();
         }
 
-        public async Task<ProductPackImage?> GetImageAsync(int packId, int sequence)
+        public async Task<PalletGroupImage?> GetImageAsync(int packId, int sequence)
         {
             return await _context.ProductPackImage
                 .FirstOrDefaultAsync(i => i.PackId == packId && i.PackSequence == sequence);
         }
 
-        public async Task AddImageAsync(ProductPackImage image)
+        public async Task AddImageAsync(PalletGroupImage image)
         {
             await _context.ProductPackImage.AddAsync(image);
         }
 
-        public async Task DeleteImageAsync(ProductPackImage image)
+        public async Task DeleteImageAsync(PalletGroupImage image)
         {
             _context.ProductPackImage.Remove(image);
             await Task.CompletedTask;
@@ -182,7 +182,7 @@ namespace OxfordOnline.Repositories
         }
 
         // --- Métodos para Itens (product_pack_item) ---
-        public async Task<IEnumerable<ProductPackItem>> GetItemsByPackIdAsync(int packId)
+        public async Task<IEnumerable<PalletGroupItem>> GetItemsByPackIdAsync(int packId)
         {
             return await _context.ProductPackItem
                     .Include(i => i.Product) // <--- CRUCIAL: Carrega o product na navegação
@@ -191,14 +191,14 @@ namespace OxfordOnline.Repositories
                     .ToListAsync();
         }
 
-        public async Task<ProductPackItem?> GetItemAsync(int packId, string sku)
+        public async Task<PalletGroupItem?> GetItemAsync(int packId, string sku)
         {
             // Busca pela chave composta: ID do Pacote + Código do Item (SKU)
             return await _context.ProductPackItem
                 .FirstOrDefaultAsync(i => i.PackId == packId && i.PackProductId == sku);
         }
 
-        public async Task<ProductPackItem> AddItemAsync(ProductPackItem item)
+        public async Task<PalletGroupItem> AddItemAsync(PalletGroupItem item)
         {
             var existingItem = await _context.ProductPackItem
                 .Include(p => p.Product)
@@ -218,7 +218,7 @@ namespace OxfordOnline.Repositories
             return item;
         }
 
-        public async Task DeleteItemAsync(ProductPackItem item)
+        public async Task DeleteItemAsync(PalletGroupItem item)
         {
             _context.ProductPackItem.Remove(item);
             await Task.CompletedTask;

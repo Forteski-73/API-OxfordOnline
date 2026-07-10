@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace OxfordOnline.Models
 {
-    [Table("product_pack_item")]
-    public class ProductPackItem
+    [Table("pallet_group_item")]
+    public class PalletGroupItem
     {
         [Key, Column("pack_id", Order = 0)]
         public int PackId { get; set; }
@@ -28,7 +28,7 @@ namespace OxfordOnline.Models
 
         [JsonIgnore]
         [ForeignKey("PackId")]
-        public virtual ProductPack? ProductPack { get; set; }
+        public virtual PalletGroup? ProductPack { get; set; }
 
         [JsonIgnore]
         [ForeignKey("PackProductId")]
