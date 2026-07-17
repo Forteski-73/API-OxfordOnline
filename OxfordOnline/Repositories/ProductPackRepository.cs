@@ -236,5 +236,59 @@ namespace OxfordOnline.Repositories
             }
         }
 
+
+
+        // --------------- Métodos para BOM (product_packing_bom) ---------------
+
+        public async Task<IEnumerable<ProductPackingBom>> GetBomsByProductIdAsync(string productId)
+        {
+            return await _context.ProductPackingBom
+                .AsNoTracking()
+                .Where(b => b.ProductId == productId)
+                .OrderBy(b => b.ProductSeq)
+                .ToListAsync();
+        }
+        public async Task UpsertBomAsync(ProductPackingBomRequest request)
+        {
+            // 1. Busca e remove todos os registros existentes para este ProductId específico
+            var existingBoms = await _context.ProductPackingBom
+                .Where(b => b.ProductId == request.ProductId)
+                .ToListAsync();
+
+            if (existingBoms.Any())
+            {
+                _context.ProductPackingBom.RemoveRange(existingBoms);
+            }
+
+            // 2. Cria a lista com os novos registros mapeados a partir do Request
+            var newBoms = request.BomItems.Select(item => new ProductPackingBom
+            {
+                ProductId = request.ProductId,
+                ProductBomId = item.ProductBomId ?? string.Empty,
+                ProductName = item.ProductName,
+                ProductQty = item.ProductQty,
+                ProductSeq = item.ProductSeq,
+                UpdatedUser = item.UpdatedUser
+            }).ToList();
+
+            // 3. Adiciona em lote todos os itens novos
+            if (newBoms.Any())
+            {
+                await _context.ProductPackingBom.AddRangeAsync(newBoms);
+            }
+        }
+
+        public async Task DeleteBomsByProductIdAsync(string productId)
+        {
+            var boms = await _context.ProductPackingBom
+                .Where(b => b.ProductId == productId)
+                .ToListAsync();
+
+            if (boms.Any())
+            {
+                _context.ProductPackingBom.RemoveRange(boms);
+            }
+        }
+
     }
 }

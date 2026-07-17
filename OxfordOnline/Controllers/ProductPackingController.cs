@@ -213,5 +213,56 @@ namespace OxfordOnline.Controllers
                 return StatusCode(500, new { message = "Erro ao deletar item.", error = ex.Message });
             }
         }
+
+
+        // --------------- Endpoints de BOM (product_packing_bom) ---------------
+
+        // GET: /v1/ProductPacking/PackingBom/ByProduct/{productId}
+        [HttpGet("PackingBom/ByProduct/{productId}")]
+        public async Task<ActionResult<IEnumerable<ProductPackingBom>>> GetBomsByProduct(string productId)
+        {
+            var boms = await _packingService.GetBomsByProductAsync(productId);
+            return Ok(boms);
+        }
+
+
+        // POST: /v1/ProductPacking/PackingBom
+        [HttpPost("PackingBom")]
+        public async Task<IActionResult> UpsertBom([FromBody] ProductPackingBomRequest request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.ProductId))
+                return BadRequest(new { message = EndPointsMessages.InvalidProductData });
+
+            try
+            {
+                var success = await _packingService.UpsertBomAsync(request);
+
+                if (!success)
+                    return BadRequest(new { message = "Não foi possível processar os dados da BOM." });
+
+                return Ok(new { message = "Estrutura BOM salva com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao salvar estrutura BOM para o produto {ProductId}", request.ProductId);
+                return StatusCode(500, new { message = "Erro ao salvar a estrutura BOM.", error = ex.Message });
+            }
+        }
+
+        // DELETE: /v1/ProductPacking/PackingBom/ByProduct/{productId}
+        [HttpDelete("PackingBom/ByProduct/{productId}")]
+        public async Task<IActionResult> DeleteAllBomsByProductId(string productId)
+        {
+            try
+            {
+                await _packingService.DeleteAllBomsByProductIdAsync(productId);
+                return Ok(new { message = "Todas as estruturas BOM do produto foram removidas." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao deletar estruturas BOM do produto {ProductId}", productId);
+                return StatusCode(500, new { message = "Erro ao limpar estruturas BOM do produto.", error = ex.Message });
+            }
+        }
     }
 }

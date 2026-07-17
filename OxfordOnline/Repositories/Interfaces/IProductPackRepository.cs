@@ -13,8 +13,6 @@ namespace OxfordOnline.Repositories.Interfaces
         Task DeleteAsync(PalletGroup pack);
         Task SaveAsync();
 
-        // --- Novos métodos para Imagens ---
-
         // Busca todas as imagens de um pacote específico
         Task<IEnumerable<PalletGroupImage>> GetImagesByPackIdAsync(int packId);
 
@@ -57,5 +55,24 @@ namespace OxfordOnline.Repositories.Interfaces
         /// Remove um registro da tabela product_pack
         /// </summary>
         Task DeleteItemsByPackIdAsync(int packId);
+
+
+        // --------------- Métodos para BOM (product_packing_bom) ---------------
+
+        /// <summary>
+        /// Busca todas as estruturas de packing BOM de um produto específico ordenadas por sequência
+        /// </summary>
+        Task<IEnumerable<ProductPackingBom>> GetBomsByProductIdAsync(string productId);
+
+        /// <summary>
+        /// Insere um novo registro ou atualiza um existente utilizando a chave única composta (ProductId + ProductBomId + ProductSeq)
+        /// </summary>
+        Task UpsertBomAsync(ProductPackingBomRequest request);
+
+
+        /// <summary>
+        /// Remove em lote todos os registros de packing BOM associados a um produto principal
+        /// </summary>
+        Task DeleteBomsByProductIdAsync(string productId);
     }
 }

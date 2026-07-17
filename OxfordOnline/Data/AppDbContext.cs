@@ -77,6 +77,8 @@ namespace OxfordOnline.Data
 
         public DbSet<ProductBom> ProductBom { get; set; }
 
+        public DbSet<ProductPackingBom> ProductPackingBom { get; set; }
+
         public DbSet<TvDevice> TvDevice { get; set; }
 
         public DbSet<Device> Device { get; set; }

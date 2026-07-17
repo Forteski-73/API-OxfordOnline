@@ -191,5 +191,38 @@ namespace OxfordOnline.Services
             return true;
         }
 
+
+        // --------------- Métodos de BOM (Tabela Filha product_packing_bom) ---------------
+
+        /// <summary>
+        /// Busca todas as estruturas de packing BOM de um produto específico.
+        /// </summary>
+        public async Task<IEnumerable<ProductPackingBom>> GetBomsByProductAsync(string productId)
+        {
+            return await _repo.GetBomsByProductIdAsync(productId);
+        }
+
+        /// <summary>
+        /// Insere ou atualiza o lote estruturado da BOM e retorna se a operação foi bem-sucedida.
+        /// </summary>
+        public async Task<bool> UpsertBomAsync(ProductPackingBomRequest request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.ProductId) || request.BomItems == null)
+                return false;
+
+            await _repo.UpsertBomAsync(request);
+            await _repo.SaveAsync();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Remove em lote todas as estruturas de packing BOM de um produto principal.
+        /// </summary>
+        public async Task DeleteAllBomsByProductIdAsync(string productId)
+        {
+            await _repo.DeleteBomsByProductIdAsync(productId);
+            await _repo.SaveAsync();
+        }
     }
 }
