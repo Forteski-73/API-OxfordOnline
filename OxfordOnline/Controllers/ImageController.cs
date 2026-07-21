@@ -427,8 +427,7 @@ namespace OxfordOnline.Controllers
                             // =====================================================
                             using var paint = new SKPaint
                             {
-                                IsAntialias = true,
-                                FilterQuality = SKFilterQuality.High
+                                IsAntialias = true
                             };
 
                             var destRect = new SKRect(
@@ -437,9 +436,12 @@ namespace OxfordOnline.Controllers
                                 posX + newWidth,
                                 posY + newHeight);
 
+                            var samplingOptions = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
+
                             canvas.DrawBitmap(
                                 originalBitmap,
                                 destRect,
+                                samplingOptions,
                                 paint);
 
                             canvas.Flush();

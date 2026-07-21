@@ -97,6 +97,7 @@ namespace OxfordOnline.Repositories
                 _context.Image.Update(existing);
             }
         }
+
         public async Task UpdateImagesByteAsync(string productId, Finalidade finalidade, List<byte[]> imageBytesList)
         {
             _logger.LogError("**** INICIO UpdateImagesByteAsync ****");
@@ -490,6 +491,71 @@ namespace OxfordOnline.Repositories
             foreach (var image in images.Where(i => !string.IsNullOrEmpty(i.PackImagePath)))
             {
                 await _ftpService.DeleteAsync(image.PackImagePath);
+            }
+        }
+
+        /// <summary>
+        /// Registra (insere ou atualiza) no banco o caminho da imagem de BOM/Sequência de Embalagem
+        /// gerada para o produto, associando-a à finalidade EMBALAGEM.
+        /// </summary>
+        public async Task SaveBomImagePathAsync(string productId, string imagePath)
+        {
+            if (string.IsNullOrWhiteSpace(productId))
+                throw new ArgumentException("productId é obrigatório.", nameof(productId));
+
+            if (string.IsNullOrWhiteSpace(imagePath))
+                throw new ArgumentException("imagePath é obrigatório.", nameof(imagePath));
+
+            try
+            {
+                // Busca todas as imagens de EMBALAGEM do produto, ordenadas pela sequência atual,
+                // para preservar a ordem relativa ao reindexar.
+                var allImages = await _context.Image
+                    .Where(i => i.ProductId == productId && i.Finalidade == Finalidade.EMBALAGEM.ToString())
+                    .OrderBy(i => i.Sequence)
+                    .ToListAsync();
+
+                // Separa o registro da imagem de BOM (se já existir) dos demais.
+                var bomImage = allImages.FirstOrDefault(i => i.ImagePath == imagePath);
+                var otherImages = allImages.Where(i => i.ImagePath != imagePath).ToList();
+
+                // Reindexa as demais imagens a partir da sequência 2, preservando a ordem entre elas.
+                var nextSequence = 2;
+                foreach (var image in otherImages)
+                {
+                    image.Sequence = nextSequence;
+                    _context.Image.Update(image);
+                    nextSequence++;
+                }
+
+                if (bomImage == null)
+                {
+                    var newImage = new Image
+                    {
+                        ProductId = productId,
+                        ImagePath = imagePath,
+                        Finalidade = Finalidade.EMBALAGEM.ToString(),
+                        Sequence = 1,
+                        ImageMain = false
+                    };
+
+                    _context.Image.Add(newImage);
+                    _logger.LogInformation("Registro de imagem de BOM criado no banco para o produto '{ProductId}'. Caminho: {Path}", productId, imagePath);
+                }
+                else
+                {
+                    bomImage.Finalidade = Finalidade.EMBALAGEM.ToString();
+                    bomImage.Sequence = 1;
+                    _context.Image.Update(bomImage);
+                    _logger.LogInformation("Registro de imagem de BOM atualizado no banco para o produto '{ProductId}'. Caminho: {Path}", productId, imagePath);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao salvar caminho da imagem de BOM no banco para o produto '{ProductId}'.", productId);
+                throw;
             }
         }
     }

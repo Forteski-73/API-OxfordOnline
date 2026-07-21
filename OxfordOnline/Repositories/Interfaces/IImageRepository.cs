@@ -13,6 +13,8 @@ namespace OxfordOnline.Repositories.Interfaces
         Task RemoveByProductIdsAsync(IEnumerable<string> productIds); // atualizado
         Task SaveAsync();
 
+        Task SaveBomImagePathAsync(string productId, string imagePath);
+
         Task AddOrUpdateAsync(Image image);
 
         Task UpdateImagesByProductIdAsync(string productId, Finalidade finalidade, List<IFormFile> files);
