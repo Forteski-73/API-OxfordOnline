@@ -124,6 +124,9 @@ builder.Services.AddScoped<ProductPackingService>();
 
 builder.Services.AddScoped<ITvDeviceRepository, TvDeviceRepository>();
 
+builder.Services.AddScoped<IVideoRepository, VideoRepository>();
+builder.Services.AddScoped<VideoService>();
+
 // === Produção ===
 if (builder.Environment.IsProduction())
 {

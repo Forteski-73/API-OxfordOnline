@@ -82,7 +82,9 @@ namespace OxfordOnline.Data
         public DbSet<TvDevice> TvDevice { get; set; }
 
         public DbSet<Device> Device { get; set; }
-        
+
+        public DbSet<Video> Videos { get; set; }
+        public DbSet<VideoCategory> VideoCategories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
