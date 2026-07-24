@@ -33,6 +33,10 @@ namespace OxfordOnline.Models
         [Column("finalidade")]
         public string Finalidade { get; set; } = "PRODUTO";
 
+        [Column("updated_at")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? UpdatedAt { get; set; }
+
         // Navegação
         [ForeignKey(nameof(ProductId))]
         [JsonIgnore]
