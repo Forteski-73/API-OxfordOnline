@@ -10,6 +10,11 @@ namespace OxfordOnline.Models
         [Column("pallet_id")]
         public int PalletId { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        [Column("pallet_destination")]
+        public string PalletDestination { get; set; }
+
         [Column("total_quantity")]
         public int TotalQuantity { get; set; }
 

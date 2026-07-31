@@ -32,6 +32,12 @@ namespace OxfordOnline.Models
         [JsonIgnore]
         public Product? Product { get; set; }
 
+        // Propriedade de Navegação para a tabela Pallet.
+        // [JsonIgnore] evita serialização no JSON de retorno.
+        [ForeignKey("PalletId")]
+        [JsonIgnore]
+        public Pallet? Pallet { get; set; }
+
         // Produto Nome para retornar no JSON (não mapeado no banco)
         [NotMapped]
         public string? ProductName { get; set; }

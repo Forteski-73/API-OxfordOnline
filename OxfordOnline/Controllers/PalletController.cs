@@ -22,6 +22,8 @@ namespace OxfordOnline.Controllers
         {
             _context = context;
         }
+        
+        private static DateTime CutoffDate => DateTime.UtcNow.AddDays(-365);
 
         // POST: Inserir ou atualizar
         [Authorize]
@@ -41,11 +43,12 @@ namespace OxfordOnline.Controllers
 
                     if (existingPallet != null)
                     {
-                        existingPallet.TotalQuantity = pallet.TotalQuantity;
-                        existingPallet.Status = pallet.Status;
-                        existingPallet.Location = pallet.Location;
-                        existingPallet.UpdatedUser = pallet.UpdatedUser;
-                        existingPallet.ImagePath = pallet.ImagePath;
+                        existingPallet.PalletDestination    = pallet.PalletDestination;
+                        existingPallet.TotalQuantity        = pallet.TotalQuantity;
+                        existingPallet.Status               = pallet.Status;
+                        existingPallet.Location             = pallet.Location;
+                        existingPallet.UpdatedUser          = pallet.UpdatedUser;
+                        existingPallet.ImagePath            = pallet.ImagePath;
                     }
                     else
                     {
@@ -67,13 +70,17 @@ namespace OxfordOnline.Controllers
             }
         }
 
-        // GET: Todas os paletes
+        // GET: Todos os paletes
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pallet>>> GetAllPallets()
         {
+            var cutoff = CutoffDate;
+
             var pallets = await _context.Pallet
                 .Where(p => p.Status != "R") // MENOS OS RECEBIDOS
+                .Where(p => p.CreatedAt >= cutoff) // ÚLTIMOS 365 DIAS
+                .OrderByDescending(p => p.CreatedAt)
                 .ToListAsync();
 
             return Ok(pallets);
@@ -85,7 +92,10 @@ namespace OxfordOnline.Controllers
             [FromQuery] string? status,
             [FromQuery] string? txtFilter)
         {
-            var query = _context.Pallet.AsQueryable();
+            var cutoff = CutoffDate;
+            var query = _context.Pallet
+               .Where(p => p.CreatedAt >= cutoff) // ÚLTIMOS 365 DIAS
+               .AsQueryable();
 
             string? dbStatus = null;
             if (!string.IsNullOrEmpty(status))
@@ -111,12 +121,16 @@ namespace OxfordOnline.Controllers
 
                 query = query.Where(p =>
                     (isNumericPalletId && p.PalletId == filterPalletId) ||
+                    ((p.PalletDestination ?? "").ToLower().Contains(filterText)) ||
                     ((p.Location ?? "").ToLower().Contains(filterText)) ||
                     ((p.CreatedUser ?? "").ToLower() == filterText)
                 );
             }
 
-            var pallets = await query.ToListAsync();
+            var pallets = await query
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync();
+
             return Ok(pallets);
         }
 
@@ -126,9 +140,11 @@ namespace OxfordOnline.Controllers
         [FromQuery] string? status,
         [FromQuery] string? txtFilter)
         {
+            var cutoff = CutoffDate;
             var query = _context.PalletItem
-            .Include(pi => pi.Product)
-            .AsQueryable();
+                .Include(pi => pi.Product)
+                .Where(pi => pi.Pallet!.CreatedAt >= cutoff) // ÚLTIMOS 365 DIAS
+                .AsQueryable();
 
             string? dbStatus = null;
             if (!string.IsNullOrEmpty(status))
