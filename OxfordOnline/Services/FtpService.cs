@@ -49,6 +49,9 @@ namespace OxfordOnline.Services
         {
             try
             {
+                // Garante que os diretórios pai existam antes de tentar o upload
+                await EnsureFtpDirectoryExistsAsync(remotePath);
+
                 var uri = new Uri($"ftp://{_ftpHost}/{remotePath}");
                 var request = (FtpWebRequest)WebRequest.Create(uri);
                 request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -206,6 +209,7 @@ namespace OxfordOnline.Services
             }
         }
 
+        /*
         public async Task EnsureFtpDirectoryExistsAsync(string remotePath)
         {
             if (string.IsNullOrWhiteSpace(remotePath)) return;
@@ -224,6 +228,68 @@ namespace OxfordOnline.Services
                     currentPath += "/" + part;
                     var uri = new Uri($"ftp://{_ftpHost}{currentPath}");
 
+                    var request = (FtpWebRequest)WebRequest.Create(uri);
+                    request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                    request.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
+                    request.UsePassive = true;
+                    request.KeepAlive = false;
+
+                    try
+                    {
+                        using var response = (FtpWebResponse)await request.GetResponseAsync();
+                        _logger.LogInformation($"[FtpService] Diretório criado: {currentPath}");
+                    }
+                    catch (WebException ex)
+                    {
+                        if (ex.Response is FtpWebResponse ftpResponse)
+                        {
+                            // Alguns servidores retornam ActionNotTakenFileUnavailable (550) 
+                            // se a pasta já existir.
+                            if (ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                            {
+                                _logger.LogDebug($"[FtpService] Diretório já existe ou sem permissão: {currentPath}");
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"[FtpService] Falha ao garantir diretório: {remotePath}");
+                throw;
+            }
+        }
+        */
+
+        public async Task EnsureFtpDirectoryExistsAsync(string remotePath)
+        {
+            if (string.IsNullOrWhiteSpace(remotePath)) return;
+
+            try
+            {
+                var normalizedPath = remotePath.Replace("\\", "/");
+
+                // Pega apenas o diretório, removendo o nome do arquivo (último segmento)
+                var lastSlashIndex = normalizedPath.LastIndexOf('/');
+                if (lastSlashIndex <= 0)
+                {
+                    // Não há subdiretório, nada a criar
+                    return;
+                }
+
+                var directoryOnly = normalizedPath.Substring(0, lastSlashIndex);
+
+                var parts = directoryOnly.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                string currentPath = "";
+
+                foreach (var part in parts)
+                {
+                    currentPath += "/" + part;
+                    var uri = new Uri($"ftp://{_ftpHost}{currentPath}");
                     var request = (FtpWebRequest)WebRequest.Create(uri);
                     request.Method = WebRequestMethods.Ftp.MakeDirectory;
                     request.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
