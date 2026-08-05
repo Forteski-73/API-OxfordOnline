@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.OxfordOnline.Models;
 
 namespace OxfordOnline.Data
 {
@@ -76,6 +77,8 @@ namespace OxfordOnline.Data
         public DbSet<PalletGroupItem> ProductPackItem { get; set; }
 
         public DbSet<ProductBom> ProductBom { get; set; }
+
+        public DbSet<ProductPackingBomAx> ProductPackingBomAx { get; set; }
 
         public DbSet<ProductPackingBom> ProductPackingBom { get; set; }
 

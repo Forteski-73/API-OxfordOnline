@@ -1,4 +1,6 @@
-﻿namespace OxfordOnline.Models.Dto
+﻿using OxfordOnline.Models.OxfordOnline.Models;
+
+namespace OxfordOnline.Models.Dto
 {
     public class ProductComplete
     {
@@ -8,6 +10,9 @@
         public InventDim? Location { get; set; }
         public TaxInformation? TaxInformation { get; set; }
         public List<ProductBom>? Bom { get; set; }
+
+        public List<ProductPackingBomAx>? BomEmb { get; set; }
+
         public List<ImageBase64>? Images { get; set; }
         public List<Tag>? Tags { get; set; }
 

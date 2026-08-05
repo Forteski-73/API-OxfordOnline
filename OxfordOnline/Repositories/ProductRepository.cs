@@ -68,9 +68,9 @@ namespace OxfordOnline.Repositories
             ).ToListAsync();
 
 
-            var tags            = await _context.Tag.Where(t => t.ProductId == productId).ToListAsync();
-            var pack            = await _context.ProductPack.Where(p => p.Items.Any(i => i.PackProductId == productId)).FirstOrDefaultAsync();
-
+            var tags    = await _context.Tag.Where(t => t.ProductId == productId).ToListAsync();
+            var pack    = await _context.ProductPack.Where(p => p.Items.Any(i => i.PackProductId == productId)).FirstOrDefaultAsync();
+            var bomEmb  = await _context.ProductPackingBomAx.Where(p => p.ProductId == productId).ToListAsync();
             // Busca os packs que contêm esse produto como item
             /*
                var packs = await _context.ProductPack
@@ -88,6 +88,7 @@ namespace OxfordOnline.Repositories
                 Location        = inventDim,
                 TaxInformation  = taxInformation,
                 Bom             = bom,
+                BomEmb          = bomEmb,
                 Images          = new List<ImageBase64>(),
                 Tags            = tags,
                 Pack            = pack

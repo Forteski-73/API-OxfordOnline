@@ -25,26 +25,6 @@ namespace OxfordOnline.Services
             _logger = logger;
         }
 
-        /*
-        public async Task UploadAsync(string remotePath, Stream content)
-        {
-            var uri = new Uri($"ftp://{_ftpHost}/{remotePath}");
-            var request = (FtpWebRequest)WebRequest.Create(uri);
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
-            request.UseBinary = true;
-            request.UsePassive = true;
-            request.KeepAlive = false;
-
-            using var requestStream = await request.GetRequestStreamAsync();
-            await content.CopyToAsync(requestStream);
-            content.Position = 0; // Opcional, caso queira resetar posição após upload
-
-            using var response = (FtpWebResponse)await request.GetResponseAsync();
-            // Opcional: você pode validar response.StatusDescription
-        }
-        */
-
         public async Task UploadAsync(string remotePath, Stream content)
         {
             try
