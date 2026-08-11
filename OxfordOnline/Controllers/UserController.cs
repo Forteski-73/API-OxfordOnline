@@ -67,7 +67,8 @@ namespace OxfordOnline.Controllers
                     {
                         User = user.User,
                         Password = hash,
-                        Account = user.Account
+                        Account = user.Account,
+                        ProfileId = user.ProfileId
                     });
                 }
 
@@ -76,7 +77,7 @@ namespace OxfordOnline.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, EndPointsMessages.LogErrorRegisterUser);
+                //_logger.LogError(ex, EndPointsMessages.LogErrorRegisterUser);
                 return StatusCode(500, new
                 {
                     message = EndPointsMessages.LogErrorRegisterUser,

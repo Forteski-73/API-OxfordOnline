@@ -9,6 +9,7 @@ using OxfordOnline.Repositories;
 using OxfordOnline.Repositories.Interfaces;
 using OxfordOnline.Resources;
 using OxfordOnline.Services;
+using OxfordOnline.Services.Interfaces;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -96,6 +97,8 @@ builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<IFtpService, FtpService>();
 builder.Services.AddScoped<FtpService>();
 
+builder.Services.AddScoped<IJwtService, JwtService>();
+
 builder.Services.AddScoped<IInventRepository, InventRepository>();
 builder.Services.AddScoped<InventService>();
 
@@ -126,6 +129,11 @@ builder.Services.AddScoped<ITvDeviceRepository, TvDeviceRepository>();
 
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 builder.Services.AddScoped<VideoService>();
+
+// Integração com a API do Sênior
+builder.Services.AddMemoryCache();
+builder.Services.Configure<SeniorSettings>(builder.Configuration.GetSection("Senior"));
+builder.Services.AddHttpClient<ISeniorAuthService, SeniorAuthService>();
 
 // === Produção ===
 if (builder.Environment.IsProduction())

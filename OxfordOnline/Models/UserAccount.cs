@@ -24,6 +24,9 @@ namespace OxfordOnline.Models
         [MaxLength(100)]
         public string Email { get; set; } = null!;  // NOT NULL e UNIQUE no banco
 
+        [Column("id_badge")]
+        [MaxLength(6)]
+        public string? IdBadge { get; set; }
         public string? Extension { get; set; }
         public string? Phone { get; set; }
 
