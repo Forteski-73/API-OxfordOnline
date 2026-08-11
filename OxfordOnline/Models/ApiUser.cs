@@ -11,5 +11,8 @@ namespace OxfordOnline.Models
         public string Account { get; set; } = string.Empty;
         [Column("profile_id")]
         public int? ProfileId { get; set; }
+
+        [NotMapped]
+        public string? Device { get; set; }
     }
 }

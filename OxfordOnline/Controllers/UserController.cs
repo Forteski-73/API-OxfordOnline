@@ -112,6 +112,26 @@ namespace OxfordOnline.Controllers
                     signingCredentials: creds
                 );
 
+                // ***** Cria atualização no device para data de último acesso mesmo se marcado 'Manter conectado' *****
+                Device? dbDevice = null;
+                if (!string.IsNullOrWhiteSpace(user.Device) && Guid.TryParse(user.Device, out var deviceGuid))
+                {
+                    dbDevice = await _context.Device
+                        .FirstOrDefaultAsync(d => d.Guid == deviceGuid && d.UserId == dbUser.Id);
+                }
+                if (dbDevice is not null)
+                {
+                    var deviceInfo = new DeviceInfo
+                    {
+                        Guid        = dbDevice.Guid.ToString(),
+                        Platform    = dbDevice.Platform,
+                        DeviceName  = dbDevice.DeviceName,
+                        AppVersion  = dbDevice.AppVersion
+                    };
+                    
+                    await UpsertDeviceAsync(dbUser.Id, deviceInfo);
+                }
+
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token)
