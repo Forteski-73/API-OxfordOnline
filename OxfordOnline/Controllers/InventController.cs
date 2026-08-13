@@ -146,5 +146,26 @@ namespace OxfordOnline.Controllers
                 });
             }
         }
+
+        // GET: /Invent/Locations
+        [Authorize]
+        [HttpGet("Locations")]
+        public async Task<ActionResult<IEnumerable<InventLocation>>> GetActiveLocations()
+        {
+            try
+            {
+                var locations = await _inventService.GetAllActiveLocationsAsync();
+                return Ok(locations);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Erro ao buscar depósitos ativos.",
+                    error = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+        }
+
     }
 }

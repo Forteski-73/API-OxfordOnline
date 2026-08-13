@@ -67,13 +67,16 @@ namespace OxfordOnline.Services
         }
 
 
-        /// Chama o repositório para salvar o um produto completo com todas as entidades relacionadas.
+        /// Chama o repositório para salvar o um produto completo com todas as entidades relacionadas. 
         public async Task<bool> SaveProductCompleteAsync(ProductComplete dtoInvent)
         {
             await _invent.SaveProductCompleteAsync(dtoInvent);
 
             return true;
         }
+
+        public async Task<List<InventLocation>> GetAllActiveLocationsAsync() =>
+            await _invent.GetAllActiveLocationsAsync();
 
     }
 }

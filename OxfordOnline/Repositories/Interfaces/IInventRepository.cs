@@ -12,5 +12,6 @@ namespace OxfordOnline.Repositories.Interfaces
         Task DeleteAsync(Invent invent);
         Task SaveAsync();
         Task SaveProductCompleteAsync(ProductComplete dtoInvent);
+        Task<List<InventLocation>> GetAllActiveLocationsAsync();
     }
 }

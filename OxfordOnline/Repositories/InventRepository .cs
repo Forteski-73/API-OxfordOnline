@@ -95,5 +95,12 @@ namespace OxfordOnline.Repositories
             // Se nenhum dos IFs acima disparar o AddAsync, o SaveChangesAsync não fará nada
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<InventLocation>> GetAllActiveLocationsAsync() =>
+            await _context.Set<InventLocation>()
+                          .Where(l => l.Status)
+                          .OrderBy(l => l.InventLocationName)
+                          .ToListAsync();
+
     }
 }
