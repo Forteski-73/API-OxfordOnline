@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.Dtos;
 using OxfordOnline.Services;
 using System;
 using System.Collections.Generic;
@@ -416,6 +417,26 @@ namespace OxfordOnline.Controllers
             {
                 return StatusCode(500, $"Erro ao recuperar máscaras: {ex.Message}");
             }
+        }
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA RETORNAR A AUDITORIA DO INVENTÁRIO ---
+        // -----------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// GET: v1/Inventory/AuditResult
+        /// Retorna todos os registros de QUANTIDADE CONTADA X QUANTIDADE NO ESTOQUE REAL
+        /// Por depósido e produto
+        /// </summary>
+
+        [HttpGet("AuditResult")]
+        public async Task<ActionResult<IEnumerable<InventoryAuditResult>>> GetInventoryStockSummary(
+            [FromQuery] string inventLocationId)
+        {
+            if (string.IsNullOrWhiteSpace(inventLocationId))
+                return BadRequest("O parâmetro 'inventLocationId' é obrigatório.");
+
+            var result = await _inventoryService.GetInventoryAuditResultAsync(inventLocationId);
+            return Ok(result);
         }
 
     }

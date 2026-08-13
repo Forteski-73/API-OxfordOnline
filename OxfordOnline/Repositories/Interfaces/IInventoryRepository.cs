@@ -2,6 +2,7 @@
 
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.Dtos;
 
 namespace OxfordOnline.Repositories.Interfaces
 {
@@ -48,6 +49,11 @@ namespace OxfordOnline.Repositories.Interfaces
         Task<List<Inventory>> GetInventoryAllAsync();
 
         Task<bool> DeleteInventoryAsync(string _inventCode); // Usando a lógica de Service (que pode incluir exclusão de Records)
+
+        // -----------------------------------------------------------------------------------
+        // --- Retorna todos os registros de saldo/disponibilidade de estoque (invent_sum) ---
+        // -----------------------------------------------------------------------------------
+        Task<IEnumerable<InventoryAuditResult>> GetInventoryAuditResultAsync(string inventLocationId);
 
         /// Retorna todas as máscaras configuradas para os campos (Unitizador, Posição, Código)
         Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync();

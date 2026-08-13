@@ -3,6 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.Dtos;
 using OxfordOnline.Repositories.Interfaces;
 using OxfordOnline.Repositories.Interfaces;
 using System;
@@ -108,6 +109,12 @@ namespace OxfordOnline.Services
         
         public async Task<bool> DeleteInvRecByCodeItemAsync(string inventCode, string unitizer, string location, string item) =>
             await _inventoryRepository.DeleteInvRecByCodeItemAsync(inventCode, unitizer, location, item);
+
+        // -----------------------------------------------------------------------------
+        // --- InventSum - Métodos do Serviço (Delegados ao Repositório) ---
+        // -----------------------------------------------------------------------------
+        public async Task<IEnumerable<InventoryAuditResult>> GetInventoryAuditResultAsync(string inventLocationId) => 
+            await _inventoryRepository.GetInventoryAuditResultAsync(inventLocationId);
 
         // -----------------------------------------------------------------------------
         // --- InventoryMask - Métodos do Serviço (Delegados ao Repositório) ---

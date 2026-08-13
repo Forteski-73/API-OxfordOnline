@@ -89,6 +89,9 @@ namespace OxfordOnline.Data
         public DbSet<Video> Videos { get; set; }
         public DbSet<VideoCategory> VideoCategories { get; set; }
 
+        public DbSet<InventSum> InventSum { get; set; }
+        public DbSet<InventLocation> InventLocation { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -104,12 +107,10 @@ namespace OxfordOnline.Data
             base.OnModelCreating(modelBuilder);
 
             // Chave primária composta para a tabela profile_menus
-            modelBuilder.Entity<ProfileMenu>()
-                .HasKey(pm => new { pm.ProfileId, pm.MenuId });
+            modelBuilder.Entity<ProfileMenu>().HasKey(pm => new { pm.ProfileId, pm.MenuId });
 
             // Define a Chave Primária Composta (PalletId + ProductId)
-            modelBuilder.Entity<PalletItem>()
-                .HasKey(pi => new { pi.PalletId, pi.ProductId });
+            modelBuilder.Entity<PalletItem>().HasKey(pi => new { pi.PalletId, pi.ProductId });
 
             // Define Explicitamente a Relação de Chave Estrangeira com Product
             // Isso garante que o EF Core saiba como buscar o Product.
@@ -119,8 +120,7 @@ namespace OxfordOnline.Data
                 .HasForeignKey(pi => pi.ProductId); // Usando PalletItem.ProductId como FK
 
             // Chave primária composta para PalletLoadLine
-            modelBuilder.Entity<Models.PalletLoadLine>()
-                .HasKey(pll => new { pll.LoadId, pll.PalletId });
+            modelBuilder.Entity<Models.PalletLoadLine>().HasKey(pll => new { pll.LoadId, pll.PalletId });
 
             modelBuilder.Entity<Models.PalletLoadLine>()
                 .HasOne(pll => pll.Pallet)
@@ -128,11 +128,12 @@ namespace OxfordOnline.Data
                 .HasForeignKey(pll => pll.PalletId);
 
             // Chave Estrangeira de ProductPack com Product
-            modelBuilder.Entity<PalletGroupImage>()
-                .HasKey(p => new { p.PackId, p.PackSequence });
+            modelBuilder.Entity<PalletGroupImage>().HasKey(p => new { p.PackId, p.PackSequence });
 
-            modelBuilder.Entity<PalletGroupItem>()
-                .HasKey(p => new { p.PackId, p.PackProductId });
+            modelBuilder.Entity<PalletGroupItem>().HasKey(p => new { p.PackId, p.PackProductId });
+
+            // Mapeamento da Chave Primária Composta do InventSum
+            modelBuilder.Entity<InventSum>().HasKey(x => new { x.ProductId, x.InventLocationId });
         }
     }
 }

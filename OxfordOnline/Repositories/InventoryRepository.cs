@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OxfordOnline.Data;
 using OxfordOnline.Models;
 using OxfordOnline.Models.Dto;
+using OxfordOnline.Models.Dtos;
 using OxfordOnline.Repositories.Interfaces; // Usa a interface unificada
 using System;
 using System.Collections.Generic;
@@ -164,7 +165,36 @@ namespace OxfordOnline.Repositories
         {
             _context.InventoryRecord.Remove(record);
         }
+        /*public async Task<IEnumerable<InventSum>> GetAllInventSumAsync()
+        {
+            return await _context.InventSum
+                                 .AsNoTracking()
+                                 .OrderBy(i => i.ProductId)
+                                 .ThenBy(i => i.InventLocationId)
+                                 .Take(100)
+                                 .ToListAsync();
+        }*/
 
+        public async Task<IEnumerable<InventoryAuditResult>> GetInventoryAuditResultAsync(string inventLocationId)
+        {
+            var query =
+                from ir in _context.InventoryRecord.AsNoTracking()
+                join s in _context.InventSum.AsNoTracking()
+                    on ir.InventProduct equals s.ProductId
+                where s.InventLocationId == inventLocationId
+                group new { ir, s } by new { s.InventLocationId, ir.InventProduct, ir.InventBarcode } into g
+                orderby g.Key.InventProduct
+                select new InventoryAuditResult
+                {
+                    InventLocationId = g.Key.InventLocationId,
+                    InventProduct = g.Key.InventProduct,
+                    InventBarcode = g.Key.InventBarcode,
+                    TotalInvent = g.Sum(x => x.ir.InventTotal ?? 0),
+                    AvailPhysical = g.Max(x => x.s.AvailPhysical)
+                };
+
+            return await query.ToListAsync();
+        }
 
         public async Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync()
         {
@@ -197,7 +227,7 @@ namespace OxfordOnline.Repositories
             if (string.IsNullOrWhiteSpace(inventoryGuid.InventGuid))
                 throw new ArgumentException("O campo 'InventGuid' é obrigatório.");
 
-            // Lógica de negócio: verifica existência antes de tentar adicionar (idempotência)
+            // Lógica de negócio: verifica existência antes de tentar adicionar
             var guidExists = await GuidExistsAsync(inventoryGuid.InventGuid);
             if (guidExists)
             {
