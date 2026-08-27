@@ -35,8 +35,8 @@ namespace OxfordOnline.Services
         public async Task<InventoryGuid?> GetGuidByInventGuidAsync(string inventGuid) =>
             await _inventoryRepository.GetGuidByInventGuidAsync(inventGuid);
 
-        public async Task<bool> CreateInventoryGuidAsync(InventoryGuid inventoryGuid) =>
-            await _inventoryRepository.CreateInventoryGuidAsync(inventoryGuid);
+        public async Task<(bool created, bool updated)> CreateOrUpdateInventoryGuidAsync(InventoryGuid inventoryGuid) =>
+            await _inventoryRepository.CreateOrUpdateInventoryGuidAsync(inventoryGuid);
 
         public async Task<IEnumerable<InventoryGuid>> GetAllInventoryGuidsAsync() =>
             await _inventoryRepository.GetAllInventoryGuidsAsync();
@@ -121,6 +121,18 @@ namespace OxfordOnline.Services
         // -----------------------------------------------------------------------------
         public async Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync() =>
             await _inventoryRepository.GetAllInventoryMasksAsync();
+
+        // -----------------------------------------------------------------------------
+        // --- InventoryHeader - Métodos do Serviço (Delegados ao Repositório) ---
+        // -----------------------------------------------------------------------------
+        public async Task<InventoryHeader?> GetInventoryHeaderByIdAsync(int id) =>
+            await _inventoryRepository.GetInventoryHeaderByIdAsync(id);
+
+        public async Task<bool> CreateOrUpdateInventoryHeaderAsync(InventoryHeader header) =>
+            await _inventoryRepository.CreateOrUpdateInventoryHeaderAsync(header);
+
+        public async Task<List<InventoryHeader>> GetRecentActiveInventoryHeadersAsync(int count = 12) =>
+            await _inventoryRepository.GetRecentActiveInventoryHeadersAsync(count);
 
         // -----------------------------------------------------------------------------
         // --- Métodos de Utilidade/Consulta ---

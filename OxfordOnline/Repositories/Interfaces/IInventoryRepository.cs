@@ -22,8 +22,8 @@ namespace OxfordOnline.Repositories.Interfaces
         Task<IEnumerable<InventoryGuid>> GetAllInventoryGuidsAsync();
 
         // Métodos de Lógica de Negócio (Service)
-        // Retorna false se já existe (comportamento idempotente)
-        Task<bool> CreateInventoryGuidAsync(InventoryGuid inventoryGuid);
+        // Insere se não existir; se já existir, atualiza o invent_header_id quando ele for diferente
+        Task<(bool created, bool updated)> CreateOrUpdateInventoryGuidAsync(InventoryGuid inventoryGuid);
 
 
         // -----------------------------------------------------------------------------
@@ -57,6 +57,18 @@ namespace OxfordOnline.Repositories.Interfaces
 
         /// Retorna todas as máscaras configuradas para os campos (Unitizador, Posição, Código)
         Task<IEnumerable<InventoryMask>> GetAllInventoryMasksAsync();
+
+        // -----------------------------------------------------------------------------
+        // --- InventoryHeader ---
+        // -----------------------------------------------------------------------------
+
+        Task<InventoryHeader?> GetInventoryHeaderByIdAsync(int id);
+
+        // Lógica: Update (se Id > 0) ou Insert
+        Task<bool> CreateOrUpdateInventoryHeaderAsync(InventoryHeader header);
+
+        // Retorna os últimos N headers ativos cadastrados (ordenados por Id decrescente)
+        Task<List<InventoryHeader>> GetRecentActiveInventoryHeadersAsync(int count = 12);
 
         /// <summary>
         /// Retorna o total de registros na tabela de produtos.

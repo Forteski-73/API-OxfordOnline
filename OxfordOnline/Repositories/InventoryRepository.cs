@@ -204,6 +204,60 @@ namespace OxfordOnline.Repositories
                                  .ToListAsync();
         }
 
+        // --- InventoryHeader - CRUD Básico ---
+
+        public Task<InventoryHeader?> GetInventoryHeaderByIdAsync(int id)
+        {
+            return _context.InventoryHeader.FirstOrDefaultAsync(h => h.Id == id);
+        }
+
+        // --- InventoryHeader - Lógica de Service ---
+
+        public async Task<bool> CreateOrUpdateInventoryHeaderAsync(InventoryHeader header)
+        {
+            if (string.IsNullOrWhiteSpace(header.InventName))
+                throw new ArgumentException("O campo 'InventName' é obrigatório.");
+
+            if (header.Id > 0)
+            {
+                var existing = await GetInventoryHeaderByIdAsync(header.Id);
+                if (existing == null)
+                    throw new KeyNotFoundException($"Inventário (header) com Id {header.Id} não encontrado.");
+
+                var nameChanged = existing.InventName != header.InventName;
+
+                existing.InventName = header.InventName;
+                existing.InventDescription = header.InventDescription;
+                existing.SalesChannelOnly = header.SalesChannelOnly;
+                existing.Active = header.Active;
+
+                // Propaga o novo nome para todos os Inventory filhos vinculados a este Header
+                if (nameChanged)
+                {
+                    await _context.Inventory
+                        .Where(i => i.InventHeaderId == header.Id)
+                        .ExecuteUpdateAsync(s => s.SetProperty(i => i.InventName, header.InventName));
+                }
+
+                await SaveAsync();
+                return false; // atualizado
+            }
+
+            await _context.InventoryHeader.AddAsync(header);
+            await SaveAsync();
+            return true; // criado
+        }
+
+        public async Task<List<InventoryHeader>> GetRecentActiveInventoryHeadersAsync(int count = 12)
+        {
+            return await _context.InventoryHeader
+                .AsNoTracking()
+                .Where(h => h.Active)
+                .OrderByDescending(h => h.Id)
+                .Take(count)
+                .ToListAsync();
+        }
+
         // --- Lógica de Agregação de Dados ---
         public async Task<decimal> CalculateInventoryTotalAsync(string inventCode)
         {
@@ -222,21 +276,44 @@ namespace OxfordOnline.Repositories
 
         // --- InventoryGuid - Lógica de Service ---
 
-        public async Task<bool> CreateInventoryGuidAsync(InventoryGuid inventoryGuid)
+        public async Task<(bool created, bool updated)> CreateOrUpdateInventoryGuidAsync(InventoryGuid inventoryGuid)
         {
             if (string.IsNullOrWhiteSpace(inventoryGuid.InventGuid))
                 throw new ArgumentException("O campo 'InventGuid' é obrigatório.");
 
-            // Lógica de negócio: verifica existência antes de tentar adicionar
-            var guidExists = await GuidExistsAsync(inventoryGuid.InventGuid);
-            if (guidExists)
+            // Validação de Regra de Negócio: O Header deve existir
+            var header = await GetInventoryHeaderByIdAsync(inventoryGuid.InventHeaderId);
+            if (header == null)
+                throw new KeyNotFoundException($"O Header de inventário '{inventoryGuid.InventHeaderId}' não foi encontrado em InventoryHeader.");
+
+            var existing = await GetGuidByInventGuidAsync(inventoryGuid.InventGuid);
+            if (existing == null)
             {
-                return false;
+                await AddGuidAsync(inventoryGuid);
+                await SaveAsync();
+                return (true, false);
             }
 
-            await AddGuidAsync(inventoryGuid);
+            // Já existe: atualiza os campos editáveis que vierem diferentes do gravado
+            var changed = false;
+
+            if (existing.InventHeaderId != inventoryGuid.InventHeaderId)
+            {
+                existing.InventHeaderId = inventoryGuid.InventHeaderId;
+                changed = true;
+            }
+
+            if (existing.InventExpSeq != inventoryGuid.InventExpSeq)
+            {
+                existing.InventExpSeq = inventoryGuid.InventExpSeq;
+                changed = true;
+            }
+
+            if (!changed)
+                return (false, false);
+
             await SaveAsync();
-            return true;
+            return (false, true);
         }
 
         // --- Inventory - Lógica de Service ---
@@ -251,10 +328,17 @@ namespace OxfordOnline.Repositories
             if (!guidExists)
                 throw new KeyNotFoundException($"O GUID de inventário '{inventory.InventGuid}' não foi encontrado em InventoryGuid.");
 
+            // 2. Validação de Regra de Negócio: O Header deve existir.
+            // O 'invent_name' é sempre espelhado a partir do Header (fonte da verdade).
+            var header = await GetInventoryHeaderByIdAsync(inventory.InventHeaderId);
+            if (header == null)
+                throw new KeyNotFoundException($"O Header de inventário '{inventory.InventHeaderId}' não foi encontrado em InventoryHeader.");
+
+            inventory.InventName = header.InventName;
 
             var existingInventory = await GetInventoryByGuidAsync(inventory.InventCode);
 
-            // 2. Lógica: Update ou Insert?
+            // 3. Lógica: Update ou Insert?
             if (existingInventory == null || string.IsNullOrWhiteSpace(existingInventory.InventCode))
             {
                 // Tenta INSERIR
@@ -265,6 +349,8 @@ namespace OxfordOnline.Repositories
                 // Mapeamento e marcação para atualização
                 existingInventory.InventGuid = inventory.InventGuid;
                 existingInventory.InventCode = inventory.InventCode;
+                existingInventory.InventHeaderId = inventory.InventHeaderId;
+                existingInventory.InventName = inventory.InventName;
                 existingInventory.InventSector = inventory.InventSector;
                 existingInventory.InventUser = inventory.InventUser;
                 existingInventory.InventStatus = inventory.InventStatus;
@@ -482,7 +568,8 @@ namespace OxfordOnline.Repositories
                     p.ProductId,
                     p.Barcode,
                     p.ProductName,
-                    p.Status
+                    p.Status,
+                    p.SalesChannel
                 })
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)

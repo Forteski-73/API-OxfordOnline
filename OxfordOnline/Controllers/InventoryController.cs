@@ -29,7 +29,7 @@ namespace OxfordOnline.Controllers
         // --- MÉTODOS PARA InventoryGuid (tabela 'inventory_guid') ---
         // -----------------------------------------------------------------------------------------------------------------
 
-        // POST: Criar um novo GUID de inventário (ou confirmar existência)
+        // POST: Cria um novo GUID de inventário, ou atualiza o invent_header_id se o GUID já existir e o valor enviado for diferente
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateInventoryGuid([FromBody] InventoryGuid inventoryGuid)
@@ -39,29 +39,34 @@ namespace OxfordOnline.Controllers
 
             try
             {
-                // A lógica de idempotência (verificar se existe e inserir se não) está no serviço.
-                var created = await _inventoryService.CreateInventoryGuidAsync(inventoryGuid);
+                // A lógica de criação/atualização está no serviço.
+                var (created, updated) = await _inventoryService.CreateOrUpdateInventoryGuidAsync(inventoryGuid);
 
                 if (created)
                 {
                     // Retorna 201 Created (sucesso)
                     return CreatedAtAction(nameof(GetInventoryGuidByGuid), new { inventGuid = inventoryGuid.InventGuid }, inventoryGuid);
                 }
-                else
-                {
-                    // Se não foi criado (já existia), buscamos o registro e retornamos 200 OK
-                    var existingRecord = await _inventoryService.GetGuidByInventGuidAsync(inventoryGuid.InventGuid);
 
-                    return Ok(new
-                    {
-                        message = $"O GUID '{inventoryGuid.InventGuid}' já existe no inventário. Nenhuma alteração foi feita.",
-                        data = existingRecord
-                    });
-                }
+                var existingRecord = await _inventoryService.GetGuidByInventGuidAsync(inventoryGuid.InventGuid);
+
+                var message = updated
+                    ? $"O GUID '{inventoryGuid.InventGuid}' já existia e foi atualizado."
+                    : $"O GUID '{inventoryGuid.InventGuid}' já existe no inventário. Nenhuma alteração foi feita.";
+
+                return Ok(new
+                {
+                    message,
+                    data = existingRecord
+                });
             }
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -437,6 +442,72 @@ namespace OxfordOnline.Controllers
 
             var result = await _inventoryService.GetInventoryAuditResultAsync(inventLocationId);
             return Ok(result);
+        }
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // --- MÉTODOS PARA INVENTORY HEADER (tabela 'inventory_header') ---
+        // -----------------------------------------------------------------------------------------------------------------
+
+        // POST: Cria um novo cabeçalho de inventário (Id == 0) ou atualiza um existente (Id > 0)
+        [Authorize]
+        [HttpPost("Header")]
+        public async Task<IActionResult> CreateOrUpdateInventoryHeader([FromBody] InventoryHeader header)
+        {
+            if (header == null || string.IsNullOrWhiteSpace(header.InventName))
+                return BadRequest("O campo 'InventName' é obrigatório.");
+
+            try
+            {
+                var created = await _inventoryService.CreateOrUpdateInventoryHeaderAsync(header);
+
+                if (created)
+                {
+                    return CreatedAtAction(nameof(GetInventoryHeaderById), new { id = header.Id }, header);
+                }
+
+                return Ok(new
+                {
+                    message = $"Cabeçalho de inventário {header.Id} atualizado com sucesso.",
+                    data = header
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro inesperado ao salvar/atualizar cabeçalho de inventário: {ex.Message}");
+            }
+        }
+
+        // GET: Cabeçalho de inventário por Id
+        [HttpGet("Header/{id}")]
+        public async Task<ActionResult<InventoryHeader>> GetInventoryHeaderById(int id)
+        {
+            var header = await _inventoryService.GetInventoryHeaderByIdAsync(id);
+
+            if (header == null)
+                return NotFound("Cabeçalho de inventário não encontrado.");
+
+            return Ok(header);
+        }
+
+        // GET: v1/Inventory/Header/Recent
+        // Retorna os últimos 12 cabeçalhos de inventário ativos cadastrados
+        [HttpGet("Header/Recent")]
+        public async Task<ActionResult<IEnumerable<InventoryHeader>>> GetRecentActiveInventoryHeaders()
+        {
+            var headers = await _inventoryService.GetRecentActiveInventoryHeadersAsync(12);
+
+            if (!headers.Any())
+                return NotFound("Nenhum cabeçalho de inventário ativo encontrado.");
+
+            return Ok(headers);
         }
 
     }

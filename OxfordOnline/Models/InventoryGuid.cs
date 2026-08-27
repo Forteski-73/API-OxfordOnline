@@ -19,5 +19,13 @@ namespace OxfordOnline.Models
 
         [Column("invent_created")]
         public DateTime? InventCreated { get; set; }
+
+        // Corresponde a `invent_header_id` INT(11) NOT NULL DEFAULT 1, Chave Estrangeira para inventory_header
+        [Required]
+        [Column("invent_header_id")]
+        public int InventHeaderId { get; set; } = 1;
+
+        [ForeignKey(nameof(InventHeaderId))]
+        public InventoryHeader? InventoryHeaderNavigation { get; set; }
     }
 }

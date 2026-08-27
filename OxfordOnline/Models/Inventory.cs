@@ -36,6 +36,14 @@ namespace OxfordOnline.Models
         [MaxLength(36)]
         public string? InventGuid { get; set; }
 
+        // Corresponde a `invent_header_id` INT(11) NOT NULL DEFAULT '1', Chave Estrangeira para inventory_header
+        [Required]
+        [Column("invent_header_id")]
+        public int InventHeaderId { get; set; } = 1;
+
+        [ForeignKey(nameof(InventHeaderId))]
+        public InventoryHeader? InventoryHeaderNavigation { get; set; }
+
         // Corresponde a `invent_sector` VARCHAR(100) NULL DEFAULT NULL
         [Column("invent_sector")]
         [MaxLength(100)]

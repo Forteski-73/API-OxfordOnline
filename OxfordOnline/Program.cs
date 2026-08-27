@@ -20,7 +20,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(10, 5, 9))));
 
-// === Autenticação JWT ===
+// === Autenticaï¿½ï¿½o JWT ===
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -61,7 +61,7 @@ builder.Services.AddVersionedApiExplorer(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // Segurança JWT
+    // Seguranï¿½a JWT
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -87,7 +87,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// === Injeção de dependência ===
+// === Injeï¿½ï¿½o de dependï¿½ncia ===
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ProductService>();
 
@@ -127,15 +127,17 @@ builder.Services.AddScoped<ProductPackingService>();
 
 builder.Services.AddScoped<ITvDeviceRepository, TvDeviceRepository>();
 
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 builder.Services.AddScoped<VideoService>();
 
-// Integração com a API do Sênior
+// Integraï¿½ï¿½o com a API do Sï¿½nior
 builder.Services.AddMemoryCache();
 builder.Services.Configure<SeniorSettings>(builder.Configuration.GetSection("Senior"));
 builder.Services.AddHttpClient<ISeniorAuthService, SeniorAuthService>();
 
-// === Produção ===
+// === Produï¿½ï¿½o ===
 if (builder.Environment.IsProduction())
 {
     builder.WebHost.UseUrls("http://0.0.0.0:5000");
@@ -146,7 +148,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactLocalhost", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://oxfordonline.com.br", "https://www.oxfordonline.com.br") // endereço do frontend
+        policy.WithOrigins("http://localhost:5173", "https://oxfordonline.com.br", "https://www.oxfordonline.com.br") // endereï¿½o do frontend
               .AllowAnyHeader() // permite Authorization, Content-Type, etc.
               .AllowAnyMethod() // GET, POST, PUT, DELETE, OPTIONS
               .AllowCredentials(); // se precisar enviar cookies
@@ -156,7 +158,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// === Versões da API no Swagger ===
+// === Versï¿½es da API no Swagger ===
 var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 app.UsePathBase("/API");
@@ -184,9 +186,9 @@ app.Use(async (context, next) =>
 });
 
 app.UseHttpsRedirection();
-// === Usar CORS antes da autenticação ===
+// === Usar CORS antes da autenticaï¿½ï¿½o ===
 app.UseCors("AllowReactLocalhost");
-// === Usar CORS antes da autenticação ===
+// === Usar CORS antes da autenticaï¿½ï¿½o ===
 app.UseAuthentication();
 app.UseAuthorization();
 

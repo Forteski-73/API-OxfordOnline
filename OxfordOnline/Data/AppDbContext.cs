@@ -70,6 +70,8 @@ namespace OxfordOnline.Data
 
         public DbSet<Models.InventoryMask> InventoryMask { get; set; }
 
+        public DbSet<Models.InventoryHeader> InventoryHeader { get; set; }
+
         public DbSet<PalletGroup> ProductPack { get; set; }
 
         public DbSet<PalletGroupImage> ProductPackImage { get; set; }

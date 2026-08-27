@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace OxfordOnline.Models
@@ -24,6 +25,12 @@ namespace OxfordOnline.Models
         [Column("status")]
         [Required]
         public bool Status { get; set; } = true;
+
+        // Exposto apenas via projeção própria em GET /v1/Inventory/Product (não serializa no restante dos endpoints de Product)
+        [Column("sales_channel")]
+        [Required]
+        [JsonIgnore]
+        public bool SalesChannel { get; set; }
 
         [Column("note")]
         [MaxLength(255)]

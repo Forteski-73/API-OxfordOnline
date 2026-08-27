@@ -13,10 +13,44 @@ namespace OxfordOnline.Controllers
     public class DeviceController : ControllerBase
     {
         private readonly ITvDeviceRepository _tvDeviceRepository;
+        private readonly IDeviceRepository _deviceRepository;
 
-        public DeviceController(ITvDeviceRepository tvDeviceRepository)
+        public DeviceController(ITvDeviceRepository tvDeviceRepository, IDeviceRepository deviceRepository)
         {
             _tvDeviceRepository = tvDeviceRepository;
+            _deviceRepository = deviceRepository;
+        }
+
+        // GET: Devices vinculados a um inventory_guid, com o username do dono
+        [Authorize]
+        [HttpGet("InventoryGuid")]
+        public async Task<ActionResult<IEnumerable<DeviceUserDto>>> GetDevicesWithInventoryGuid()
+        {
+            var devices = await _deviceRepository.GetDevicesWithInventoryGuidAsync();
+            if (!devices.Any())
+                return NotFound("Nenhum device vinculado a um inventory_guid foi encontrado.");
+
+            return Ok(devices);
+        }
+
+        // PUT: Atualiza customDeviceName, isActive e, opcionalmente, o invent_header_id do InventoryGuid vinculado
+        // Rota própria (Update/{id}) para não colidir com PUT v1/Device/{deviceId} (Setor da TV)
+        [Authorize]
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> UpdateDevice(int id, [FromBody] UpdateDeviceRequest request)
+        {
+            try
+            {
+                var device = await _deviceRepository.UpdateAsync(id, request);
+                if (device == null)
+                    return NotFound("Device não encontrado.");
+
+                return Ok(device);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // GET: Todos os registros de tv_device
