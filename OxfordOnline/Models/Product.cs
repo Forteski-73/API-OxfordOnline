@@ -26,7 +26,6 @@ namespace OxfordOnline.Models
         [Required]
         public bool Status { get; set; } = true;
 
-        // Exposto apenas via projeção própria em GET /v1/Inventory/Product (não serializa no restante dos endpoints de Product)
         [Column("sales_channel")]
         [Required]
         [JsonIgnore]
