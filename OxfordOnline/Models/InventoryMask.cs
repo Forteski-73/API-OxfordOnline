@@ -1,7 +1,8 @@
-﻿using System;
+﻿using OxfordOnline.Models.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using OxfordOnline.Models.Enums;
+using System.Text.Json.Serialization;
 
 namespace OxfordOnline.Models
 {
@@ -24,6 +25,13 @@ namespace OxfordOnline.Models
         [Column("field_mask")]
         [MaxLength(255)]
         public string FieldMask { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Indica se essa máscara está ativa.
+        /// </summary>
+        [Column("is_active")]
+        [JsonIgnore]
+        public bool IsActive { get; set; } = true;
 
         /// <summary>
         /// Propriedade para facilitar o uso do Enum Mask no C#

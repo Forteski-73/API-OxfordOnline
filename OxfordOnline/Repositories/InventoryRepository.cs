@@ -165,15 +165,6 @@ namespace OxfordOnline.Repositories
         {
             _context.InventoryRecord.Remove(record);
         }
-        /*public async Task<IEnumerable<InventSum>> GetAllInventSumAsync()
-        {
-            return await _context.InventSum
-                                 .AsNoTracking()
-                                 .OrderBy(i => i.ProductId)
-                                 .ThenBy(i => i.InventLocationId)
-                                 .Take(100)
-                                 .ToListAsync();
-        }*/
 
         public async Task<IEnumerable<InventoryAuditResult>> GetInventoryAuditResultAsync(string inventLocationId)
         {
@@ -200,6 +191,7 @@ namespace OxfordOnline.Repositories
         {
             return await _context.InventoryMask
                                  .AsNoTracking()
+                                 .Where(m => m.IsActive)
                                  .OrderBy(m => m.Id)
                                  .ToListAsync();
         }
