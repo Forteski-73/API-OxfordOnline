@@ -135,6 +135,9 @@ builder.Services.AddScoped<VideoService>();
 builder.Services.AddScoped<IKpiRepository, KpiRepository>();
 builder.Services.AddScoped<KpiService>();
 
+builder.Services.AddScoped<IBreakageRepository, BreakageRepository>();
+builder.Services.AddScoped<BreakageService>();
+
 // Integra��o com a API do S�nior
 builder.Services.AddMemoryCache();
 builder.Services.Configure<SeniorSettings>(builder.Configuration.GetSection("Senior"));

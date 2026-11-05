@@ -94,6 +94,8 @@ namespace OxfordOnline.Data
         public DbSet<InventSum> InventSum { get; set; }
         public DbSet<InventLocation> InventLocation { get; set; }
 
+        public DbSet<BreakageRecord> BreakageRecord { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -136,6 +138,9 @@ namespace OxfordOnline.Data
 
             // Mapeamento da Chave Primária Composta do InventSum
             modelBuilder.Entity<InventSum>().HasKey(x => new { x.ProductId, x.InventLocationId });
+
+            // A coluna status é um ENUM no banco: grava o nome do valor, não o índice numérico.
+            modelBuilder.Entity<BreakageRecord>().Property(b => b.Status).HasConversion<string>();
         }
     }
 }

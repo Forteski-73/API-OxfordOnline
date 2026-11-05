@@ -48,6 +48,16 @@ namespace OxfordOnline.Resources
         // Pallet
         public const string ImagesOnPalletNotOk = "Todas as imagens na lista devem pertencer ao mesmo PalletId.";
 
+        // Quebras
+        public const string BreakageNotFound = "Registro de quebra não encontrado.";
+        public const string BreakageMustStartPending = "Um novo registro de quebra deve iniciar com status PENDENTE.";
+        public const string BreakageInvalidTransition = "Não é permitido alterar o status de {0} para {1}.";
+        public const string BreakageWrittenOffCannotDelete = "Registro de quebra com status BAIXADO não pode ser excluído.";
+        public const string BreakageUserRequired = "O campo {0} é obrigatório nesta operação.";
+        public const string LogErrorSavingBreakage = "Erro ao salvar registro de quebra.";
+        public const string LogErrorDeletingBreakage = "Erro ao excluir registro de quebra com id {BreakageId}.";
+        public const string ErrorGettingBreakages = "Erro ao buscar registros de quebra.";
+
         // Default
         public const string Error = "Erro: %Error%";
         public const string Sucess = "Concluído com sucesso.";
