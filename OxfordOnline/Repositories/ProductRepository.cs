@@ -202,8 +202,19 @@ namespace OxfordOnline.Repositories
 
             if (filterRequest.ProductId?.Any() == true)
             {
-                var ids = filterRequest.ProductId;
-                var barcodes = ids.Where(x => x.Length >= 13).ToList();
+                var ids = filterRequest.ProductId
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Select(x => x.Trim())
+                    .ToList();
+
+                // Código sem zeros à esquerda + versão com 1 zero (formato gravado no banco)
+                var barcodes = ids
+                    .Where(x => x.All(char.IsDigit))
+                    .Select(x => x.TrimStart('0'))
+                    .Where(x => x.Length > 0)
+                    .SelectMany(x => new[] { x, "0" + x })
+                    .Distinct()
+                    .ToList();
 
                 baseQuery = baseQuery.Where(q =>
                     ids.Contains(q.p.ProductId) ||

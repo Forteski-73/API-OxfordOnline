@@ -17,12 +17,12 @@ namespace OxfordOnline.Services
     {
         private readonly IBreakageRepository _breakageRepository;
 
-        // Fluxo: PENDENTE -> APROVADO ou REJEITADO; APROVADO -> BAIXADO.
+        // Fluxo: PENDENTE -> APROVADO ou REJEITADO; APROVADO ou REJEITADO -> BAIXADO.
         private static readonly Dictionary<BreakageStatus, BreakageStatus[]> _allowedTransitions = new()
         {
             [BreakageStatus.PENDENTE] = new[] { BreakageStatus.APROVADO, BreakageStatus.REJEITADO },
             [BreakageStatus.APROVADO] = new[] { BreakageStatus.BAIXADO },
-            [BreakageStatus.REJEITADO] = Array.Empty<BreakageStatus>(),
+            [BreakageStatus.REJEITADO] = new[] { BreakageStatus.BAIXADO },
             [BreakageStatus.BAIXADO] = Array.Empty<BreakageStatus>(),
         };
 
